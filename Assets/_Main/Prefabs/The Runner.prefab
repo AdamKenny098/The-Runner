@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8304429269938126052}
   - component: {fileID: 6439836039121314206}
   m_Layer: 0
-  m_Name: Player
+  m_Name: The Runner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
