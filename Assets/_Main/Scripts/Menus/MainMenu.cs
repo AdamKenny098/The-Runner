@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject settingsMenu;
     public GameObject mainMenu;
-    public string newGame;
+    private string newGame = "Apartment";
     public GameObject LoadingScreen;
     public Image LoadingBarFill;
 
@@ -29,8 +29,10 @@ public class MainMenu : MonoBehaviour
 
     public void Options()
     {
-        settingsMenu.SetActive(!settingsMenu.activeSelf);
-        mainMenu.SetActive(!mainMenu.activeSelf);
+        bool settingsEnabled = settingsMenu.activeSelf;
+        bool mainEnabled = mainMenu.activeSelf;
+        settingsMenu.SetActive(!settingsEnabled);
+        mainMenu.SetActive(!mainEnabled);
     }
 
 
@@ -44,6 +46,7 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
 
     private void LoadScene()
     {

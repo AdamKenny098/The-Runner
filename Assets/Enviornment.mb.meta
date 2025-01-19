@@ -1,13 +1,73 @@
 fileFormatVersion: 2
-guid: 2eb6143ef637e924e9382c817f4b37b7
+guid: 04773cb26341dff4c8fea54f76e02b0d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface1
+    second: {fileID: 2100000, guid: f096817fe04b3c14ca132f71c2bcf495, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface10
+    second: {fileID: 2100000, guid: 1edbce5eb3ad0ab41b3233c139e54a90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface11
+    second: {fileID: 2100000, guid: 7b12caf373f27b7428b5ee13c8140079, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface12
+    second: {fileID: 2100000, guid: 24fa50525e94b2540a17c2497cc09fa2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface2
+    second: {fileID: 2100000, guid: 31228508c52f63140a67285054f8bb0b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface3
+    second: {fileID: 2100000, guid: 9d71e142b8e28f74285c81d81322d45d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface4
+    second: {fileID: 2100000, guid: e83f99379df24064498fb1ee440b616a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface5
+    second: {fileID: 2100000, guid: 3dd03b8e56d12b14fbea2a57231053bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface6
+    second: {fileID: 2100000, guid: 8160c33a6ae93f5469eac615eceb8f0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface7
+    second: {fileID: 2100000, guid: 96ab276b85a4a194089a183fe4add7cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface8
+    second: {fileID: 2100000, guid: b054998dcf25c2640a2f19c0575811d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface9
+    second: {fileID: 2100000, guid: d477b6897c30a0a46a0ebcb9a2086c36, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
-    materialSearch: 1
+    materialSearch: 0
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
