@@ -160,9 +160,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (38)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -222,9 +228,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (45)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -284,9 +296,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (53)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -346,9 +364,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (8)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -408,9 +432,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (46)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -470,9 +500,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (25)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -532,9 +568,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (39)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -594,9 +636,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (48)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -656,9 +704,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (11)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -718,9 +772,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (43)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -780,9 +840,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (6)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -842,9 +908,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (14)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -904,9 +976,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (40)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -966,9 +1044,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (24)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1028,9 +1112,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (54)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1090,9 +1180,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (52)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1152,9 +1248,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (29)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1214,9 +1316,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (12)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1276,9 +1384,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (50)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1338,9 +1452,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (27)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1400,9 +1520,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (26)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1462,9 +1588,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (15)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1524,9 +1656,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (22)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1586,9 +1724,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (18)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1648,9 +1792,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (13)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1710,9 +1860,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (5)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1772,9 +1928,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (10)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1834,9 +1996,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (17)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1896,9 +2064,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (32)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1958,9 +2132,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (57)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1980,7 +2160,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 474733972117052250, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
       propertyPath: m_VersionIndex
-      value: 3310
+      value: 3316
       objectReference: {fileID: 0}
     - target: {fileID: 676795187157754614, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2000,7 +2180,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8160c33a6ae93f5469eac615eceb8f0c, type: 2}
     - target: {fileID: 3559014583013940607, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
       propertyPath: m_VersionIndex
-      value: 2535
+      value: 2541
       objectReference: {fileID: 0}
     - target: {fileID: 3969354059635351289, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
       propertyPath: m_LocalScale.x
@@ -2060,7 +2240,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8160c33a6ae93f5469eac615eceb8f0c, type: 2}
     - target: {fileID: 4996013476678726821, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
       propertyPath: m_VersionIndex
-      value: 3377
+      value: 3383
       objectReference: {fileID: 0}
     - target: {fileID: 5890443976106908912, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2068,13 +2248,18 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8160c33a6ae93f5469eac615eceb8f0c, type: 2}
     - target: {fileID: 6882079953797324463, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
       propertyPath: m_VersionIndex
-      value: 2911
+      value: 2917
       objectReference: {fileID: 0}
     - target: {fileID: 7392843569331615144, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
       propertyPath: m_VersionIndex
-      value: 2975
+      value: 2981
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7629093509200617279, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
+    - {fileID: 2716182906664029996, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
+    - {fileID: 8985794304790699620, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
+    - {fileID: 7587627225328968034, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
+    - {fileID: 779856561273192815, guid: 7be63303b5fe8b34cb86c8039d2ab377, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2134,9 +2319,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (33)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2196,9 +2387,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (9)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2258,9 +2455,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (7)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2320,9 +2523,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (49)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2382,9 +2591,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (21)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2444,9 +2659,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (36)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2506,9 +2727,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (56)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2568,9 +2795,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (16)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2630,9 +2863,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (55)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2692,9 +2931,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (3)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2754,9 +2999,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (42)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2816,9 +3067,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (31)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2878,9 +3135,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (44)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2940,9 +3203,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (20)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3002,9 +3271,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (4)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3064,9 +3339,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (37)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3126,9 +3407,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (23)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3188,9 +3475,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (30)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3250,9 +3543,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (2)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3312,9 +3611,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (19)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3374,9 +3679,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (41)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3436,9 +3747,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (47)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3498,9 +3815,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (28)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3560,9 +3883,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (51)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3622,9 +3951,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (34)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3684,9 +4019,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
       propertyPath: m_Name
-      value: Whiskey Glass (35)
+      value: Whiskey Glass
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8462676467826169709, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3150582576526325097, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
+    - {fileID: 4215987269857916522, guid: 0ca8431dbc1eab945a90e4ecc8ce55af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
