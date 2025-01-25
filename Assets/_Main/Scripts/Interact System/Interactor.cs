@@ -14,8 +14,7 @@ public class Interactor : MonoBehaviour
     public Transform InteractorSource; // Reference for the ray origin (e.g., FPS camera)
     public float InteractRange; // Interaction range
     public TMP_Text tmpText; // TextMeshPro UI element to display object name
-    public Image interactIcon;
-    public Sprite interactSprite;
+    public GameObject interactIcon;
 
     void Start()
     {
@@ -30,7 +29,7 @@ public class Interactor : MonoBehaviour
             if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactableObj))
             {
                 tmpText.text = hitInfo.collider.gameObject.name; // Display the interactable object's name
-                interactIcon.sprite = interactSprite;
+                interactIcon.SetActive(true);
 
                 // Check for interaction input
                 if (Input.GetKeyDown(KeyCode.E))
@@ -41,11 +40,13 @@ public class Interactor : MonoBehaviour
             else
             {
                 tmpText.text = ""; // Clear text if hit object is not interactable
+                interactIcon.SetActive(false);
             }
         }
         else
         {
             tmpText.text = ""; // Clear text if no object is hit
+            interactIcon.SetActive(false);
         }
     }
 }
