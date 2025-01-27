@@ -12,7 +12,6 @@ public class PickUpScript : MonoBehaviour
     public GameObject hoverUI; // Reference to the HoverUI GameObject
     public TMP_Text hoverText; // Reference to the TextMeshPro text component
 
-
     void Update()
     {
         HandleHoverUI();
@@ -21,19 +20,52 @@ public class PickUpScript : MonoBehaviour
         {
             if (heldObj == null)
             {
-                // Raycast to detect objects to pick up
+                // Raycast to detect objects to pick up or stack
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
                 {
                     if (hit.collider.CompareTag("canPickUp"))
                     {
-                        PickUpObject(hit.collider.gameObject);
+                        // Check if it's a stack on the counter
+                        if (hit.collider.CompareTag("Counter"))
+                        {
+                            PlateCounter counter = hit.collider.GetComponent<PlateCounter>();
+                            if (counter != null)
+                            {
+                                GameObject stack = counter.PickUpStack();
+                                if (stack != null)
+                                {
+                                    PickUpObject(stack);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Pick up the individual object
+                            PickUpObject(hit.collider.gameObject);
+                        }
                     }
                 }
             }
             else
             {
-                DropObject();
+                // Raycast to detect counter for dropping
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
+                {
+                    // Ensure the held object is a plate and the hit object is a counter
+                    if (hit.collider.CompareTag("Counter") && heldObj.layer == LayerMask.NameToLayer("Plates"))
+                    {
+                        PlateCounter counter = hit.collider.GetComponent<PlateCounter>();
+                        if (counter != null)
+                        {
+                            counter.AddPlateToStack(heldObj);
+                            DropObject();
+                        }
+                    }
+                }
+
+                DropObject(); // Fallback if no valid drop target is found
             }
         }
 
@@ -44,6 +76,7 @@ public class PickUpScript : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
             {
+                // FoodBin Interaction
                 if (hit.collider.CompareTag("FoodBin"))
                 {
                     Debug.Log("Interacting with Food Bin...");
@@ -53,10 +86,8 @@ public class PickUpScript : MonoBehaviour
                         foodBin.StartScraping(heldObj.GetComponent<Plate>());
                     }
                 }
-            }
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
-            {
+                // LiquidBucket Interaction
                 if (hit.collider.CompareTag("LiquidBucket"))
                 {
                     Debug.Log("Interacting with Liquid Bucket...");
@@ -99,9 +130,23 @@ public class PickUpScript : MonoBehaviour
         {
             if (hit.collider.CompareTag("canPickUp") && heldObj == null)
             {
-                // Show the Hover UI and update text
+                // Check the object's layer for context-specific hover text
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Plates"))
+                {
+                    hoverUI.SetActive(true);
+                    hoverText.text = "Pick Up Plate ?";
+                }
+                else
+                {
+                    hoverUI.SetActive(true);
+                    hoverText.text = "Pick Up ?";
+                }
+            }
+            else if (hit.collider.CompareTag("Counter") && heldObj != null && heldObj.layer == LayerMask.NameToLayer("Plates"))
+            {
+                // Update hover text for plate stacking
                 hoverUI.SetActive(true);
-                hoverText.text = "Pick Up ?";
+                hoverText.text = "Place Plate ?";
             }
             else
             {
