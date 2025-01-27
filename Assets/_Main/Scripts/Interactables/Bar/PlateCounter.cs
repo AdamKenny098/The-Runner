@@ -13,11 +13,12 @@ public class PlateCounter : MonoBehaviour
             // Get the next available stack position
             Transform stackPosition = stackPositions[plateStack.Count];
 
-            // Disable physics on the plate
+            // Disable physics and gravity on the plate
             Rigidbody plateRb = plate.GetComponent<Rigidbody>();
             if (plateRb != null)
             {
                 plateRb.isKinematic = true; // Prevent physics interactions
+                plateRb.useGravity = false; // Disable gravity
             }
 
             // Snap the plate to the stack position
