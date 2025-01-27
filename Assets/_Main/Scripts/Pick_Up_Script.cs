@@ -101,15 +101,31 @@ public class PickUpScript : MonoBehaviour
         }
     }
 
+
     void PickUpObject(GameObject pickUpObj)
     {
         heldObj = pickUpObj;
         heldObjRb = heldObj.GetComponent<Rigidbody>();
         heldObjRb.isKinematic = true;
-        heldObj.transform.position = holdPos.position;
+
+        // Cache the object's original world scale
+        Vector3 originalWorldScale = heldObj.transform.lossyScale;
+
+        // Parent the object to the hold position
         heldObj.transform.SetParent(holdPos);
-        Debug.Log($"Picked up object: {heldObj.name}");
+
+        // Restore the object's world scale after parenting
+        heldObj.transform.localScale = Vector3.one; // Temporarily reset local scale
+        heldObj.transform.localScale = new Vector3(
+            originalWorldScale.x / heldObj.transform.lossyScale.x,
+            originalWorldScale.y / heldObj.transform.lossyScale.y,
+            originalWorldScale.z / heldObj.transform.lossyScale.z
+        );
+
+        Debug.Log($"Picked up object: {heldObj.name}, Original World Scale: {originalWorldScale}");
     }
+
+
 
     void DropObject()
     {
@@ -117,10 +133,19 @@ public class PickUpScript : MonoBehaviour
         {
             heldObjRb.isKinematic = false;
             heldObj.transform.SetParent(null);
+
+            // Force a predefined scale (e.g., consistent for plates or objects)
+            heldObj.transform.localScale = new Vector3(1, 1, 1);
+
             heldObj = null;
             Debug.Log("Dropped object.");
         }
     }
+
+
+
+
+
 
     void HandleHoverUI()
     {
@@ -144,10 +169,19 @@ public class PickUpScript : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Counter") && heldObj != null && heldObj.layer == LayerMask.NameToLayer("Plates"))
             {
-                // Update hover text for plate stacking
-                hoverUI.SetActive(true);
-                hoverText.text = "Place Plate ?";
+                Plate plate = heldObj.GetComponent<Plate>();
+                if (plate != null && plate.IsDirty())
+                {
+                    hoverUI.SetActive(true);
+                    hoverText.text = "Clean Plate Required!";
+                }
+                else
+                {
+                    hoverUI.SetActive(true);
+                    hoverText.text = "Place Plate ?";
+                }
             }
+
             else
             {
                 // Hide the Hover UI if no interactable object is detected

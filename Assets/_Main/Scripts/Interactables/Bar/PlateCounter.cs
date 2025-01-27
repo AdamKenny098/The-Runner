@@ -8,33 +8,43 @@ public class PlateCounter : MonoBehaviour
 
     public void AddPlateToStack(GameObject plate)
     {
-        if (plateStack.Count < stackPositions.Length)
+        // Check if the object is a plate and if it's clean
+        Plate plateComponent = plate.GetComponent<Plate>();
+        if (plateComponent != null && !plateComponent.IsDirty()) // Only clean plates
         {
-            // Get the next available stack position
-            Transform stackPosition = stackPositions[plateStack.Count];
-
-            // Disable physics and gravity on the plate
-            Rigidbody plateRb = plate.GetComponent<Rigidbody>();
-            if (plateRb != null)
+            if (plateStack.Count < stackPositions.Length)
             {
-                plateRb.isKinematic = true; // Prevent physics interactions
-                plateRb.useGravity = false; // Disable gravity
+                // Get the next available stack position
+                Transform stackPosition = stackPositions[plateStack.Count];
+
+                // Disable physics and gravity on the plate
+                Rigidbody plateRb = plate.GetComponent<Rigidbody>();
+                if (plateRb != null)
+                {
+                    plateRb.isKinematic = true; // Prevent physics interactions
+                    plateRb.useGravity = false; // Disable gravity
+                }
+
+                // Snap the plate to the stack position
+                plate.transform.SetParent(stackPosition);
+                plate.transform.localPosition = Vector3.zero; // Reset local position
+                plate.transform.localRotation = Quaternion.identity; // Reset local rotation
+
+                // Add the plate to the stack
+                plateStack.Push(plate);
+                Debug.Log($"Plate added to stack! Current stack size: {plateStack.Count}");
             }
-
-            // Snap the plate to the stack position
-            plate.transform.SetParent(stackPosition);
-            plate.transform.localPosition = Vector3.zero; // Reset local position
-            plate.transform.localRotation = Quaternion.identity; // Reset local rotation
-
-            // Add the plate to the stack
-            plateStack.Push(plate);
-            Debug.Log($"Plate added to stack! Current stack size: {plateStack.Count}");
+            else
+            {
+                Debug.Log("Stack is full!");
+            }
         }
         else
         {
-            Debug.Log("Stack is full!");
+            Debug.Log("Only clean plates can be stacked!");
         }
     }
+
 
 
     public GameObject PickUpStack()
