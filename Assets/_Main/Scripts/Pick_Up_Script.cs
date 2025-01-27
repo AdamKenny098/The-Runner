@@ -1,144 +1,117 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PickUpScript : MonoBehaviour
 {
     public GameObject player;
     public Transform holdPos;
-    public float throwForce = 500f; //force at which the object is thrown at
-    public float pickUpRange = 5f; //how far the player can pickup the object from
-    private float rotationSensitivity = 1f; //how fast/slow the object is rotated in relation to mouse movement
-    private GameObject heldObj; //object which we pick up
-    private Rigidbody heldObjRb; //rigidbody of object we pick up
-    private bool canDrop = true; //this is needed so we don't throw/drop object when rotating the object
-    private int LayerNumber; //layer index
+    public float pickUpRange = 5f;
+    [HideInInspector] public GameObject heldObj; // Made public so other scripts can access it
+    private Rigidbody heldObjRb;
 
-    private Vector3 originalScale;
+    public GameObject hoverUI; // Reference to the HoverUI GameObject
+    public TMP_Text hoverText; // Reference to the TextMeshPro text component
 
-    //Reference to script which includes mouse movement of player (looking around)
-    //we want to disable the player looking around when rotating the object
-    //example below 
-    //MouseLookScript mouseLookScript;
-    void Start()
-    {
-        LayerNumber = LayerMask.NameToLayer("holdLayer"); //if your holdLayer is named differently make sure to change this ""
 
-        //mouseLookScript = player.GetComponent<MouseLookScript>();
-    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) //change E to whichever key you want to press to pick up
+        HandleHoverUI();
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if (heldObj == null) //if currently not holding anything
+            if (heldObj == null)
             {
-                //perform raycast to check if player is looking at object within pickuprange
+                // Raycast to detect objects to pick up
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
+                if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
                 {
-                    //make sure pickup tag is attached
-                    if (hit.transform.gameObject.tag == "canPickUp")
+                    if (hit.collider.CompareTag("canPickUp"))
                     {
-                        //pass in object hit into the PickUpObject function
-                        PickUpObject(hit.transform.gameObject);
+                        PickUpObject(hit.collider.gameObject);
                     }
                 }
             }
             else
             {
-                if(canDrop == true)
+                DropObject();
+            }
+        }
+
+        // Separate key for interactions
+        if (Input.GetKeyDown(KeyCode.E) && heldObj != null)
+        {
+            // Raycast to detect interactable objects
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
+            {
+                if (hit.collider.CompareTag("FoodBin"))
                 {
-                    StopClipping(); //prevents object from clipping through walls
-                    DropObject();
+                    Debug.Log("Interacting with Food Bin...");
+                    FoodBin foodBin = hit.collider.GetComponent<FoodBin>();
+                    if (foodBin != null)
+                    {
+                        foodBin.StartScraping(heldObj.GetComponent<Plate>());
+                    }
+                }
+            }
+
+            if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
+            {
+                if (hit.collider.CompareTag("LiquidBucket"))
+                {
+                    Debug.Log("Interacting with Liquid Bucket...");
+                    LiquidBucket liquidBucket = hit.collider.GetComponent<LiquidBucket>();
+                    if (liquidBucket != null)
+                    {
+                        liquidBucket.StartCleaning(heldObj.GetComponent<Glass>());
+                    }
                 }
             }
         }
-        if (heldObj != null) //if player is holding object
-        {
-            MoveObject(); //keep object position at holdPos
-            RotateObject();
-            if (Input.GetKeyDown(KeyCode.Mouse0) && canDrop == true) //Mous0 (leftclick) is used to throw, change this if you want another button to be used)
-            {
-                StopClipping();
-                ThrowObject();
-            }
-
-        }
     }
+
     void PickUpObject(GameObject pickUpObj)
     {
-        if (pickUpObj.GetComponent<Rigidbody>()) //make sure the object has a RigidBody
-        {
-            heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast (no longer == null)
-            heldObjRb = pickUpObj.GetComponent<Rigidbody>(); //assign Rigidbody
-            originalScale = heldObj.transform.localScale;
-            heldObjRb.isKinematic = true;
-            heldObjRb.transform.parent = holdPos.transform; //parent object to holdposition
-            heldObj.layer = LayerNumber; //change the object layer to the holdLayer
-            //make sure object doesnt collide with player, it can cause weird bugs
-            Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
-
-        }
+        heldObj = pickUpObj;
+        heldObjRb = heldObj.GetComponent<Rigidbody>();
+        heldObjRb.isKinematic = true;
+        heldObj.transform.position = holdPos.position;
+        heldObj.transform.SetParent(holdPos);
+        Debug.Log($"Picked up object: {heldObj.name}");
     }
+
     void DropObject()
     {
-        //re-enable collision with player
-        Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
-        heldObj.layer = 0; //object assigned back to default layer
-        heldObjRb.isKinematic = false;
-        heldObj.transform.parent = null; //unparent object
-        heldObj.transform.localScale = originalScale;
-        heldObj = null; //undefine game object
-    }
-    void MoveObject()
-    {
-        //keep object position the same as the holdPosition position
-        heldObj.transform.position = holdPos.transform.position;
-    }
-        void RotateObject()
-    {
-        if (Input.GetKey(KeyCode.R)) // Hold R key to rotate
+        if (heldObj != null)
         {
-            canDrop = false; // Prevent throwing while rotating
+            heldObjRb.isKinematic = false;
+            heldObj.transform.SetParent(null);
+            heldObj = null;
+            Debug.Log("Dropped object.");
+        }
+    }
 
-            // Calculate rotation based on mouse movement
-            float XaxisRotation = Input.GetAxis("Mouse X") * rotationSensitivity;
-            float YaxisRotation = Input.GetAxis("Mouse Y") * rotationSensitivity;
-
-            // Apply rotations
-            heldObj.transform.Rotate(Vector3.up, -XaxisRotation, Space.World);   // Rotate around global Y axis (horizontal movement)
-            heldObj.transform.Rotate(Vector3.right, -YaxisRotation, Space.Self); // Rotate around local X axis (vertical movement)
+    void HandleHoverUI()
+    {
+        // Perform a raycast to detect objects
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
+        {
+            if (hit.collider.CompareTag("canPickUp") && heldObj == null)
+            {
+                // Show the Hover UI and update text
+                hoverUI.SetActive(true);
+                hoverText.text = "Pick Up ?";
+            }
+            else
+            {
+                // Hide the Hover UI if no interactable object is detected
+                hoverUI.SetActive(false);
+            }
         }
         else
         {
-            canDrop = true; // Re-enable dropping/throwing
-        }
-    }
-
-
-    void ThrowObject()
-    {
-        //same as drop function, but add force to object before undefining it
-        Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
-        heldObj.layer = 0;
-        heldObjRb.isKinematic = false;
-        heldObj.transform.parent = null;
-        heldObjRb.AddForce(transform.forward * throwForce);
-        heldObj = null;
-    }
-    void StopClipping() //function only called when dropping/throwing
-    {
-        var clipRange = Vector3.Distance(heldObj.transform.position, transform.position); //distance from holdPos to the camera
-        //have to use RaycastAll as object blocks raycast in center screen
-        //RaycastAll returns array of all colliders hit within the cliprange
-        RaycastHit[] hits;
-        hits = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.forward), clipRange);
-        //if the array length is greater than 1, meaning it has hit more than just the object we are carrying
-        if (hits.Length > 1)
-        {
-            //change object position to camera position 
-            heldObj.transform.position = transform.position + new Vector3(0f, -0.5f, 0f); //offset slightly downward to stop object dropping above player 
-            //if your player is small, change the -0.5f to a smaller number (in magnitude) ie: -0.1f
+            hoverUI.SetActive(false); // Hide the UI if the raycast hits nothing
         }
     }
 }

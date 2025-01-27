@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BathroomDoor : MonoBehaviour, IInteractable
+public class HerCloset : MonoBehaviour, IInteractable
 {
+    [SerializeField] string description = "";
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +20,15 @@ public class BathroomDoor : MonoBehaviour, IInteractable
     public void Interact()
     {
 
+    }
+
+    public string GetDescription()
+    {
+        return description;
+    }
+
+    public bool RequiresUniquePanel()
+    {
+        return false;
     }
 }

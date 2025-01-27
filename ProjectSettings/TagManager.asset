@@ -6,6 +6,10 @@ TagManager:
   tags:
   - CinemachineTarget
   - canPickUp
+  - FoodBin
+  - Counter
+  - LiquidBin
+  - LiquidBucket
   layers:
   - Default
   - TransparentFX
@@ -14,10 +18,10 @@ TagManager:
   - Water
   - UI
   - holdLayer
-  - 
-  - 
-  - 
-  - 
+  - Plates
+  - Glasses
+  - Cutlery
+  - Bits&Bobs
   - 
   - 
   - 
