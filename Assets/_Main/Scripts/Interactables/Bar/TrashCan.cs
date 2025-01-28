@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TrashCan : MonoBehaviour
@@ -7,44 +6,71 @@ public class TrashCan : MonoBehaviour
     [Header("Trash Can Settings")]
     public string acceptedTag; // The tag this trash can accepts (e.g., "Recycling" or "Waste")
     public float disposalTime = 0.5f; // Time it takes to dispose of the object
+    public UnityEngine.UI.Slider progressBar; // Optional: Progress bar for visual feedback
 
-    private bool isInteracting = false;
+    [Header("Tracking")]
+    public int platesDisposed = 0; // Counter for plates disposed of
 
-    private void OnTriggerStay(Collider other)
+    private bool isDisposing = false; // Prevents overlapping disposal processes
+
+    // Method to start the disposal process
+    public void StartDisposal(GameObject obj, PickUpSystem pickUpSystem)
     {
-        // Check if the player is holding an object
-        if (Input.GetKeyDown(KeyCode.E) && !isInteracting && other.CompareTag("Player"))
+        if (obj != null && !isDisposing)
         {
-            PickUpSystem pickUpSystem = other.GetComponent<PickUpSystem>();
-            if (pickUpSystem != null && pickUpSystem.heldObj != null)
+            // Increment plate counter if the object is a plate
+            if (obj.CompareTag("Plate"))
             {
-                // Check if the held object has the correct tag
-                if (pickUpSystem.heldObj.CompareTag(acceptedTag))
-                {
-                    StartCoroutine(DisposeObject(pickUpSystem));
-                }
-                else
-                {
-                    Debug.Log("Incorrect trash can for this object!");
-                }
+                platesDisposed++;
+                Debug.Log($"Plate disposed of. Total plates disposed: {platesDisposed}");
+            }
+
+            // Check if the object's tag matches the acceptedTag for the trash can
+            if (obj.CompareTag(acceptedTag))
+            {
+                StartCoroutine(DisposeObject(obj, pickUpSystem));
+            }
+            else
+            {
+                Debug.Log("Incorrect trash can for this object!");
             }
         }
     }
 
-    private IEnumerator DisposeObject(PickUpSystem pickUpSystem)
+    // Coroutine to handle the disposal process
+    private IEnumerator DisposeObject(GameObject obj, PickUpSystem pickUpSystem)
     {
-        isInteracting = true;
+        isDisposing = true;
 
         Debug.Log("Disposing of object...");
-        yield return new WaitForSeconds(disposalTime);
 
-        // Delete the object
-        Destroy(pickUpSystem.heldObj);
+        float elapsed = 0f;
+        if (progressBar != null)
+        {
+            progressBar.gameObject.SetActive(true); // Show the slider
+        }
 
-        // Reset held object in the pick-up system
+        while (elapsed < disposalTime)
+        {
+            elapsed += Time.deltaTime;
+            if (progressBar != null)
+            {
+                progressBar.value = elapsed / disposalTime; // Update progress bar
+            }
+            yield return null;
+        }
+
+        if (progressBar != null)
+        {
+            progressBar.gameObject.SetActive(false); // Hide the slider
+            progressBar.value = 0; // Reset progress bar value
+        }
+
+        // Destroy the object and reset the pick-up system
+        Destroy(obj);
         pickUpSystem.DropObject();
 
         Debug.Log("Object disposed of!");
-        isInteracting = false;
+        isDisposing = false;
     }
 }

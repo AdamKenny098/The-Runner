@@ -112,22 +112,13 @@ public class PickUpSystem : MonoBehaviour
                     liquidBucket.StartCleaning(heldObj.GetComponent<Glass>());
                 }
             }
-            else if (hit.collider.CompareTag("LiquidBucket"))
+            else if (hit.collider.CompareTag("TrashCan")) // Interaction with trash cans
             {
-                Debug.Log("Interacting with Liquid Bucket...");
-                LiquidBucket liquidBucket = hit.collider.GetComponent<LiquidBucket>();
-                if (liquidBucket != null)
+                Debug.Log("Interacting with Trash Can...");
+                TrashCan trashCan = hit.collider.GetComponent<TrashCan>();
+                if (trashCan != null)
                 {
-                    liquidBucket.StartCleaning(heldObj.GetComponent<Glass>());
-                }
-            }
-            else if (hit.collider.CompareTag("LiquidBucket"))
-            {
-                Debug.Log("Interacting with Liquid Bucket...");
-                LiquidBucket liquidBucket = hit.collider.GetComponent<LiquidBucket>();
-                if (liquidBucket != null)
-                {
-                    liquidBucket.StartCleaning(heldObj.GetComponent<Glass>());
+                    trashCan.StartDisposal(heldObj, this);
                 }
             }
         }
@@ -155,15 +146,39 @@ public class PickUpSystem : MonoBehaviour
     {
         if (heldObj != null)
         {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
+            {
+                // Check for counter interaction
+                if (hit.collider.CompareTag("Counter") && heldObj.CompareTag("Plate"))
+                {
+                    Plate plate = heldObj.GetComponent<Plate>();
+                    if (plate != null && !plate.IsDirty())
+                    {
+                        PlateCounter counter = hit.collider.GetComponent<PlateCounter>();
+                        if (counter != null)
+                        {
+                            counter.AddPlateToStack(heldObj); // Add plate to counter stack
+                            heldObj = null; // Reset held object
+                            Debug.Log("Plate placed on counter.");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Cannot place dirty plate on the counter!");
+                    }
+                }
+            }
+
+            // If no valid target is found, drop the object normally
             if (heldObjRb != null) heldObjRb.isKinematic = false;
-
-            // Unparent the object
             heldObj.transform.SetParent(null);
-
             Debug.Log($"Dropped object: {heldObj.name}");
             heldObj = null;
         }
     }
+
 
 
 
@@ -198,7 +213,7 @@ public class PickUpSystem : MonoBehaviour
                     hoverText.text = "Pick Up ?";
                 }
             }
-            else if (hitObject.CompareTag("Counter") && heldObj != null && heldObj.layer == LayerMask.NameToLayer("Plates"))
+            else if (hitObject.CompareTag("Counter") && heldObj != null && heldObj.CompareTag("Plate"))
             {
                 Plate plate = heldObj.GetComponent<Plate>();
                 if (plate != null && plate.IsDirty())
@@ -210,6 +225,53 @@ public class PickUpSystem : MonoBehaviour
                 {
                     hoverUI.SetActive(true);
                     hoverText.text = "Place Plate ?";
+                }
+            }
+            else if (hitObject.CompareTag("TrashCan") && heldObj != null)
+            {
+                TrashCan trashCan = hitObject.GetComponent<TrashCan>();
+                if (trashCan != null)
+                {
+                    if (heldObj.CompareTag(trashCan.acceptedTag))
+                    {
+                        hoverUI.SetActive(true);
+                        hoverText.text = "Dispose Object ?";
+                    }
+                    else
+                    {
+                        hoverUI.SetActive(true);
+                        hoverText.text = "Incorrect Trash Can!";
+                    }
+                }
+            }
+            // Handle hover UI for food bin
+            else if (hitObject.CompareTag("FoodBin") && heldObj != null)
+            {
+                Plate plate = heldObj.GetComponent<Plate>();
+                if (plate != null && plate.IsDirty())
+                {
+                    hoverUI.SetActive(true);
+                    hoverText.text = "Scrape Plate ?";
+                }
+                else
+                {
+                    hoverUI.SetActive(true);
+                    hoverText.text = "Incorrect Object!";
+                }
+            }
+            // Handle hover UI for liquid bucket
+            else if (hitObject.CompareTag("LiquidBucket") && heldObj != null)
+            {
+                Glass glass = heldObj.GetComponent<Glass>();
+                if (glass != null && glass.IsDirty())
+                {
+                    hoverUI.SetActive(true);
+                    hoverText.text = "Clean Glass ?";
+                }
+                else
+                {
+                    hoverUI.SetActive(true);
+                    hoverText.text = "Incorrect Object!";
                 }
             }
             else
