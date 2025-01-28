@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3150582576526325097}
   - component: {fileID: 4215987269857916522}
   - component: {fileID: -7953996047436891878}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Whiskey Glass
-  m_TagString: canPickUp
+  m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,4 +147,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f23f8fd4ee7f0cb4d80dd4c7526f12c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liquidVisual: {fileID: 0}

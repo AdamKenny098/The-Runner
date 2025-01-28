@@ -10,6 +10,10 @@ TagManager:
   - Counter
   - LiquidBin
   - LiquidBucket
+  - Recycling
+  - Waste
+  - Glass
+  - Plate
   layers:
   - Default
   - TransparentFX
@@ -22,9 +26,9 @@ TagManager:
   - Glasses
   - Cutlery
   - Bits&Bobs
-  - 
-  - 
-  - 
+  - Waste
+  - Recycling
+  - CanPickUp
   - 
   - 
   - 

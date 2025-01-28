@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7428042686656802707}
   - component: {fileID: 6675739263569165159}
   - component: {fileID: -7613994902163631116}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Plate
-  m_TagString: canPickUp
+  m_TagString: Plate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
