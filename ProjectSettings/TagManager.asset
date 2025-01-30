@@ -10,10 +10,11 @@ TagManager:
   - Counter
   - LiquidBin
   - LiquidBucket
-  - Recycling
-  - Waste
   - Glass
   - Plate
+  - TrashCan
+  - Waste
+  - Recycling
   layers:
   - Default
   - TransparentFX
