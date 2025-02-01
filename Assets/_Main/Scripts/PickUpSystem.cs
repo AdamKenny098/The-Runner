@@ -28,6 +28,12 @@ public class PickUpSystem : MonoBehaviour
         {
             HandleInteractions(); // Handles interactions with held objects
         }
+
+        // Automatically clear heldObj if it’s no longer parented to the hold position.
+        if (heldObj != null && heldObj.transform.parent != holdPos)
+        {
+            heldObj = null;
+        }
     }
 
     void TryPickUp()
@@ -129,18 +135,19 @@ public class PickUpSystem : MonoBehaviour
     {
         heldObj = pickUpObj;
         heldObjRb = heldObj.GetComponent<Rigidbody>();
-        if (heldObjRb != null) heldObjRb.isKinematic = true;
+        if (heldObjRb != null)
+        {
+            heldObjRb.isKinematic = true;
+            heldObjRb.velocity = Vector3.zero; // Reset any movement
+        }
 
-        // Parent the object to the hold position
+        // Parent the object to the hold position and reset its local transform
         heldObj.transform.SetParent(holdPos);
         heldObj.transform.localPosition = Vector3.zero;
         heldObj.transform.localRotation = Quaternion.identity;
 
         Debug.Log($"Picked up object: {heldObj.name}");
     }
-
-
-
 
     public void DropObject()
     {
@@ -172,12 +179,17 @@ public class PickUpSystem : MonoBehaviour
             }
 
             // If no valid target is found, drop the object normally
-            if (heldObjRb != null) heldObjRb.isKinematic = false;
+            if (heldObjRb != null)
+            {
+                heldObjRb.isKinematic = false;
+                heldObjRb.velocity = Vector3.zero;
+            }
             heldObj.transform.SetParent(null);
             Debug.Log($"Dropped object: {heldObj.name}");
             heldObj = null;
         }
     }
+
 
 
 
@@ -202,7 +214,7 @@ public class PickUpSystem : MonoBehaviour
                     hoverUI.SetActive(true);
                     hoverText.text = "Pick Up Plate ?";
                 }
-                if (hit.collider.CompareTag("Glass") && heldObj == null)
+                else if (hit.collider.CompareTag("Glass") && heldObj == null)
                 {
                     hoverUI.SetActive(true);
                     hoverText.text = "Pick Up Glass ?";

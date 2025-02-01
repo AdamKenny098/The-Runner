@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6e16372e1e17c468f8cbaec0885f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plateType: Entree
