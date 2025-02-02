@@ -15,7 +15,7 @@ public class StackManager : MonoBehaviour
     {
         Plate plate = other.GetComponent<Plate>();
 
-        if (plate != null && plate.plateType == plateType) // Check if it's a matching plate
+        if (plate != null && plate.plateType == plateType && !plate.IsDirty()) // Check if it's a matching plate
         {
             // If this plate is already in the stack, do nothing.
             if (stackedPlates.Contains(other.gameObject))

@@ -9,7 +9,9 @@ public class PickUpSystem : MonoBehaviour
     [HideInInspector] public GameObject heldObj; // Made public so other scripts can access it
     private Rigidbody heldObjRb;
 
-    public GameObject hoverUI; // Reference to the HoverUI GameObject
+    public GameObject hoverUI;
+    public GameObject hoverUIE;
+    public GameObject hoverUIF; // Reference to the HoverUI GameObject
     public TMP_Text hoverText; // Reference to the TextMeshPro text component
     public LayerMask canPickUpLayer; // Layer for objects that can be picked up
 
@@ -190,14 +192,6 @@ public class PickUpSystem : MonoBehaviour
         }
     }
 
-
-
-
-
-
-
-
-
     void HandleHoverUI()
     {
         // Perform a raycast to detect objects
@@ -205,40 +199,25 @@ public class PickUpSystem : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange, LayerMask.GetMask("CanPickUp", "Default")))
         {
             GameObject hitObject = hit.collider.gameObject;
+            UpdateHoverUI(false, false, false, "");
 
             if (hitObject.layer == LayerMask.NameToLayer("CanPickUp") && heldObj == null)
             {
                 // Check the object's specific layer for context-specific hover text
                 if (hit.collider.CompareTag("Plate") && heldObj == null)
                 {
-                    hoverUI.SetActive(true);
-                    hoverText.text = "Pick Up Plate ?";
+                    UpdateHoverUI(true, false, true, "Pick Up Plate ?");
                 }
                 else if (hit.collider.CompareTag("Glass") && heldObj == null)
                 {
-                    hoverUI.SetActive(true);
-                    hoverText.text = "Pick Up Glass ?";
+                    UpdateHoverUI(true, false, true, "Pick Up Glass ?");
                 }
                 else
                 {
-                    hoverUI.SetActive(true);
-                    hoverText.text = "Pick Up ?";
+                    UpdateHoverUI(true, false, true, "Pick Up ?");
                 }
             }
-            else if (hitObject.CompareTag("Counter") && heldObj != null && heldObj.CompareTag("Plate"))
-            {
-                Plate plate = heldObj.GetComponent<Plate>();
-                if (plate != null && plate.IsDirty())
-                {
-                    hoverUI.SetActive(true);
-                    hoverText.text = "Clean Plate Required!";
-                }
-                else
-                {
-                    hoverUI.SetActive(true);
-                    hoverText.text = "Place Plate ?";
-                }
-            }
+            
             else if (hitObject.CompareTag("TrashCan") && heldObj != null)
             {
                 TrashCan trashCan = hitObject.GetComponent<TrashCan>();
@@ -246,13 +225,11 @@ public class PickUpSystem : MonoBehaviour
                 {
                     if (heldObj.CompareTag(trashCan.acceptedTag))
                     {
-                        hoverUI.SetActive(true);
-                        hoverText.text = "Dispose Object ?";
+                        UpdateHoverUI(false, true, true, "Dispose Of Object ?");
                     }
                     else
                     {
-                        hoverUI.SetActive(true);
-                        hoverText.text = "Incorrect Trash Can!";
+                        UpdateHoverUI(false, false, true, "Incorrect Trash Can");
                     }
                 }
             }
@@ -262,13 +239,11 @@ public class PickUpSystem : MonoBehaviour
                 Plate plate = heldObj.GetComponent<Plate>();
                 if (plate != null && plate.IsDirty())
                 {
-                    hoverUI.SetActive(true);
-                    hoverText.text = "Scrape Plate ?";
+                    UpdateHoverUI(false, true, true, "Scrape Plate?");
                 }
                 else
                 {
-                    hoverUI.SetActive(true);
-                    hoverText.text = "Incorrect Object!";
+                    UpdateHoverUI(false, false, false, "");
                 }
             }
             // Handle hover UI for liquid bucket
@@ -277,29 +252,33 @@ public class PickUpSystem : MonoBehaviour
                 Glass glass = heldObj.GetComponent<Glass>();
                 if (glass != null && glass.IsDirty())
                 {
-                    hoverUI.SetActive(true);
-                    hoverText.text = "Clean Glass ?";
+                    UpdateHoverUI(false, true, true, "Empty Glass");
                 }
                 else
                 {
-                    hoverUI.SetActive(true);
-                    hoverText.text = "Incorrect Object!";
+                    UpdateHoverUI(false, false, false, "");
                 }
             }
             else
             {
                 // Hide the Hover UI if no interactable object is detected
-                hoverUI.SetActive(false);
+                UpdateHoverUI(false, false, false, "");
             }
         }
         else
         {
-            hoverUI.SetActive(false); // Hide the UI if the raycast hits nothing
+            UpdateHoverUI(false, false, false, ""); // Hide the UI if the raycast hits nothing
         }
     }
 
-
-
-
-
+    void UpdateHoverUI(bool uiFActive, bool uiEActive, bool textActive, string message)
+    {
+        hoverUIF.SetActive(uiFActive);
+        hoverUIE.SetActive(uiEActive);
+        hoverText.gameObject.SetActive(textActive);
+        if (textActive)
+        {
+            hoverText.text = message;
+        }
+    }
 }
