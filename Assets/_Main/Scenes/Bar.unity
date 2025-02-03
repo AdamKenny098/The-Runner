@@ -24188,37 +24188,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 16128688379294456, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 16311
-      objectReference: {fileID: 0}
-    - target: {fileID: 16128688379294463, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.375
-      objectReference: {fileID: 0}
-    - target: {fileID: 56495189389312340, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.103
-      objectReference: {fileID: 0}
-    - target: {fileID: 56495189389312340, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.189
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643497867892259635, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.375
-      objectReference: {fileID: 0}
     - target: {fileID: 6497763319286838152, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6497763319286838152, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6839642024405596426, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
-      propertyPath: GroundLayers.m_Bits
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7232495452893567487, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
       propertyPath: hoverUI
@@ -24236,10 +24208,6 @@ PrefabInstance:
       propertyPath: hoverText
       value: 
       objectReference: {fileID: 1250663350}
-    - target: {fileID: 7232495452893567487, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
-      propertyPath: canPickUpLayer.m_Bits
-      value: 8192
-      objectReference: {fileID: 0}
     - target: {fileID: 8304429269938126052, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 102.73
@@ -24280,8 +24248,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6439836039121314206, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
