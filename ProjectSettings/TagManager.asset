@@ -15,6 +15,7 @@ TagManager:
   - TrashCan
   - Waste
   - Recycling
+  - Stack
   layers:
   - Default
   - TransparentFX

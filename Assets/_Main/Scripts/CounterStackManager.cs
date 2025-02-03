@@ -22,11 +22,11 @@ public class CounterStackManager : MonoBehaviour
                 // Move the container to the next available stack point.
                 Transform targetPoint = stackPositions[nextStackIndex];
                 other.transform.position = targetPoint.position;
-                other.transform.rotation = targetPoint.rotation; // Optional: match rotation
+                other.transform.rotation = Quaternion.Euler(0, 0, 0);// Optional: match rotation
                 other.transform.localScale = new Vector3(1, 1, 1);
 
                 // Optionally, parent the container to the counter so it moves along if needed.
-                other.transform.SetParent(transform);
+                other.transform.SetParent(targetPoint);
 
                 // Increment to use the next position for subsequent containers.
                 nextStackIndex++;
