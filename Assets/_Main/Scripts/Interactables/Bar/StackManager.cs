@@ -7,6 +7,7 @@ public class StackManager : MonoBehaviour
     public Transform stackPoint; // Position where plates will stack
     public float stackHeight = 0.2f; // Distance between stacked plates
     public List<GameObject> stackedPlates = new List<GameObject>();
+    public Transform stackContainer;
 
     // Define the forced scale for plates when stacked.
     public Vector3 forcedPlateScale = new Vector3(1f, 1f, 1f);
@@ -39,10 +40,20 @@ public class StackManager : MonoBehaviour
 
     public void StackPlate(GameObject plate)
     {
-        plate.transform.SetParent(stackPoint);
+        plate.transform.SetParent(stackContainer);
 
         // Force the plate's scale to be the desired value.
         plate.transform.localScale = forcedPlateScale;
+
+        // Optionally disable the plate's collider to prevent unwanted physics interactions
+        Collider plateCollider = plate.GetComponent<Collider>();
+        if (plateCollider != null)
+            plateCollider.enabled = false;
+
+        // If the plate has a Rigidbody, set it to kinematic
+        Rigidbody plateRb = plate.GetComponent<Rigidbody>();
+        if (plateRb != null)
+            plateRb.isKinematic = true;
 
         int stackCount = stackedPlates.Count;
 
@@ -61,4 +72,37 @@ public class StackManager : MonoBehaviour
         }
         stackedPlates.Clear();
     }
+    public GameObject CreateStackContainer()
+    {
+        // Create a new empty GameObject to serve as the container
+        GameObject container = new GameObject("PlateStackContainer");
+        container.tag = "Stack";
+        container.layer = 13;
+
+        // Position the container at the current stack point (or another appropriate location)
+        container.transform.position = stackPoint.position;
+
+        // Optional: Add a collider and Rigidbody to the container if needed for pickup interactions.
+        // For example:
+        // BoxCollider containerCollider = container.AddComponent<BoxCollider>();
+        // Rigidbody containerRb = container.AddComponent<Rigidbody>();
+        // containerRb.isKinematic = true;
+
+        // Reparent each plate in the stack to the container
+        foreach (GameObject plate in stackedPlates)
+        {
+            plate.transform.SetParent(container.transform);
+
+            // Optionally disable individual colliders to prevent unwanted physics interactions.
+            Collider plateCollider = plate.GetComponent<Collider>();
+            if (plateCollider != null)
+                plateCollider.enabled = false;
+        }
+
+        // Clear the stacked plates list since they are now children of the container.
+        stackedPlates.Clear();
+
+        return container;
+    }
+
 }

@@ -14,6 +14,7 @@ public class PickUpSystem : MonoBehaviour
     public GameObject hoverUIF; // Reference to the HoverUI GameObject
     public TMP_Text hoverText; // Reference to the TextMeshPro text component
     public LayerMask canPickUpLayer; // Layer for objects that can be picked up
+    public StackManager stackManager;
 
     void Update()
     {
@@ -281,4 +282,17 @@ public class PickUpSystem : MonoBehaviour
             hoverText.text = message;
         }
     }
+
+    void TryPickUpStack()
+    {
+        // Assuming you have a reference to your StackManager
+        GameObject container = stackManager.CreateStackContainer();
+        if (container != null)
+        {
+            // Use your existing pickup logic to pick up the container.
+            // For example:
+            PickUpObject(container);
+        }
+    }
+
 }
