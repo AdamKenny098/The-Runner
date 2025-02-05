@@ -23,7 +23,7 @@ public class CounterStackManager : MonoBehaviour
                 Transform targetPoint = stackPositions[nextStackIndex];
                 other.transform.position = targetPoint.position;
                 other.transform.rotation = Quaternion.Euler(0, 0, 0);// Optional: match rotation
-                other.transform.localScale = new Vector3(1, 1, 1);
+                
 
                 // Optionally, parent the container to the counter so it moves along if needed.
                 other.transform.SetParent(targetPoint);

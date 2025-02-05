@@ -16,6 +16,8 @@ TagManager:
   - Waste
   - Recycling
   - Stack
+  - OrderDropZone
+  - Order
   layers:
   - Default
   - TransparentFX
