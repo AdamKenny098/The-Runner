@@ -15,6 +15,8 @@ public class PickUpSystem : MonoBehaviour
     public TMP_Text hoverText; // Reference to the TextMeshPro text component
     public LayerMask canPickUpLayer; // Layer for objects that can be picked up
     public StackManager stackManager;
+    public TicketManager ticketManager;
+    public GameObject heldOrder; // The order object the player is carrying.
 
     void Update()
     {
@@ -179,6 +181,26 @@ public class PickUpSystem : MonoBehaviour
                         Debug.Log("Cannot place dirty plate on the counter!");
                     }
                 }
+
+                if (hit.collider.CompareTag("OrderDropZone") && heldObj.CompareTag("Order"))
+                {
+                    Order order = heldObj.GetComponent<Order>();
+                    if (order != null)
+                    {
+                        PlateCounter counter = hit.collider.GetComponent<PlateCounter>();
+                        if (counter != null)
+                        {
+                            counter.AddPlateToStack(heldObj); // Add plate to counter stack
+                            heldObj = null; // Reset held object
+                            Debug.Log("Plate placed on counter.");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Cannot place dirty plate on the counter!");
+                    }
+                }
             }
 
             // If no valid target is found, drop the object normally
@@ -212,6 +234,10 @@ public class PickUpSystem : MonoBehaviour
                 else if (hit.collider.CompareTag("Glass") && heldObj == null)
                 {
                     UpdateHoverUI(true, false, true, "Pick Up Glass ?");
+                }
+                else if (hit.collider.CompareTag("Order") && heldObj == null)
+                {
+                    UpdateHoverUI(true, false, true, "Pick Up Order ?");
                 }
                 else
                 {
@@ -260,6 +286,19 @@ public class PickUpSystem : MonoBehaviour
                     UpdateHoverUI(false, false, false, "");
                 }
             }
+
+            else if (hitObject.CompareTag("OrderDropZone") && heldObj != null)
+            {
+                Order order = heldObj.GetComponent<Order>();
+                if (order != null)
+                {
+                    UpdateHoverUI(false, true, true, "Place Order?");
+                }
+                else
+                {
+                    UpdateHoverUI(false, false, false, "");
+                }
+            }
             else
             {
                 // Hide the Hover UI if no interactable object is detected
@@ -295,4 +334,16 @@ public class PickUpSystem : MonoBehaviour
         }
     }
 
+    // This method is called when picking up an order.
+    public void PickUpOrder(GameObject orderObj)
+    {
+        heldOrder = orderObj;
+        Order order = orderObj.GetComponent<Order>();
+        if (order != null)
+        {
+            // Update the ticket UI with the order details.
+            ticketManager.UpdateTicket(order.GetOrderDetails());
+        }
+        // Additional logic to attach the order to the player, etc.
+    }
 }
