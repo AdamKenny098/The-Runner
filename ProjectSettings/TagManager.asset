@@ -19,6 +19,7 @@ TagManager:
   - OrderDropZone
   - Order
   - GlassStorage
+  - Tray
   layers:
   - Default
   - TransparentFX

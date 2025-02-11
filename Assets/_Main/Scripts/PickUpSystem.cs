@@ -5,6 +5,7 @@ public class PickUpSystem : MonoBehaviour
 {
     public GameObject player;
     public Transform holdPos;
+    public Transform trayHoldPos;   // Custom hold position for the tray
     public float pickUpRange = 5f;
     [HideInInspector] public GameObject heldObj; // Made public so other scripts can access it
     private Rigidbody heldObjRb;
@@ -135,6 +136,34 @@ public class PickUpSystem : MonoBehaviour
                     }
                 }
             }
+
+            else if (hit.collider.CompareTag("FoodBin"))
+            {
+                Debug.Log("Interacting with Food Bin...");
+                FoodBin foodBin = hit.collider.GetComponent<FoodBin>();
+                if (foodBin != null)
+                {
+                    foodBin.StartScraping(heldObj.GetComponent<Plate>());
+                }
+            }
+            else if (hit.collider.CompareTag("LiquidBucket"))
+            {
+                Debug.Log("Interacting with Liquid Bucket...");
+                LiquidBucket liquidBucket = hit.collider.GetComponent<LiquidBucket>();
+                if (liquidBucket != null)
+                {
+                    liquidBucket.StartCleaning(heldObj.GetComponent<Glass>());
+                }
+            }
+            else if (hit.collider.CompareTag("TrashCan")) // Interaction with trash cans
+            {
+                Debug.Log("Interacting with Trash Can...");
+                TrashCan trashCan = hit.collider.GetComponent<TrashCan>();
+                if (trashCan != null)
+                {
+                    trashCan.StartDisposal(heldObj, this);
+                }
+            }
         }
         else
         {
@@ -147,20 +176,33 @@ public class PickUpSystem : MonoBehaviour
     void PickUpObject(GameObject pickUpObj)
     {
         heldObj = pickUpObj;
-        heldObjRb = heldObj.GetComponent<Rigidbody>();
+        Rigidbody heldObjRb = heldObj.GetComponent<Rigidbody>();
+
         if (heldObjRb != null)
         {
             heldObjRb.isKinematic = true;
             heldObjRb.velocity = Vector3.zero; // Reset any movement
         }
 
-        // Parent the object to the hold position and reset its local transform
-        heldObj.transform.SetParent(holdPos);
-        heldObj.transform.localPosition = Vector3.zero;
-        heldObj.transform.localRotation = Quaternion.identity;
-
-        Debug.Log($"Picked up object: {heldObj.name}");
+        // Check if the object is a tray and apply custom hold position
+        if (heldObj.CompareTag("Tray"))
+        {
+            // Parent to tray hold position and apply correct rotation
+            heldObj.transform.SetParent(trayHoldPos);
+            heldObj.transform.localPosition = Vector3.zero;
+            heldObj.transform.localRotation = Quaternion.Euler(-90, 0, 0);  // Custom rotation for tray
+            Debug.Log("Tray picked up with correct rotation and custom hold position.");
+        }
+        else
+        {
+            // Parent other objects to the default hold position
+            heldObj.transform.SetParent(holdPos);
+            heldObj.transform.localPosition = Vector3.zero;
+            heldObj.transform.localRotation = Quaternion.identity;  // Default rotation
+            Debug.Log($"Picked up object: {heldObj.name}");
+        }
     }
+
 
     public void DropObject()
     {
