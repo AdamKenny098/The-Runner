@@ -1,34 +1,72 @@
 using System.Collections;
 using UnityEngine;
 
-public class GlassStorage : MonoBehaviour
+public class GlassStorageManager : MonoBehaviour
 {
     public Transform[] glassSlots; // Array of the 25 glass child objects
-    private int nextGlassIndex = 0; // Tracks which glass to activate next
+    public int nextGlassIndex = 0; // Tracks which glass to activate next
+    private bool isResetting = false; // Prevent multiple resets
+    public bool isFull = false; // Tracks if the storage is full
 
-    // Called when the player interacts with the storage
+    // Called when the player stores a glass
     public void StoreGlass(GameObject playerGlass)
     {
+        if (isResetting) return;  // Prevent storing during reset
+
         StartCoroutine(StoreGlassRoutine(playerGlass));
     }
 
     private IEnumerator StoreGlassRoutine(GameObject playerGlass)
     {
-        // Wait for 0.5 seconds to simulate interaction time
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f); // Simulate interaction time
 
-        // Destroy the glass the player is holding
-        Destroy(playerGlass);
+        Destroy(playerGlass); // Destroy the glass the player is holding
 
-        // Activate the next hidden glass in storage
         if (nextGlassIndex < glassSlots.Length)
         {
             glassSlots[nextGlassIndex].gameObject.SetActive(true);
             nextGlassIndex++;
+            Debug.Log($"Stored glass at slot {nextGlassIndex}/{glassSlots.Length}");
         }
-        else
+
+        // Set storage to full if all slots are filled
+        if (nextGlassIndex >= glassSlots.Length)
         {
-            Debug.Log("Storage is full! No more slots available.");
+            isFull = true;
+            Debug.Log("Storage is now full!");
         }
+    }
+
+    // Called when the player interacts with empty hands
+    public void TryResetStorage()
+    {
+        if (isFull && !isResetting)
+        {
+            StartCoroutine(ResetStorageRoutine());
+        }
+        else if (!isFull)
+        {
+            Debug.Log("Storage is not full, no need to reset.");
+        }
+    }
+
+    private IEnumerator ResetStorageRoutine()
+    {
+        isResetting = true;
+        Debug.Log("Resetting storage... Please wait 4 seconds.");
+
+        yield return new WaitForSeconds(4f); // Simulate long reset interaction
+
+        // Hide all glasses and reset the index
+        foreach (Transform glass in glassSlots)
+        {
+            glass.gameObject.SetActive(false);
+        }
+
+        nextGlassIndex = 0;
+        isFull = false;
+        isResetting = false;
+
+        Debug.Log("Storage reset complete. You can store glasses again.");
     }
 }

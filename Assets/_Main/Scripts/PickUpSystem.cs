@@ -105,47 +105,42 @@ public class PickUpSystem : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
         {
-            if (hit.collider.CompareTag("FoodBin"))
-            {
-                Debug.Log("Interacting with Food Bin...");
-                FoodBin foodBin = hit.collider.GetComponent<FoodBin>();
-                if (foodBin != null)
-                {
-                    foodBin.StartScraping(heldObj.GetComponent<Plate>());
-                }
-            }
-            else if (hit.collider.CompareTag("LiquidBucket"))
-            {
-                Debug.Log("Interacting with Liquid Bucket...");
-                LiquidBucket liquidBucket = hit.collider.GetComponent<LiquidBucket>();
-                if (liquidBucket != null)
-                {
-                    liquidBucket.StartCleaning(heldObj.GetComponent<Glass>());
-                }
-            }
-            else if (hit.collider.CompareTag("TrashCan")) // Interaction with trash cans
-            {
-                Debug.Log("Interacting with Trash Can...");
-                TrashCan trashCan = hit.collider.GetComponent<TrashCan>();
-                if (trashCan != null)
-                {
-                    trashCan.StartDisposal(heldObj, this);
-                }
-            }
+            Debug.Log($"Raycast hit: {hit.collider.gameObject.name}");
 
-            // Interaction with Glass Storage
-            else if (hit.collider.CompareTag("GlassStorage") && heldObj != null && heldObj.CompareTag("Glass"))
+            if (hit.collider.CompareTag("GlassStorage"))
             {
-                Debug.Log("Interacting with Glass Storage...");
-                GlassStorage storageManager = hit.collider.GetComponent<GlassStorage>();
+                GlassStorageManager storageManager = hit.collider.GetComponent<GlassStorageManager>();
+
                 if (storageManager != null)
                 {
-                    storageManager.StoreGlass(heldObj);
-                    heldObj = null;  // Clear the player's held object after storage
+                    if (heldObj == null && storageManager.isFull)
+                    {
+                        Debug.Log("Player has empty hands. Storage is full, attempting to reset...");
+                        storageManager.TryResetStorage();
+                    }
+                    else if (heldObj != null && heldObj.CompareTag("Glass") && !storageManager.isFull)
+                    {
+                        Debug.Log("Storing glass in storage...");
+                        storageManager.StoreGlass(heldObj);
+                        heldObj = null;
+                    }
+                    else if (heldObj != null && heldObj.CompareTag("Glass") && storageManager.isFull)
+                    {
+                        Debug.Log("Storage is full! You need to reset before adding more glasses.");
+                    }
+                    else if (heldObj == null && !storageManager.isFull)
+                    {
+                        Debug.Log("Storage is not full. No action needed.");
+                    }
                 }
             }
         }
+        else
+        {
+            Debug.Log("Raycast did not hit any object.");
+        }
     }
+
 
 
     void PickUpObject(GameObject pickUpObj)
@@ -256,7 +251,7 @@ public class PickUpSystem : MonoBehaviour
                     UpdateHoverUI(true, false, true, "Pick Up ?");
                 }
             }
-            
+            // Handle hover UI for Trash Cans
             else if (hitObject.CompareTag("TrashCan") && heldObj != null)
             {
                 TrashCan trashCan = hitObject.GetComponent<TrashCan>();
@@ -298,7 +293,7 @@ public class PickUpSystem : MonoBehaviour
                     UpdateHoverUI(false, false, false, "");
                 }
             }
-
+            // Handle hover UI for Order Counter
             else if (hitObject.CompareTag("OrderDropZone") && heldObj != null)
             {
                 Order order = heldObj.GetComponent<Order>();
@@ -311,6 +306,33 @@ public class PickUpSystem : MonoBehaviour
                     UpdateHoverUI(false, false, false, "");
                 }
             }
+            // Handle hover UI for Glass Tray
+            else if (hitObject.CompareTag("GlassStorage"))
+            {
+                GlassStorageManager glassStorage = hitObject.GetComponent<GlassStorageManager>();
+
+                // If the player's hand is empty and the storage is full
+                if (heldObj == null && glassStorage.nextGlassIndex == glassStorage.glassSlots.Length)
+                {
+                    UpdateHoverUI(false, true, true, "Empty Glasses?");
+                }
+                // If the player is holding a glass and the storage is not full
+                else if (heldObj != null)
+                {
+                    Glass glass = heldObj.GetComponent<Glass>();
+
+                    if (glass != null && glassStorage.nextGlassIndex < glassStorage.glassSlots.Length)
+                    {
+                        UpdateHoverUI(false, true, true, "Place Glass?");
+                    }
+                    // If storage is full and the player is holding a glass
+                    else if (glass != null && glassStorage.nextGlassIndex == glassStorage.glassSlots.Length)
+                    {
+                        UpdateHoverUI(false, true, true, "Storage Full, Empty it First");
+                    }
+                }
+            }
+
             else
             {
                 // Hide the Hover UI if no interactable object is detected
