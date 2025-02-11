@@ -29,8 +29,9 @@ public class PickUpSystem : MonoBehaviour
         }
 
         // Check if the player is pressing the E key (for interactions with objects like FoodBin or LiquidBucket)
-        if (Input.GetKeyDown(KeyCode.E) && heldObj != null)
+        if (Input.GetKeyDown(KeyCode.E))
         {
+
             HandleInteractions(); // Handles interactions with held objects
         }
 
@@ -312,7 +313,7 @@ public class PickUpSystem : MonoBehaviour
                 GlassStorageManager glassStorage = hitObject.GetComponent<GlassStorageManager>();
 
                 // If the player's hand is empty and the storage is full
-                if (heldObj == null && glassStorage.nextGlassIndex == glassStorage.glassSlots.Length)
+                if (heldObj == null && glassStorage.isFull)
                 {
                     UpdateHoverUI(false, true, true, "Empty Glasses?");
                 }
