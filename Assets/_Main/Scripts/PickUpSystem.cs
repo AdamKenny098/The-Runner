@@ -132,6 +132,18 @@ public class PickUpSystem : MonoBehaviour
                     trashCan.StartDisposal(heldObj, this);
                 }
             }
+
+            // Interaction with Glass Storage
+            else if (hit.collider.CompareTag("GlassStorage") && heldObj != null && heldObj.CompareTag("Glass"))
+            {
+                Debug.Log("Interacting with Glass Storage...");
+                GlassStorage storageManager = hit.collider.GetComponent<GlassStorage>();
+                if (storageManager != null)
+                {
+                    storageManager.StoreGlass(heldObj);
+                    heldObj = null;  // Clear the player's held object after storage
+                }
+            }
         }
     }
 
