@@ -203,7 +203,6 @@ public class PickUpSystem : MonoBehaviour
         }
     }
 
-
     public void DropObject()
     {
         if (heldObj != null)

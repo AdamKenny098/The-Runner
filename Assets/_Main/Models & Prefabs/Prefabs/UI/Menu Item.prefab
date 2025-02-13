@@ -685,6 +685,8 @@ GameObject:
   - component: {fileID: 2593477862105978855}
   - component: {fileID: 7554681783957460759}
   - component: {fileID: 1677002822944248206}
+  - component: {fileID: 8175178936917989559}
+  - component: {fileID: 6418226542942055985}
   m_Layer: 5
   m_Name: Menu Item
   m_TagString: Untagged
@@ -763,6 +765,48 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8175178936917989559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190087799948617604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48812b0cfbac784694e78f658a9e125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemNameText: {fileID: 6124985806526831328}
+  itemCarbsText: {fileID: 1032440861804066800}
+  itemProteinText: {fileID: 1189827891923425733}
+  itemVegText: {fileID: 6043154335625900726}
+  itemGarnishText: {fileID: 3489607155439206687}
+  itemInfoText: {fileID: 8626893672385168922}
+  itemPriceText: {fileID: 4058535493657015868}
+  itemImage: {fileID: 8987362751173139435}
+--- !u!114 &6418226542942055985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190087799948617604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8189a5ae5fab94db41a9496017aa51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodItemDisplay: {fileID: 8175178936917989559}
+  sampleFoodData:
+    itemName: Garlic Mushrooms
+    itemCarbs: Bread
+    itemProtein: N/A
+    itemVeg: Mushrooms
+    itemGarnish: Greens
+    itemInfo: Starter
+    itemPrice: $14.95
+    itemSprite: {fileID: 0}
 --- !u!1 &3331583530521152792
 GameObject:
   m_ObjectHideFlags: 0

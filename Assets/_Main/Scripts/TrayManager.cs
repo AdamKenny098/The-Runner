@@ -6,6 +6,34 @@ public class TrayManager : MonoBehaviour
     private int nextAvailableSlot = 0;  // Tracks the next available slot
 
     // Adds an item to the tray
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Order"))
+        {
+            if (nextAvailableSlot >= traySlots.Length)
+            {
+                Debug.LogWarning("Tray is full! Cannot add more items.");
+                return;  // Exit early if tray is full
+            }
+
+            Order order = other.GetComponent<Order>();
+            if (order != null)
+            {
+                Transform targetPoint = traySlots[nextAvailableSlot];
+                other.transform.position = targetPoint.position;
+                other.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+                // Parent the order to the tray slot
+                other.transform.SetParent(targetPoint);
+                nextAvailableSlot++;
+
+                Debug.Log($"Order {order.name} added to slot {nextAvailableSlot}/{traySlots.Length}.");
+            }
+        }
+    }
+
+
     public bool AddItemToTray(GameObject orderItem)
     {
         if (nextAvailableSlot >= traySlots.Length)
