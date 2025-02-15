@@ -16,7 +16,6 @@ public class PickUpSystem : MonoBehaviour
     public TMP_Text hoverText; // Reference to the TextMeshPro text component
     public LayerMask canPickUpLayer; // Layer for objects that can be picked up
     public StackManager stackManager;
-    public TicketManager ticketManager;
     public GameObject heldOrder; // The order object the player is carrying.
 
     void Update()
@@ -417,8 +416,8 @@ public class PickUpSystem : MonoBehaviour
         Order order = orderObj.GetComponent<Order>();
         if (order != null)
         {
-            // Update the ticket UI with the order details.
-            ticketManager.UpdateTicket(order.GetOrderDetails());
+            //// Update the ticket UI with the order details.
+            //ticketManager.UpdateTicket(order.GetOrderDetails());
         }
         // Additional logic to attach the order to the player, etc.
     }

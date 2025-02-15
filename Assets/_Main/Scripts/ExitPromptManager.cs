@@ -20,7 +20,7 @@ public class CombinedTimerManager : MonoBehaviour
     public TextMeshProUGUI exitCountdownText;
 
     // Internal timer for the session
-    private float sessionTimer = 0f;
+    [SerializeField]private float sessionTimer = 0f;
 
     // When true, the session timer is paused during the exit countdown
     private bool isPaused = false;
