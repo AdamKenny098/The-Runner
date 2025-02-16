@@ -16269,6 +16269,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ticketPrefab: {fileID: 4332527708208322326, guid: b97f6142f5a9c4743906dbfb54c2d232, type: 3}
   ticketSpawnPoint: {fileID: 1811111669}
+  starterOptions:
+  - Garlic Mushrooms
+  - Soup
+  - Garlic Bread
+  mainOptions:
+  - Bangers and Mash
+  - Turkey and Ham
+  - Roast Beef
+  dessertOptions:
+  - Trio of Ice Cream
+  - Jelly and Ice cream
+  - Chocolate Mousse
 --- !u!114 &1628531698
 MonoBehaviour:
   m_ObjectHideFlags: 0

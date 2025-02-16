@@ -9,12 +9,18 @@ public class TicketMaker : MonoBehaviour
     // Optional: A spawn point for new tickets; if not set, the TicketMaker's position is used.
     public Transform ticketSpawnPoint;
 
+    // Arrays of menu items for each course.
+    public string[] starterOptions;
+    public string[] mainOptions;
+    public string[] dessertOptions;
+
     // Counter to assign unique ticket numbers.
     private int ticketCount = 0;
 
     /// <summary>
     /// Creates a new Ticket by instantiating the ticketPrefab, setting its properties randomly,
-    /// and updating its physical TextMeshPro display.
+    /// selecting random items for each course from the provided arrays, and updating its physical
+    /// TextMeshPro display.
     /// </summary>
     public void CreateNewTicket()
     {
@@ -47,22 +53,59 @@ public class TicketMaker : MonoBehaviour
         // Set the preparation time for the ticket (e.g., between 30 and 90 seconds).
         newTicket.timeToMake = Random.Range(30, 91);
 
+        // Select random items from each array.
+        string selectedStarters = "";
+        if (newTicket.isHavingStarters && starterOptions != null && starterOptions.Length > 0)
+        {
+            for (int i = 0; i < newTicket.numberOfStarters; i++)
+            {
+                string starter = starterOptions[Random.Range(0, starterOptions.Length)];
+                selectedStarters += starter + "\n";
+            }
+        }
+
+        string selectedMains = "";
+        if (mainOptions != null && mainOptions.Length > 0)
+        {
+            for (int i = 0; i < newTicket.numberOfEntrees; i++)
+            {
+                string mainCourse = mainOptions[Random.Range(0, mainOptions.Length)];
+                selectedMains += mainCourse + "\n";
+            }
+        }
+
+        string selectedDesserts = "";
+        if (newTicket.isHavingDesserts && dessertOptions != null && dessertOptions.Length > 0)
+        {
+            for (int i = 0; i < newTicket.numberOfDesserts; i++)
+            {
+                string dessert = dessertOptions[Random.Range(0, dessertOptions.Length)];
+                selectedDesserts += dessert + "\n";
+            }
+        }
+
         // Log the new ticket details.
         Debug.Log($"Created Ticket #{newTicket.ticketNumber}: {newTicket.numberOfPeople} people, " +
                   $"Starters: {newTicket.isHavingStarters} ({newTicket.numberOfStarters}), " +
                   $"Entrees: {newTicket.numberOfEntrees}, Desserts: {newTicket.isHavingDesserts} ({newTicket.numberOfDesserts}), " +
                   $"Time: {newTicket.timeToMake} sec");
 
-        // Update the physical ticket's text display.
+        // Update the physical ticket's TextMeshPro display.
         TMP_Text ticketText = newTicket.GetComponentInChildren<TMP_Text>();
         if (ticketText != null)
         {
-            ticketText.text = $"Ticket #{newTicket.ticketNumber}\n" +
-                              $"People: {newTicket.numberOfPeople}\n" +
-                              (newTicket.isHavingStarters ? $"Starters: {newTicket.numberOfStarters}\n" : "") +
-                              $"Entrees: {newTicket.numberOfEntrees}\n" +
-                              (newTicket.isHavingDesserts ? $"Desserts: {newTicket.numberOfDesserts}\n" : "") +
-                              $"Time to Make: {newTicket.timeToMake} sec";
+            ticketText.text =
+                $"-----------------------------------------\n" +
+                $"               The Arklight               \n" +
+                $"-----------------------------------------\n" +
+                $"\n" +
+                $"Insert Date System Here\n" +
+                $"Ticket #{newTicket.ticketNumber}\n" +
+                $"Heads: {newTicket.numberOfPeople}\n" +
+                $"\n" +
+                (newTicket.isHavingStarters ? $"<color=#FB4D62><b>        ----- STARTERS -----        </b></color> {selectedStarters}\n" : "") +
+                $"<color=#FB4D62><b>        ----- ENTREES -----        </b></color> {selectedMains}\n" +
+                (newTicket.isHavingDesserts ? $"<color=#FB4D62><b>        ----- DESSERTS -----        </b></color> {selectedDesserts}\n" : "");
         }
         else
         {
