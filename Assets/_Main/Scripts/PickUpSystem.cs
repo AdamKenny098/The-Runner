@@ -15,8 +15,6 @@ public class PickUpSystem : MonoBehaviour
     public GameObject hoverUIF; // Reference to the HoverUI GameObject
     public TMP_Text hoverText; // Reference to the TextMeshPro text component
     public LayerMask canPickUpLayer; // Layer for objects that can be picked up
-    public StackManager stackManager;
-    public GameObject heldOrder; // The order object the player is carrying.
 
     void Update()
     {
@@ -36,7 +34,7 @@ public class PickUpSystem : MonoBehaviour
         }
 
         // Automatically clear heldObj if it’s no longer parented to the hold position.
-        if (heldObj != null && heldObj.transform.parent != holdPos)
+        if (heldObj != null && (heldObj.transform.parent != holdPos && heldObj.transform.parent != trayHoldPos))
         {
             heldObj = null;
         }
@@ -108,10 +106,25 @@ public class PickUpSystem : MonoBehaviour
         {
             Debug.Log($"Raycast hit: {hit.collider.gameObject.name}");
 
-            if (hit.collider.CompareTag("GlassStorage"))
+            // If the held object is a tray, handle tray interactions.
+            if (heldObj != null && heldObj.CompareTag("Tray"))
+            {
+                OrderDropZone orderDropZone = hit.collider.GetComponent<OrderDropZone>();
+                if (orderDropZone != null)
+                {
+                    // Call the tray-specific drop logic.
+                    TrayManager trayManager = heldObj.GetComponent<TrayManager>();
+                    if (trayManager != null)
+                    {
+                        orderDropZone.HandleTrayDrop(trayManager);
+                        return; // Exit after handling tray interaction.
+                    }
+                }
+            }
+            // Otherwise, continue with the regular interactions.
+            else if (hit.collider.CompareTag("GlassStorage"))
             {
                 GlassStorageManager storageManager = hit.collider.GetComponent<GlassStorageManager>();
-
                 if (storageManager != null)
                 {
                     if (heldObj == null && storageManager.isFull)
@@ -135,32 +148,48 @@ public class PickUpSystem : MonoBehaviour
                     }
                 }
             }
-
             else if (hit.collider.CompareTag("FoodBin"))
             {
                 Debug.Log("Interacting with Food Bin...");
                 FoodBin foodBin = hit.collider.GetComponent<FoodBin>();
-                if (foodBin != null)
+                if (foodBin != null && heldObj != null)
                 {
-                    foodBin.StartScraping(heldObj.GetComponent<Plate>());
+                    Plate plate = heldObj.GetComponent<Plate>();
+                    if (plate != null)
+                    {
+                        foodBin.StartScraping(plate);
+                    }
                 }
             }
             else if (hit.collider.CompareTag("LiquidBucket"))
             {
                 Debug.Log("Interacting with Liquid Bucket...");
                 LiquidBucket liquidBucket = hit.collider.GetComponent<LiquidBucket>();
-                if (liquidBucket != null)
+                if (liquidBucket != null && heldObj != null)
                 {
-                    liquidBucket.StartCleaning(heldObj.GetComponent<Glass>());
+                    Glass glass = heldObj.GetComponent<Glass>();
+                    if (glass != null)
+                    {
+                        liquidBucket.StartCleaning(glass);
+                    }
                 }
             }
-            else if (hit.collider.CompareTag("TrashCan")) // Interaction with trash cans
+            else if (hit.collider.CompareTag("TrashCan"))
             {
                 Debug.Log("Interacting with Trash Can...");
                 TrashCan trashCan = hit.collider.GetComponent<TrashCan>();
-                if (trashCan != null)
+                if (trashCan != null && heldObj != null)
                 {
                     trashCan.StartDisposal(heldObj, this);
+                }
+            }
+            else if (hit.collider.CompareTag("OrderDropZone"))
+            {
+                OrderDropZone orderDropZone = hit.collider.GetComponent<OrderDropZone>();
+                if (orderDropZone != null && heldObj != null)
+                {
+                    // For non-tray orders, you might handle drop differently.
+                    orderDropZone.HandleOrderDrop(heldObj.GetComponent<Collider>());
                 }
             }
         }
@@ -169,6 +198,7 @@ public class PickUpSystem : MonoBehaviour
             Debug.Log("Raycast did not hit any object.");
         }
     }
+
 
 
 
@@ -338,10 +368,16 @@ public class PickUpSystem : MonoBehaviour
             else if (hitObject.CompareTag("OrderDropZone") && heldObj != null)
             {
                 Order order = heldObj.GetComponent<Order>();
+                TrayManager trayManager = heldObj.GetComponent<TrayManager>();
                 if (order != null)
                 {
                     UpdateHoverUI(false, true, true, "Place Order?");
                 }
+                else if(trayManager != null)
+                {
+                    UpdateHoverUI(false, true, true, "Place Tray?");
+                }
+
                 else
                 {
                     UpdateHoverUI(false, false, false, "");
@@ -397,7 +433,7 @@ public class PickUpSystem : MonoBehaviour
         }
     }
 
-    void TryPickUpStack()
+    /*void TryPickUpStack()
     {
         // Assuming you have a reference to your StackManager
         GameObject container = stackManager.CreateStackContainer();
@@ -408,17 +444,5 @@ public class PickUpSystem : MonoBehaviour
             PickUpObject(container);
         }
     }
-
-    // This method is called when picking up an order.
-    public void PickUpOrder(GameObject orderObj)
-    {
-        heldOrder = orderObj;
-        Order order = orderObj.GetComponent<Order>();
-        if (order != null)
-        {
-            //// Update the ticket UI with the order details.
-            //ticketManager.UpdateTicket(order.GetOrderDetails());
-        }
-        // Additional logic to attach the order to the player, etc.
-    }
+    */
 }

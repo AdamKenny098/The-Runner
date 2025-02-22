@@ -6,20 +6,7 @@ public class OrderDropZone : MonoBehaviour
     public Transform snapPos;
     public float destroyTime = 10f;  // Temporarily set to 10 seconds
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Order"))
-        {
-            HandleOrderDrop(other);
-        }
-        else if (other.CompareTag("Tray"))
-        {
-            HandleTrayDrop(other);
-        }
-    }
-
-    private void HandleOrderDrop(Collider other)
+    public void HandleOrderDrop(Collider other)
     {
         Order order = other.GetComponent<Order>();
         if (order != null)
@@ -38,23 +25,29 @@ public class OrderDropZone : MonoBehaviour
         }
     }
 
-
-    private void HandleTrayDrop(Collider other)
+    public void HandleTrayDrop(TrayManager trayManager)
     {
-        TrayManager trayManager = other.GetComponent<TrayManager>();
         if (trayManager != null)
         {
-            SnapObjectToPosition(other.transform, snapPos, Quaternion.Euler(-90, 0, 0));
+            // Snap the tray into position by resetting its local position and applying the desired local rotation.
+            SnapObjectToPosition(trayManager.transform, snapPos, Quaternion.Euler(-90, 0, 0));
             DestroyAllGrandchildren(trayManager.gameObject, destroyTime);
             Debug.Log("Tray dropped, destroying all orders on the tray.");
         }
     }
 
-    private void SnapObjectToPosition(Transform obj, Transform targetPos, Quaternion rotation)
+    /// <summary>
+    /// Snaps an object to a target position by setting its parent, local position, and local rotation.
+    /// </summary>
+    private void SnapObjectToPosition(Transform obj, Transform targetPos, Quaternion localRotation)
     {
-        obj.position = targetPos.position;
-        obj.rotation = rotation;
-        obj.SetParent(targetPos);
+        // Set the object's parent to the target position without altering its local transform.
+        obj.SetParent(targetPos, false);
+        // Reset local position to zero.
+        obj.localPosition = new Vector3(0, -0.005f, 0.01f);
+        // Set local rotation to the desired value.
+        obj.localRotation = Quaternion.Euler(-90,0,-90);
+        obj.localScale = new Vector3(0.003662357f, 0.0009582097f, 0.004463832f);
     }
 
     public void DestroyAllGrandchildren(GameObject parentObject, float delay)
@@ -73,9 +66,6 @@ public class OrderDropZone : MonoBehaviour
         }
     }
 
-
-    // Coroutine to delay destruction
-    // Coroutine to delay destruction
     private IEnumerator DelayedDestroy(GameObject obj, float delay)
     {
         Debug.Log($"Starting coroutine for {obj.name}, will destroy after {delay} seconds.");
@@ -91,5 +81,4 @@ public class OrderDropZone : MonoBehaviour
             Debug.LogWarning($"{obj.name} is already destroyed before delay.");
         }
     }
-
 }
