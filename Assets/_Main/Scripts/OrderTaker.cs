@@ -7,7 +7,7 @@ using UnityEngine;
 public class OrderTaker : MonoBehaviour
 {
     // When true, orders can be taken.
-    private bool canTakeOrder = true;
+    public bool canTakeOrder = true;
 
     // Internal timer for the session
     private float orderTimer = 0f;
