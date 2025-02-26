@@ -41,7 +41,6 @@ public class OrderTaker : MonoBehaviour
                 if (outcome % 2 == 0)
                 {
                     orderCreator.CreateNewTicket();
-                    Debug.Log("Order Taken");
                 }
                 else
                 {

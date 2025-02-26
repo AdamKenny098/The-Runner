@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5965321283400831008}
   - component: {fileID: 2646331399873542805}
   - component: {fileID: 4440289364539193893}
+  - component: {fileID: -7284183995482384932}
   m_Layer: 13
   m_Name: Trio of Ice Cream
-  m_TagString: Plate
+  m_TagString: Order
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,6 +155,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plateType: Bowl
+--- !u!65 &-7284183995482384932
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9159651837943565241}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.021050053, y: 0.008950304, z: 0.021050056}
+  m_Center: {x: 9.313225e-10, y: -0.004475152, z: -0.000000001862645}
 --- !u!1001 &2476939115140075485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -205,6 +227,10 @@ PrefabInstance:
     - target: {fileID: 7895590265775739547, guid: b6405e8551b9bff4199f8886461e6860, type: 3}
       propertyPath: m_Name
       value: Strawberry Icecream
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895590265775739547, guid: b6405e8551b9bff4199f8886461e6860, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -284,6 +310,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Strawberry Icecream
       objectReference: {fileID: 0}
+    - target: {fileID: 7621754239691895921, guid: 144fcc654ba8229478b65a1b652c524f, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -305,6 +335,10 @@ PrefabInstance:
     - target: {fileID: 6909482522282851755, guid: 901670aaca2affb4b8ae127df1fad0c2, type: 3}
       propertyPath: m_Name
       value: Vanilla Icecream
+      objectReference: {fileID: 0}
+    - target: {fileID: 6909482522282851755, guid: 901670aaca2affb4b8ae127df1fad0c2, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8169704629703427169, guid: 901670aaca2affb4b8ae127df1fad0c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -424,6 +458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vanilla Icecream
       objectReference: {fileID: 0}
+    - target: {fileID: 7621754239691895921, guid: 144fcc654ba8229478b65a1b652c524f, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -502,6 +540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chocolate Icecream
       objectReference: {fileID: 0}
+    - target: {fileID: 7621754239691895921, guid: 144fcc654ba8229478b65a1b652c524f, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -523,6 +565,10 @@ PrefabInstance:
     - target: {fileID: 3393019293338142657, guid: 7312208b789d7074aafb13c3b81d7b96, type: 3}
       propertyPath: m_Name
       value: Chocolate Icecream
+      objectReference: {fileID: 0}
+    - target: {fileID: 3393019293338142657, guid: 7312208b789d7074aafb13c3b81d7b96, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7145610265670188687, guid: 7312208b789d7074aafb13c3b81d7b96, type: 3}
       propertyPath: m_LocalPosition.x

@@ -2420,6 +2420,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04953369, y: 0.09197143, z: 0.010000003}
   m_Center: {x: 0.019766817, y: 0.04098571, z: -0.00000035762787}
+--- !u!1 &148659680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 148659681}
+  m_Layer: 13
+  m_Name: Docket Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &148659681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148659680}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.94, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5334037120285022851}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &151047847
 GameObject:
   m_ObjectHideFlags: 0
@@ -10771,8 +10802,8 @@ Transform:
   m_LocalScale: {x: 0.008333331, y: 0.008333331, z: 0.014984768}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5334037120285022851}
   - {fileID: 1443133481}
+  - {fileID: 5334037120285022851}
   m_Father: {fileID: 248920281}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!54 &1060176215
@@ -16311,6 +16342,7 @@ GameObject:
   - component: {fileID: 1628531695}
   - component: {fileID: 1628531697}
   - component: {fileID: 1628531698}
+  - component: {fileID: 1628531699}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -16368,6 +16400,8 @@ MonoBehaviour:
   docketPositions:
   - {fileID: 2598547}
   - {fileID: 2137632036}
+  - {fileID: 492965187}
+  orderTaker: {fileID: 1628531698}
   starterOptions:
   - Garlic Mushrooms
   - Soup
@@ -16380,6 +16414,9 @@ MonoBehaviour:
   - Trio of Ice Cream
   - Jelly and Ice cream
   - Chocolate Mousse
+  allTickets: []
+  ticketCount: 0
+  currentDocketIndex: 0
 --- !u!114 &1628531698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16392,11 +16429,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea5870e320cb0347af89c467c099771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canTakeOrder: 1
   orderLeastWait: 5
   orderMostWait: 15
   timeBetweenOrders: 0
   outcome: 0
   orderCreator: {fileID: 1628531697}
+--- !u!114 &1628531699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628531694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8957c01c80a5f54899ecbec398e1e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints:
+  - {fileID: 973569540}
+  - {fileID: 813004504}
+  - {fileID: 797852342}
+  - {fileID: 1258544756}
+  - {fileID: 1120470589}
+  - {fileID: 1279944135}
+  spawnInterval: 10
+  stopSpawning: 0
+  starterOrderPrefabs:
+  - {fileID: 7230828807338483206, guid: 0335041087debcd4788cb0c1e4749ad7, type: 3}
+  - {fileID: 4857138480094627701, guid: ce8a10fdcb5865f469e829a3267e56f5, type: 3}
+  - {fileID: 8670485205721479922, guid: d569ee9fab414014b8b576a5c1c62c45, type: 3}
+  entreeOrderPrefabs:
+  - {fileID: 437457753476090761, guid: 8d878a47b870f3e4aac49f33c8653faf, type: 3}
+  - {fileID: 7985491076483417121, guid: e0680ff4628f5924a99f900408d32ed2, type: 3}
+  - {fileID: 5035125289544136743, guid: a3527a9ce53ae2a4d822cae20cb61f89, type: 3}
+  dessertOrderPrefabs:
+  - {fileID: 3707153842626879143, guid: f529ed7f82a1bcc48819920775fa3695, type: 3}
+  - {fileID: 4802936181769731714, guid: 85db595d61fd974449f0c6cbc13db644, type: 3}
+  - {fileID: 9159651837943565241, guid: e3e0578adb75b6149bb54b9931691af1, type: 3}
+  ticketMaker: {fileID: 1628531697}
+  currentTicket: {fileID: 0}
+  currentTicketIndex: 0
 --- !u!1 &1639831931
 GameObject:
   m_ObjectHideFlags: 0
@@ -22607,7 +22681,6 @@ GameObject:
   - component: {fileID: 361892979}
   - component: {fileID: 361892978}
   - component: {fileID: 361892977}
-  - component: {fileID: 5334037119550555777}
   m_Layer: 0
   m_Name: Kitchen_pass (Hot)
   m_TagString: Untagged
@@ -26568,6 +26641,10 @@ PrefabInstance:
       value: Tray
       objectReference: {fileID: 0}
     - target: {fileID: 3865585641379676064, guid: e4c14deca7f29e54db8c8263f74c17ed, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.30000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865585641379676064, guid: e4c14deca7f29e54db8c8263f74c17ed, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.22000006
       objectReference: {fileID: 0}
@@ -26577,15 +26654,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3865585641379676064, guid: e4c14deca7f29e54db8c8263f74c17ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.39797553
+      value: 0.39793977
       objectReference: {fileID: 0}
     - target: {fileID: 3865585641379676064, guid: e4c14deca7f29e54db8c8263f74c17ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.333
+      value: 0.33302292
       objectReference: {fileID: 0}
     - target: {fileID: 3865585641379676064, guid: e4c14deca7f29e54db8c8263f74c17ed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.061
+      value: 0.92199236
       objectReference: {fileID: 0}
     - target: {fileID: 3865585641379676064, guid: e4c14deca7f29e54db8c8263f74c17ed, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26633,7 +26710,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6746ebc034b7d584e8a614222d288a5f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3865585641379676064, guid: e4c14deca7f29e54db8c8263f74c17ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 148659681}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 435338738483956058, guid: e4c14deca7f29e54db8c8263f74c17ed, type: 3}
       insertIndex: -1
@@ -27736,29 +27816,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832149484372770315}
   m_Mesh: {fileID: -5495902117074765545, guid: 3924bb31386b47b42921735a56b15eee, type: 3}
---- !u!114 &5334037119550555777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832149484372770315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8957c01c80a5f54899ecbec398e1e40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orderPrefabs:
-  - {fileID: 1460872964630923809, guid: 980c11ccf266a424a8f63ae4000a406a, type: 3}
-  spawnPoints:
-  - {fileID: 973569540}
-  - {fileID: 813004504}
-  - {fileID: 797852342}
-  - {fileID: 1258544756}
-  - {fileID: 1120470589}
-  - {fileID: 1279944135}
-  spawnInterval: 1
-  stopSpawning: 0
 --- !u!33 &5334037120056117840
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -27887,6 +27944,7 @@ MonoBehaviour:
   - {fileID: 1148411960}
   - {fileID: 686970742}
   - {fileID: 1673694947}
+  docketSlot: {fileID: 148659681}
 --- !u!4 &5334037120285022851 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3865585641379676064, guid: e4c14deca7f29e54db8c8263f74c17ed, type: 3}

@@ -9,7 +9,7 @@ public class OrderDropZone : MonoBehaviour
     public void HandleOrderDrop(Collider other)
     {
         Order order = other.GetComponent<Order>();
-        if (order != null)
+        if (order != null && order.ticket != null)
         {
             // Check if the order is part of a tray
             if (other.transform.parent != null && other.transform.parent.CompareTag("Tray"))
@@ -24,6 +24,8 @@ public class OrderDropZone : MonoBehaviour
             Debug.Log($"Order {order.name} will be destroyed in {destroyTime} seconds.");
         }
     }
+
+
 
     public void HandleTrayDrop(TrayManager trayManager)
     {

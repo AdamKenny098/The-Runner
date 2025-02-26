@@ -219,9 +219,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5586389019650030136}
   - component: {fileID: 4332527708208322326}
-  m_Layer: 0
+  - component: {fileID: 864678020664741628}
+  m_Layer: 13
   m_Name: Order Ticket
-  m_TagString: Untagged
+  m_TagString: Docket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,15 +259,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db88882a254df67488bb5e584e8f7a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ticketNumber: 0
   numberOfPeople: 0
   isHavingStarters: 0
   isHavingDesserts: 0
   isEveryoneEating: 0
-  ticketNumber: 0
   numberOfStarters: 0
   numberOfEntrees: 0
   numberOfDesserts: 0
   timeToMake: 0
+  spawnedOrders: []
+--- !u!65 &864678020664741628
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935311387343314594}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.9997559, z: 0.02}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7173781647718854541
 GameObject:
   m_ObjectHideFlags: 0

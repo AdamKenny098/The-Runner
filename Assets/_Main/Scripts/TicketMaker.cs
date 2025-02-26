@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -14,8 +15,11 @@ public class TicketMaker : MonoBehaviour
     public string[] mainOptions;
     public string[] dessertOptions;
 
-    private int ticketCount = 0;
-    private int currentDocketIndex = 0;
+    [Header("Ticket Storage")]
+    public List<Ticket> allTickets = new List<Ticket>(); // List of all created tickets
+
+    public int ticketCount = 0;
+    public int currentDocketIndex = 0;
 
     /// <summary>
     /// Checks if every docket position has at least one child ticket.
@@ -113,6 +117,8 @@ public class TicketMaker : MonoBehaviour
             Debug.LogWarning("No TextMeshPro component found on the Ticket prefab.");
         }
 
+        // Add the new ticket to the list.
+        allTickets.Add(newTicket);
         // After creating the ticket, check if all slots are now filled.
         if (docketPositions != null && docketPositions.Length > 0 && AreAllSlotsFilled())
         {
@@ -151,7 +157,7 @@ public class TicketMaker : MonoBehaviour
 
         if (ticket.isHavingStarters)
             text += $"<color=#FB4D62><b>        ----- STARTERS -----        </b></color>\n{starters}\n";
-        text += $"<color=#FB4D62><b>        ----- ENTREES -----        </b></color>\n{mains}\n";
+            text += $"<color=#FB4D62><b>        ----- ENTREES -----        </b></color>\n{mains}\n";
         if (ticket.isHavingDesserts)
             text += $"<color=#FB4D62><b>        ----- DESSERTS -----        </b></color>\n{desserts}\n";
         return text;

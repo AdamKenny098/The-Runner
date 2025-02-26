@@ -1,41 +1,27 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class TrayManager : MonoBehaviour
 {
     public Transform[] traySlots;  // Array of empty slots on the tray
     private int nextAvailableSlot = 0;  // Tracks the next available slot
+    public Transform docketSlot;
 
-    // Adds an item to the tray
+    private List<GameObject> placedOrders = new List<GameObject>(); // Track orders added to the tray
+    private GameObject docketTicket = null;  // Store the current docket
 
-    private void OnTriggerEnter(Collider other)
+    /// <summary>
+    /// Adds an order to the tray in the next available slot.
+    /// </summary>
+    public bool AddOrderToTray(GameObject orderItem)
     {
-        if (other.CompareTag("Order"))
+        // Prevent adding duplicate orders
+        if (placedOrders.Contains(orderItem))
         {
-            if (nextAvailableSlot >= traySlots.Length)
-            {
-                Debug.LogWarning("Tray is full! Cannot add more items.");
-                return;  // Exit early if tray is full
-            }
-
-            Order order = other.GetComponent<Order>();
-            if (order != null)
-            {
-                Transform targetPoint = traySlots[nextAvailableSlot];
-                other.transform.position = targetPoint.position;
-                other.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-                // Parent the order to the tray slot
-                other.transform.SetParent(targetPoint);
-                nextAvailableSlot++;
-
-                Debug.Log($"Order {order.name} added to slot {nextAvailableSlot}/{traySlots.Length}.");
-            }
+            Debug.LogWarning($"Order {orderItem.name} is already on the tray!");
+            return false;
         }
-    }
 
-
-    public bool AddItemToTray(GameObject orderItem)
-    {
         if (nextAvailableSlot >= traySlots.Length)
         {
             Debug.Log("Tray is full! Cannot add more items.");
@@ -43,32 +29,67 @@ public class TrayManager : MonoBehaviour
         }
 
         // Parent the order item to the next available slot
-        orderItem.transform.SetParent(traySlots[nextAvailableSlot]);
+        orderItem.transform.SetParent(traySlots[nextAvailableSlot], false);
         orderItem.transform.localPosition = Vector3.zero;  // Align to slot position
         orderItem.transform.localRotation = Quaternion.identity;  // Reset rotation if needed
 
-        Debug.Log($"Added {orderItem.name} to tray slot {nextAvailableSlot + 1}/{traySlots.Length}");
-
+        placedOrders.Add(orderItem); // Track the added order
         nextAvailableSlot++;  // Move to the next slot
+
+        Debug.Log($"Added {orderItem.name} to tray slot {nextAvailableSlot}/{traySlots.Length}");
         return true;  // Item added successfully
     }
 
-    // Clears the tray, removing all items
-    public void ClearTray()
+    /// <summary>
+    /// Positions the docket (ticket) on the tray.
+    /// </summary>
+    public bool PositionDocket(GameObject ticketItem)
     {
-        foreach (Transform slot in traySlots)
+        if (docketTicket != null)
         {
-            if (slot.childCount > 0)
-            {
-                Destroy(slot.GetChild(0).gameObject);  // Remove the item from the tray
-            }
+            Debug.LogWarning("A docket is already placed on the tray!");
+            return false; // A docket is already placed
         }
 
-        nextAvailableSlot = 0;
-        Debug.Log("Tray cleared and ready for new items.");
+        docketTicket = ticketItem;
+        docketTicket.transform.SetParent(docketSlot, false);
+        docketTicket.transform.localPosition = Vector3.zero;  // Align to slot position
+        docketTicket.transform.localRotation = Quaternion.identity;  // Reset rotation if needed
+
+        Debug.Log($"Docket {ticketItem.name} placed on the tray.");
+        return true;
     }
 
-    // Check if the tray is full
+    /// <summary>
+    /// Removes an order from the tray.
+    /// </summary>
+    public void RemoveOrderFromTray(GameObject orderItem)
+    {
+        if (placedOrders.Contains(orderItem))
+        {
+            placedOrders.Remove(orderItem);
+            orderItem.transform.SetParent(null); // Detach from tray
+            Debug.Log($"Removed {orderItem.name} from tray.");
+            nextAvailableSlot--; // Free up a slot
+        }
+    }
+
+    /// <summary>
+    /// Removes the docket from the tray.
+    /// </summary>
+    public void RemoveDocket()
+    {
+        if (docketTicket != null)
+        {
+            Debug.Log($"Docket {docketTicket.name} removed from the tray.");
+            docketTicket.transform.SetParent(null); // Detach from tray
+            docketTicket = null;
+        }
+    }
+
+    /// <summary>
+    /// Checks if the tray is full.
+    /// </summary>
     public bool IsTrayFull()
     {
         return nextAvailableSlot >= traySlots.Length;

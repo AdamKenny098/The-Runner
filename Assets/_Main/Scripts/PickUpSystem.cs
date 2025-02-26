@@ -192,6 +192,33 @@ public class PickUpSystem : MonoBehaviour
                     orderDropZone.HandleOrderDrop(heldObj.GetComponent<Collider>());
                 }
             }
+
+            else if (hit.collider.CompareTag("Tray"))
+            {
+                TrayManager trayManager = hit.collider.GetComponent<TrayManager>();
+
+                if (trayManager != null && heldObj != null)
+                {
+                    Ticket ticket = heldObj.GetComponent<Ticket>();
+                    Order order = heldObj.GetComponent<Order>();
+
+                    if (ticket != null)
+                    {
+                        Debug.Log("Adding Ticket to Tray...");
+                        trayManager.PositionDocket(heldObj);
+                    }
+                    else if (order != null)
+                    {
+                        Debug.Log("Adding Order to Tray...");
+                        trayManager.AddOrderToTray(heldObj);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Held object is neither a Ticket nor an Order!");
+                    }
+                }
+            }
+
         }
         else
         {
