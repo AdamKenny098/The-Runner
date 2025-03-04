@@ -1,5 +1,9 @@
 using UnityEngine;
+using System.Collections;
 using TMPro;
+using StarterAssets;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Cinemachine;
 
 interface IInteractable
 {
@@ -20,6 +24,8 @@ public class Interactor : MonoBehaviour
     public GameObject closeButton; // Reference to the close panel button
     public GameObject yesButton; // Reference to the Yes button
     public GameObject noButton; // Reference to the No button
+
+    public CinemachineBrain cinemachineBrain;
 
     void Start()
     {
@@ -63,14 +69,14 @@ public class Interactor : MonoBehaviour
             }
             else
             {
-                
+
                 tmpText.text = "";
                 interactIcon.SetActive(false);
             }
         }
         else
         {
-           
+
             tmpText.text = "";
             interactIcon.SetActive(false);
         }
@@ -78,6 +84,8 @@ public class Interactor : MonoBehaviour
 
     void ShowInteractionPanel(string description)
     {
+        LockCamera();  // Ensure the camera is locked when the interaction panel is shown.
+
         interactionPanel.SetActive(true); // Show the panel
         descriptionText.text = description; // Set the description text
 
@@ -90,8 +98,9 @@ public class Interactor : MonoBehaviour
 
     public void ShowUniqueInteractionPanel(string description)
     {
+        LockCamera();
+
         // Reset button visibility
-        Debug.Log("Resetting buttons before showing unique interaction panel.");
         ResetButtons();
 
         // Set the description text
@@ -116,19 +125,17 @@ public class Interactor : MonoBehaviour
 
     public void CloseInteractionPanel()
     {
-        // Hide the panel and reset buttons
         interactionPanel.SetActive(false);
-        yesButton.SetActive(false);
-        noButton.SetActive(false);
-        closeButton.SetActive(true);
+        ResetButtons();
 
-        Debug.Log("Interaction panel closed. Buttons reset to default state.");
-
-        // Lock the cursor back for gameplay
+        // Lock the cursor and hide it immediately, then delay the camera unlock
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Debug.Log("Cursor locked and hidden for gameplay.");
+        StartCoroutine(UnlockCameraWithDelay(0.01f)); // Short delay before unlocking the camera.
+
+        Debug.Log("Interaction panel closed and cursor locked.");
     }
+
 
     private void ResetButtons()
     {
@@ -138,5 +145,24 @@ public class Interactor : MonoBehaviour
         closeButton.SetActive(true);
 
         Debug.Log("Buttons reset: Yes (hidden), No (hidden), Close (visible).");
+    }
+
+    public void LockCamera()
+    {
+        // Disable the firstPersonController to lock the camera and player movement.
+        cinemachineBrain.enabled = false;
+    }
+
+    public bool ignoreMouseInput = false;  // Flag to temporarily ignore mouse input
+
+    private void UnlockCamera()
+    {
+        cinemachineBrain.enabled = true; // Re-enable the camera control.
+    }
+
+    private IEnumerator UnlockCameraWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        UnlockCamera();
     }
 }

@@ -7,6 +7,7 @@ public class FrontDoorHandle : MonoBehaviour, IInteractable
 
     // Loading screen (optional)
     [SerializeField] private GameObject loadingScreen;
+    [SerializeField] private GameObject HUD;
 
     public void Interact()
     {
@@ -38,6 +39,7 @@ public class FrontDoorHandle : MonoBehaviour, IInteractable
         if (loadingScreen != null)
         {
             Debug.Log("Activating loading screen...");
+            HUD.SetActive(false);
             loadingScreen.SetActive(true); // Activate the loading screen (optional)
         }
         else

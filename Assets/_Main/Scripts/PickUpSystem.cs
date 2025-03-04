@@ -7,7 +7,7 @@ public class PickUpSystem : MonoBehaviour
     public Transform holdPos;
     public Transform trayHoldPos;   // Custom hold position for the tray
     public float pickUpRange = 5f;
-    [HideInInspector] public GameObject heldObj; // Made public so other scripts can access it
+    public GameObject heldObj; // Made public so other scripts can access it
     private Rigidbody heldObjRb;
 
     public GameObject hoverUI;
@@ -16,6 +16,7 @@ public class PickUpSystem : MonoBehaviour
     public TMP_Text hoverText; // Reference to the TextMeshPro text component
     public LayerMask canPickUpLayer; // Layer for objects that can be picked up
 
+    public TrayManager trayManager;
     void Update()
     {
         HandleHoverUI();
@@ -107,7 +108,33 @@ public class PickUpSystem : MonoBehaviour
             Debug.Log($"Raycast hit: {hit.collider.gameObject.name}");
 
             // If the held object is a tray, handle tray interactions.
-            if (heldObj != null && heldObj.CompareTag("Tray"))
+
+            if (hit.collider.CompareTag("TrayPosition"))
+            {
+                if (heldObj != null && heldObj.CompareTag("Tray"))
+                {
+                    TrayManager trayManager = heldObj.GetComponent<TrayManager>();
+                    if (trayManager != null)
+                    {
+                        trayManager.PlaceTray(heldObj, hit.transform);
+
+                    }
+                }
+                else if (heldObj == null && hit.transform.childCount > 0)
+                {
+                    Transform firstChild = hit.transform.GetChild(0);
+
+                    if (firstChild.CompareTag("Tray"))
+                    {
+                        if (Input.GetKeyDown(KeyCode.E))
+                        {
+                            PickUpObject(firstChild.gameObject);
+                        }
+                    }
+                }
+            }
+
+            else if (heldObj != null && heldObj.CompareTag("Tray"))
             {
                 OrderDropZone orderDropZone = hit.collider.GetComponent<OrderDropZone>();
                 if (orderDropZone != null)
@@ -200,14 +227,13 @@ public class PickUpSystem : MonoBehaviour
                 if (trayManager != null && heldObj != null)
                 {
                     Ticket ticket = heldObj.GetComponent<Ticket>();
-                    Order order = heldObj.GetComponent<Order>();
 
                     if (ticket != null)
                     {
                         Debug.Log("Adding Ticket to Tray...");
                         trayManager.PositionDocket(heldObj);
                     }
-                    else if (order != null)
+                    else if (heldObj.CompareTag("Order"))
                     {
                         Debug.Log("Adding Order to Tray...");
                         trayManager.AddOrderToTray(heldObj);
@@ -218,11 +244,6 @@ public class PickUpSystem : MonoBehaviour
                     }
                 }
             }
-
-        }
-        else
-        {
-            Debug.Log("Raycast did not hit any object.");
         }
     }
 
@@ -436,6 +457,37 @@ public class PickUpSystem : MonoBehaviour
                     }
                 }
             }
+
+            else if (hitObject.CompareTag("TrayPosition"))
+            {
+                // Ensure heldObj is not null before accessing its components
+                TrayManager trayManager = null;
+                if (heldObj != null)
+                {
+                    trayManager = heldObj.GetComponent<TrayManager>();
+                }
+                
+
+                // If the player's hand is empty and the TrayPosition has a tray
+                if (heldObj == null && hit.transform.childCount > 0)
+                {
+                    UpdateHoverUI(true, false, true, "Pick Up Tray?");
+                }
+                // If the player is holding a tray and TrayPosition is empty
+                else if (heldObj != null)
+                {
+                    if (trayManager != null && hit.transform.childCount == 0)
+                    {
+                        UpdateHoverUI(false, true, true, "Place Tray?");
+                    }
+                    // If TrayPosition is full and player is holding a tray
+                    else if (trayManager != null && hit.transform.childCount > 0)
+                    {
+                        UpdateHoverUI(false, true, true, "There's Already A Tray!");
+                    }
+                }
+            }
+
 
             else
             {

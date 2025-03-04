@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Profiling;
 
 public class TrayManager : MonoBehaviour
 {
     public Transform[] traySlots;  // Array of empty slots on the tray
+    public Transform[] trayPositions;
     private int nextAvailableSlot = 0;  // Tracks the next available slot
     public Transform docketSlot;
 
@@ -32,6 +34,7 @@ public class TrayManager : MonoBehaviour
         orderItem.transform.SetParent(traySlots[nextAvailableSlot], false);
         orderItem.transform.localPosition = Vector3.zero;  // Align to slot position
         orderItem.transform.localRotation = Quaternion.identity;  // Reset rotation if needed
+        orderItem.transform.localScale = Vector3.one;
 
         placedOrders.Add(orderItem); // Track the added order
         nextAvailableSlot++;  // Move to the next slot
@@ -55,6 +58,7 @@ public class TrayManager : MonoBehaviour
         docketTicket.transform.SetParent(docketSlot, false);
         docketTicket.transform.localPosition = Vector3.zero;  // Align to slot position
         docketTicket.transform.localRotation = Quaternion.identity;  // Reset rotation if needed
+        ticketItem.transform.localScale = Vector3.one;
 
         Debug.Log($"Docket {ticketItem.name} placed on the tray.");
         return true;
@@ -93,5 +97,36 @@ public class TrayManager : MonoBehaviour
     public bool IsTrayFull()
     {
         return nextAvailableSlot >= traySlots.Length;
+    }
+
+    public void PlaceTray(GameObject tray, Transform traySpot)
+    {
+        if (tray == null || traySpot == null)
+        {
+            Debug.LogError("Tray or TrayPosition is NULL! Cannot place.");
+            return;
+        }
+        else
+        {
+            // Set tray position to match the held object position
+            tray.transform.position = traySpot.position;
+            tray.transform.rotation = traySpot.rotation;
+
+            // Parent the tray to the TrayPosition
+            tray.transform.SetParent(traySpot, true);
+
+            Rigidbody rb = tray.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+                Debug.Log("Set Rigidbody to Kinematic.");
+            }
+
+            Debug.Log("Tray successfully placed.");
+        }
+
+        Debug.Log($"Placing tray {tray.name} at {traySpot.name}");
+
+        
     }
 }
