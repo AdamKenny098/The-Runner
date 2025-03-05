@@ -8,12 +8,13 @@ public class Ticket : MonoBehaviour
     public bool isHavingStarters;
     public bool isHavingDesserts;
     public bool isEveryoneEating;
-    public int numberOfStarters;
-    public int numberOfEntrees;
-    public int numberOfDesserts;
     public int timeToMake;
 
-    public List<Order> spawnedOrders = new List<Order>();  // Store Orders instead of GameObjects
+    public List<string> orderedStarters = new List<string>();  // Stores exact starter names
+    public List<string> orderedEntrees = new List<string>();   // Stores exact entree names
+    public List<string> orderedDesserts = new List<string>();  // Stores exact dessert names
+
+    public List<Order> spawnedOrders = new List<Order>();  // Track spawned orders
 
     public void RemoveOrder(Order order)
     {
@@ -29,12 +30,7 @@ public class Ticket : MonoBehaviour
             }
         }
     }
-    
 
-
-    /// <summary>
-    /// Marks this ticket as completed.
-    /// </summary>
     private void CompleteTicket()
     {
         Debug.Log($"✅ Ticket #{ticketNumber} is now COMPLETE!");

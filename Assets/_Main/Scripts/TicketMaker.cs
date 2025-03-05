@@ -44,14 +44,12 @@ public class TicketMaker : MonoBehaviour
     /// </summary>
     public void CreateNewTicket()
     {
-        // If an OrderTaker exists and orders are currently disabled, do nothing.
         if (orderTaker != null && !orderTaker.canTakeOrder)
         {
             Debug.Log("No more orders can be taken: orderTaker.canTakeOrder is false.");
             return;
         }
 
-        // Check if all docket positions are filled.
         if (docketPositions != null && docketPositions.Length > 0 && AreAllSlotsFilled())
         {
             if (orderTaker != null)
@@ -60,7 +58,6 @@ public class TicketMaker : MonoBehaviour
             return;
         }
 
-        // Determine spawn position and parent transform.
         Transform parentTransform = null;
         Vector3 spawnPosition = transform.position;
         if (docketPositions != null && docketPositions.Length > 0)
@@ -75,7 +72,6 @@ public class TicketMaker : MonoBehaviour
             parentTransform = ticketSpawnPoint;
         }
 
-        // Instantiate ticket and set parent.
         Ticket newTicket = Instantiate(ticketPrefab, spawnPosition, Quaternion.identity);
         if (parentTransform != null)
         {
@@ -83,43 +79,38 @@ public class TicketMaker : MonoBehaviour
             newTicket.transform.localPosition = Vector3.zero;
         }
 
-        // Update ticket properties.
         ticketCount++;
         newTicket.ticketNumber = ticketCount;
         newTicket.numberOfPeople = Random.Range(1, 6);
         newTicket.isHavingStarters = Random.value < 0.5f;
         newTicket.isHavingDesserts = Random.value < 0.5f;
         newTicket.isEveryoneEating = Random.value < 0.8f;
-        newTicket.numberOfStarters = newTicket.isHavingStarters ? Random.Range(1, newTicket.numberOfPeople + 1) : 0;
-        newTicket.numberOfEntrees = newTicket.numberOfPeople;
-        newTicket.numberOfDesserts = newTicket.isHavingDesserts ? Random.Range(1, newTicket.numberOfPeople + 1) : 0;
         newTicket.timeToMake = Random.Range(30, 91);
 
-        // Build menu strings.
-        string selectedStarters = GetRandomItems(starterOptions, newTicket.numberOfStarters, newTicket.isHavingStarters);
-        string selectedMains = GetRandomItems(mainOptions, newTicket.numberOfEntrees, true);
-        string selectedDesserts = GetRandomItems(dessertOptions, newTicket.numberOfDesserts, newTicket.isHavingDesserts);
+        // ?? Store the exact food items instead of just counting them
+        newTicket.orderedStarters = GetRandomItemsList(starterOptions, newTicket.isHavingStarters ? Random.Range(1, newTicket.numberOfPeople + 1) : 0, newTicket.isHavingStarters);
+        newTicket.orderedEntrees = GetRandomItemsList(mainOptions, newTicket.numberOfPeople, true);
+        newTicket.orderedDesserts = GetRandomItemsList(dessertOptions, newTicket.isHavingDesserts ? Random.Range(1, newTicket.numberOfPeople + 1) : 0, newTicket.isHavingDesserts);
 
         Debug.Log($"Created Ticket #{newTicket.ticketNumber}: {newTicket.numberOfPeople} people, " +
-                  $"Starters: {newTicket.isHavingStarters} ({newTicket.numberOfStarters}), " +
-                  $"Entrees: {newTicket.numberOfEntrees}, " +
-                  $"Desserts: {newTicket.isHavingDesserts} ({newTicket.numberOfDesserts}), " +
+                  $"Starters: {newTicket.isHavingStarters} ({newTicket.orderedStarters.Count}), " +
+                  $"Entrees: {newTicket.orderedEntrees.Count}, " +
+                  $"Desserts: {newTicket.isHavingDesserts} ({newTicket.orderedDesserts.Count}), " +
                   $"Time: {newTicket.timeToMake} sec");
 
-        // Update the physical ticket's TextMeshPro display.
+        // Update the physical ticket’s TextMeshPro display
         TMP_Text ticketText = newTicket.GetComponentInChildren<TMP_Text>();
         if (ticketText != null)
         {
-            ticketText.text = GenerateTicketText(newTicket, selectedStarters, selectedMains, selectedDesserts);
+            ticketText.text = GenerateTicketText(newTicket);
         }
         else
         {
             Debug.LogWarning("No TextMeshPro component found on the Ticket prefab.");
         }
 
-        // Add the new ticket to the list.
         allTickets.Add(newTicket);
-        // After creating the ticket, check if all slots are now filled.
+
         if (docketPositions != null && docketPositions.Length > 0 && AreAllSlotsFilled())
         {
             if (orderTaker != null)
@@ -127,25 +118,26 @@ public class TicketMaker : MonoBehaviour
         }
     }
 
+
+
     /// <summary>
     /// Returns a newline-separated list of random items from the given options.
     /// </summary>
-    private string GetRandomItems(string[] options, int count, bool isActive)
+    private List<string> GetRandomItemsList(string[] options, int count, bool isActive)
     {
+        List<string> selectedItems = new List<string>();
         if (!isActive || options == null || options.Length == 0)
-            return "";
-        string result = "";
+            return selectedItems;
+
         for (int i = 0; i < count; i++)
         {
-            result += options[Random.Range(0, options.Length)] + "\n";
+            selectedItems.Add(options[Random.Range(0, options.Length)]);
         }
-        return result;
+        return selectedItems;
     }
 
-    /// <summary>
-    /// Generates the formatted ticket text.
-    /// </summary>
-    private string GenerateTicketText(Ticket ticket, string starters, string mains, string desserts)
+
+    private string GenerateTicketText(Ticket ticket)
     {
         string text =
             "-----------------------------------------\n" +
@@ -156,10 +148,14 @@ public class TicketMaker : MonoBehaviour
             $"Heads: {ticket.numberOfPeople}\n\n";
 
         if (ticket.isHavingStarters)
-            text += $"<color=#FB4D62><b>        ----- STARTERS -----        </b></color>\n{starters}\n";
-            text += $"<color=#FB4D62><b>        ----- ENTREES -----        </b></color>\n{mains}\n";
+            text += $"<color=#FB4D62><b>        ----- STARTERS -----        </b></color>\n{string.Join("\n", ticket.orderedStarters)}\n";
+
+        text += $"<color=#FB4D62><b>        ----- ENTREES -----        </b></color>\n{string.Join("\n", ticket.orderedEntrees)}\n";
+
         if (ticket.isHavingDesserts)
-            text += $"<color=#FB4D62><b>        ----- DESSERTS -----        </b></color>\n{desserts}\n";
+            text += $"<color=#FB4D62><b>        ----- DESSERTS -----        </b></color>\n{string.Join("\n", ticket.orderedDesserts)}\n";
+
         return text;
     }
+
 }

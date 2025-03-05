@@ -113,35 +113,30 @@ public class OrderSpawner : MonoBehaviour
         }
 
         GameObject orderPrefab = null;
+        string orderName = ""; // Store the required food name
 
-        if (spawnedStarters < currentTicket.numberOfStarters)
+        if (spawnedStarters < currentTicket.orderedStarters.Count)
         {
-            if (starterOrderPrefabs.Length > 0)
-            {
-                orderPrefab = starterOrderPrefabs[Random.Range(0, starterOrderPrefabs.Length)];
-                spawnedStarters++;
-            }
+            orderName = currentTicket.orderedStarters[spawnedStarters]; // Get exact order
+            orderPrefab = FindPrefab(orderName, starterOrderPrefabs);
+            spawnedStarters++;
         }
-        else if (spawnedEntrees < currentTicket.numberOfEntrees)
+        else if (spawnedEntrees < currentTicket.orderedEntrees.Count)
         {
-            if (entreeOrderPrefabs.Length > 0)
-            {
-                orderPrefab = entreeOrderPrefabs[Random.Range(0, entreeOrderPrefabs.Length)];
-                spawnedEntrees++;
-            }
+            orderName = currentTicket.orderedEntrees[spawnedEntrees];
+            orderPrefab = FindPrefab(orderName, entreeOrderPrefabs);
+            spawnedEntrees++;
         }
-        else if (spawnedDesserts < currentTicket.numberOfDesserts)
+        else if (spawnedDesserts < currentTicket.orderedDesserts.Count)
         {
-            if (dessertOrderPrefabs.Length > 0)
-            {
-                orderPrefab = dessertOrderPrefabs[Random.Range(0, dessertOrderPrefabs.Length)];
-                spawnedDesserts++;
-            }
+            orderName = currentTicket.orderedDesserts[spawnedDesserts];
+            orderPrefab = FindPrefab(orderName, dessertOrderPrefabs);
+            spawnedDesserts++;
         }
 
         if (orderPrefab == null)
         {
-            Debug.LogError("OrderSpawner: No appropriate order prefab found!");
+            Debug.LogError($"OrderSpawner: No matching prefab found for {orderName}!");
             return;
         }
 
@@ -149,14 +144,16 @@ public class OrderSpawner : MonoBehaviour
         newOrder.transform.SetParent(spawnPoint, false);
         newOrder.transform.localPosition = Vector3.zero;
 
-        // Set the explicit reference to the ticket
+        // Link the order to the ticket
         Order order = newOrder.GetComponent<Order>();
         if (order != null)
         {
             order.ticket = currentTicket;
             currentTicket.spawnedOrders.Add(order);
+            Debug.Log($"Spawned {orderName} for ticket #{currentTicket.ticketNumber}");
         }
     }
+
 
 
     Transform GetNextEmptySpawnPoint()
@@ -171,8 +168,22 @@ public class OrderSpawner : MonoBehaviour
 
     bool AllOrdersSpawned()
     {
-        return spawnedStarters >= currentTicket.numberOfStarters &&
-               spawnedEntrees >= currentTicket.numberOfEntrees &&
-               spawnedDesserts >= currentTicket.numberOfDesserts;
+        return spawnedStarters >= currentTicket.orderedStarters.Count &&
+               spawnedEntrees >= currentTicket.orderedEntrees.Count &&
+               spawnedDesserts >= currentTicket.orderedDesserts.Count;
     }
+
+
+    GameObject FindPrefab(string orderName, GameObject[] prefabList)
+    {
+        foreach (GameObject prefab in prefabList)
+        {
+            if (prefab.name == orderName) // Ensure prefab names match order names
+            {
+                return prefab;
+            }
+        }
+        return null; // Return null if no matching prefab is found
+    }
+
 }
