@@ -8,35 +8,128 @@ public class OrderDropZone : MonoBehaviour
 
     public void HandleOrderDrop(Collider other)
     {
-        Order order = other.GetComponent<Order>();
-        if (order != null && order.ticket != null)
-        {
-            // Check if the order is part of a tray
-            if (other.transform.parent != null && other.transform.parent.CompareTag("Tray"))
-            {
-                Debug.Log($"Order {order.name} is part of a tray. Ignoring individual order trigger.");
-                return;  // Skip processing orders that are on a tray
-            }
+        if (!other.CompareTag("Order")) return; // Ensure it's an order before proceeding
 
-            // Proceed with normal order processing if not on a tray
-            SnapObjectToPosition(other.transform, snapPos, Quaternion.Euler(0, 0, 0));
-            StartCoroutine(DelayedDestroy(order.gameObject, destroyTime));
-            Debug.Log($"Order {order.name} will be destroyed in {destroyTime} seconds.");
+        // Check if the order is part of a tray
+        if (other.transform.parent != null && other.transform.parent.CompareTag("Tray"))
+        {
+            Debug.Log($"Order {other.name} is part of a tray. Ignoring individual order trigger.");
+            return;  // Skip processing orders that are on a tray
+        }
+
+        // Snap the order and schedule destruction
+        SnapObjectToPosition(other.transform, snapPos, Quaternion.Euler(0, 0, 0));
+        StartCoroutine(DelayedDestroy(other.gameObject, destroyTime));
+
+        // We need to determine the correct ticket. Assuming each order is a child of a ticket GameObject:
+        Ticket orderTicket = other.transform.parent != null ? other.transform.parent.GetComponent<Ticket>() : null;
+
+        if (orderTicket == null)
+        {
+            Debug.LogWarning($"?? Order {other.name} has no associated ticket!");
+            return;
+        }
+
+        int points = 0;
+        string orderName = other.name; // Assuming object name matches the order type
+
+        if (orderTicket.orderedStarters.Contains(orderName)) points = 10;
+        else if (orderTicket.orderedEntrees.Contains(orderName)) points = 20;
+        else if (orderTicket.orderedDesserts.Contains(orderName)) points = 15;
+        else
+        {
+            points = -10; // Deduct points if incorrect order
+            Debug.Log($"? Incorrect Order {orderName}! -10 points.");
+        }
+
+        if (points > 0)
+            ScoreManager.Instance.AddScore(points);
+        else
+            ScoreManager.Instance.DeductScore(-points);
+
+        // Check for late penalty if orders have a time-tracking system
+        OrderTimer orderTimer = other.GetComponent<OrderTimer>();
+        if (orderTimer != null && orderTimer.IsLate())
+        {
+            ScoreManager.Instance.DeductScore(5);
+            Debug.Log($"? Late Order! -5 points.");
         }
     }
+
 
 
 
     public void HandleTrayDrop(TrayManager trayManager)
     {
-        if (trayManager != null)
+        if (trayManager == null) return;
+
+        // Snap the tray into position
+        SnapObjectToPosition(trayManager.transform, snapPos, Quaternion.Euler(-90, 0, 0));
+
+        int totalPoints = 0; // Track total points earned
+        int incorrectOrders = 0; // Track incorrect orders
+
+        Debug.Log($"?? Processing tray drop for {trayManager.name}...");
+
+        // Loop through all children (orders) of the tray
+        foreach (Transform child in trayManager.transform)
         {
-            // Snap the tray into position by resetting its local position and applying the desired local rotation.
-            SnapObjectToPosition(trayManager.transform, snapPos, Quaternion.Euler(-90, 0, 0));
-            DestroyAllGrandchildren(trayManager.gameObject, destroyTime);
-            Debug.Log("Tray dropped, destroying all orders on the tray.");
+            if (!child.CompareTag("Order")) continue; // Skip non-order objects
+
+            // Try to retrieve the order's ticket
+            Ticket orderTicket = child.parent != null ? child.parent.GetComponent<Ticket>() : null;
+
+            if (orderTicket == null)
+            {
+                Debug.LogWarning($"?? Order {child.name} has no associated ticket! Skipping.");
+                continue;
+            }
+
+            int points = 0;
+            string orderName = child.name; // Assume order name matches meal type
+
+            if (orderTicket.orderedStarters.Contains(orderName)) points = 10;
+            else if (orderTicket.orderedEntrees.Contains(orderName)) points = 20;
+            else if (orderTicket.orderedDesserts.Contains(orderName)) points = 15;
+            else
+            {
+                points = -10; // Incorrect order penalty
+                incorrectOrders++;
+                Debug.Log($"? Incorrect Order {orderName} detected! -10 points.");
+            }
+
+            // Apply score
+            if (points > 0)
+            {
+                totalPoints += points;
+            }
+            else
+            {
+                totalPoints -= points; // Deduct negative score
+            }
+
+            // Check if the order is late
+            OrderTimer orderTimer = child.GetComponent<OrderTimer>();
+            if (orderTimer != null && orderTimer.IsLate())
+            {
+                totalPoints -= 5; // Late penalty
+                Debug.Log($"? Late Order {orderName}! -5 points.");
+            }
         }
+
+        // Update final score
+        if (totalPoints > 0)
+            ScoreManager.Instance.AddScore(totalPoints);
+        else
+            ScoreManager.Instance.DeductScore(-totalPoints);
+
+        Debug.Log($"?? Final tray score: {totalPoints} points. " +
+                  $" ? Incorrect: {incorrectOrders}");
+
+        // Destroy all orders on the tray after processing
+        DestroyAllGrandchildren(trayManager.gameObject, destroyTime);
     }
+
 
     /// <summary>
     /// Snaps an object to a target position by setting its parent, local position, and local rotation.

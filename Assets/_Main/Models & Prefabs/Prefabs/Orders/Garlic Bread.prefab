@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2060374402605212688}
   - component: {fileID: 3837535692951276930}
   - component: {fileID: 5500778351344351930}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Garlic Bread
   m_TagString: Order
   m_Icon: {fileID: 0}
@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 5132977887638101774}
   - component: {fileID: 5165646814920081051}
   - component: {fileID: 7632144433029075504}
+  - component: {fileID: 2847132962940575811}
   m_Layer: 13
   m_Name: Garlic Bread
   m_TagString: Order
@@ -203,6 +204,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2847132962940575811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3826669634416277214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a134483d802cbc4ebccbae82b05eea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDeliveryTime: 30
 --- !u!1001 &3907865868942643623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -269,7 +283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4946822912142570138, guid: a6a05dfd6ea5bca4e92945a2926df319, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

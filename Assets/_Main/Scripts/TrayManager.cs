@@ -20,13 +20,11 @@ public class TrayManager : MonoBehaviour
         // Prevent adding duplicate orders
         if (placedOrders.Contains(orderItem))
         {
-            Debug.LogWarning($"Order {orderItem.name} is already on the tray!");
             return false;
         }
 
         if (nextAvailableSlot >= traySlots.Length)
         {
-            Debug.Log("Tray is full! Cannot add more items.");
             return false;  // Tray is full
         }
 
@@ -39,7 +37,6 @@ public class TrayManager : MonoBehaviour
         placedOrders.Add(orderItem); // Track the added order
         nextAvailableSlot++;  // Move to the next slot
 
-        Debug.Log($"Added {orderItem.name} to tray slot {nextAvailableSlot}/{traySlots.Length}");
         return true;  // Item added successfully
     }
 
@@ -50,7 +47,6 @@ public class TrayManager : MonoBehaviour
     {
         if (docketTicket != null)
         {
-            Debug.LogWarning("A docket is already placed on the tray!");
             return false; // A docket is already placed
         }
 
@@ -59,8 +55,6 @@ public class TrayManager : MonoBehaviour
         docketTicket.transform.localPosition = Vector3.zero;  // Align to slot position
         docketTicket.transform.localRotation = Quaternion.identity;  // Reset rotation if needed
         ticketItem.transform.localScale = Vector3.one;
-
-        Debug.Log($"Docket {ticketItem.name} placed on the tray.");
         return true;
     }
 
@@ -73,7 +67,6 @@ public class TrayManager : MonoBehaviour
         {
             placedOrders.Remove(orderItem);
             orderItem.transform.SetParent(null); // Detach from tray
-            Debug.Log($"Removed {orderItem.name} from tray.");
             nextAvailableSlot--; // Free up a slot
         }
     }
@@ -85,7 +78,6 @@ public class TrayManager : MonoBehaviour
     {
         if (docketTicket != null)
         {
-            Debug.Log($"Docket {docketTicket.name} removed from the tray.");
             docketTicket.transform.SetParent(null); // Detach from tray
             docketTicket = null;
         }
@@ -103,7 +95,6 @@ public class TrayManager : MonoBehaviour
     {
         if (tray == null || traySpot == null)
         {
-            Debug.LogError("Tray or TrayPosition is NULL! Cannot place.");
             return;
         }
         else
@@ -119,14 +110,7 @@ public class TrayManager : MonoBehaviour
             if (rb != null)
             {
                 rb.isKinematic = true;
-                Debug.Log("Set Rigidbody to Kinematic.");
             }
-
-            Debug.Log("Tray successfully placed.");
         }
-
-        Debug.Log($"Placing tray {tray.name} at {traySpot.name}");
-
-        
     }
 }

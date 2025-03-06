@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class OrderSpawner : MonoBehaviour
@@ -22,17 +22,28 @@ public class OrderSpawner : MonoBehaviour
     private int spawnedDesserts = 0;
     public int currentTicketIndex = 0;
 
-    private void Start()
+    private IEnumerator Start()
     {
-        if (ticketMaker.allTickets.Count == 0)
+
+        if (ticketMaker == null)
         {
-            Debug.LogError("OrderSpawner: No tickets available in TicketMaker!");
-            return;
+            yield break; // Stops execution if no TicketMaker is assigned
         }
+
+        // 🔄 Wait for TicketMaker to generate at least one ticket
+        while (ticketMaker.allTickets.Count == 0)
+        {
+            yield return new WaitForSeconds(0.5f); // Check again every 0.5 seconds
+        }
+
+
+        // ✅ Set the first ticket and start spawning
         currentTicketIndex = 0;
         currentTicket = ticketMaker.allTickets[currentTicketIndex];
+
         StartCoroutine(SpawnOrders());
     }
+
 
     private void Update()
     {
@@ -41,7 +52,6 @@ public class OrderSpawner : MonoBehaviour
             if (currentTicket != ticketMaker.allTickets[currentTicketIndex])
             {
                 currentTicket = ticketMaker.allTickets[currentTicketIndex];
-                Debug.Log($"Switched to new ticket: {currentTicket.ticketNumber}");
 
                 spawnedStarters = 0;
                 spawnedEntrees = 0;
@@ -54,61 +64,62 @@ public class OrderSpawner : MonoBehaviour
 
     IEnumerator SpawnOrders()
     {
-        while (!stopSpawning)
+        while (!stopSpawning) // 1. Keep running unless `stopSpawning` is set to true
         {
-            if (ticketMaker.allTickets.Count > currentTicketIndex)
+            if (ticketMaker.allTickets.Count > currentTicketIndex) // 2. Ensure there are available tickets
             {
-                currentTicket = ticketMaker.allTickets[currentTicketIndex];
+                currentTicket = ticketMaker.allTickets[currentTicketIndex]; // 3. Set the current ticket
             }
             else
             {
-                Debug.Log("No tickets available in TicketMaker.");
-                yield return new WaitForSeconds(spawnInterval);
-                continue;
+                yield return new WaitForSeconds(spawnInterval); // 5. Wait before checking again
+                continue; // 6. Skip to next iteration of the loop
             }
 
-            if (AllOrdersSpawned())
-            {
-                Debug.Log("All orders for ticket #" + currentTicket.ticketNumber + " have been spawned.");
+            // ✅ Debugging: Log current order counts before checking `AllOrdersSpawned()`
 
+            if (AllOrdersSpawned()) // 7. Check if all required orders have been spawned
+            {
+
+                // 9. Reset order tracking to prepare for the next ticket
                 spawnedStarters = 0;
                 spawnedEntrees = 0;
                 spawnedDesserts = 0;
 
-                if (currentTicketIndex < ticketMaker.allTickets.Count - 1)
+                if (currentTicketIndex < ticketMaker.allTickets.Count - 1) // 10. Check if there are more tickets to process
                 {
-                    currentTicketIndex++;
-                    currentTicket = ticketMaker.allTickets[currentTicketIndex];
-                    Debug.Log("Switching to ticket #" + currentTicket.ticketNumber);
+                    currentTicketIndex++; // 11. Move to the next ticket
+                    currentTicket = ticketMaker.allTickets[currentTicketIndex]; // 12. Update `currentTicket`
 
-                    StartCoroutine(SpawnAllOrdersForCurrentTicket());
+                    StartCoroutine(SpawnAllOrdersForCurrentTicket()); // 14. Start spawning orders for the new ticket
                 }
                 else
                 {
-                    Debug.Log("No more tickets available. Stopping order spawning.");
-                    stopSpawning = true;
-                    yield break;
+                    stopSpawning = true; // 16. Stop further spawning
+                    yield break; // 17. Exit the coroutine
                 }
             }
-            yield return new WaitForSeconds(spawnInterval);
+            yield return new WaitForSeconds(spawnInterval); // 18. Wait before checking again
         }
     }
 
+
     IEnumerator SpawnAllOrdersForCurrentTicket()
     {
+        yield return new WaitForSeconds(currentTicket.timeToMake);
         while (!AllOrdersSpawned())
         {
             SpawnOrder();
-            yield return new WaitForSeconds(spawnInterval / 2); // Stagger order spawning slightly
+            yield return new WaitForSeconds(1);
         }
     }
+
 
     void SpawnOrder()
     {
         Transform spawnPoint = GetNextEmptySpawnPoint();
         if (spawnPoint == null)
         {
-            Debug.Log("No empty spawn points available.");
             return;
         }
 
@@ -136,7 +147,6 @@ public class OrderSpawner : MonoBehaviour
 
         if (orderPrefab == null)
         {
-            Debug.LogError($"OrderSpawner: No matching prefab found for {orderName}!");
             return;
         }
 
@@ -150,7 +160,6 @@ public class OrderSpawner : MonoBehaviour
         {
             order.ticket = currentTicket;
             currentTicket.spawnedOrders.Add(order);
-            Debug.Log($"Spawned {orderName} for ticket #{currentTicket.ticketNumber}");
         }
     }
 

@@ -105,10 +105,7 @@ public class PickUpSystem : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
         {
-            Debug.Log($"Raycast hit: {hit.collider.gameObject.name}");
-
             // If the held object is a tray, handle tray interactions.
-
             if (hit.collider.CompareTag("TrayPosition"))
             {
                 if (heldObj != null && heldObj.CompareTag("Tray"))
@@ -156,12 +153,10 @@ public class PickUpSystem : MonoBehaviour
                 {
                     if (heldObj == null && storageManager.isFull)
                     {
-                        Debug.Log("Player has empty hands. Storage is full, attempting to reset...");
                         storageManager.TryResetStorage();
                     }
                     else if (heldObj != null && heldObj.CompareTag("Glass") && !storageManager.isFull)
                     {
-                        Debug.Log("Storing glass in storage...");
                         storageManager.StoreGlass(heldObj);
                         heldObj = null;
                     }
@@ -177,7 +172,6 @@ public class PickUpSystem : MonoBehaviour
             }
             else if (hit.collider.CompareTag("FoodBin"))
             {
-                Debug.Log("Interacting with Food Bin...");
                 FoodBin foodBin = hit.collider.GetComponent<FoodBin>();
                 if (foodBin != null && heldObj != null)
                 {
@@ -190,7 +184,6 @@ public class PickUpSystem : MonoBehaviour
             }
             else if (hit.collider.CompareTag("LiquidBucket"))
             {
-                Debug.Log("Interacting with Liquid Bucket...");
                 LiquidBucket liquidBucket = hit.collider.GetComponent<LiquidBucket>();
                 if (liquidBucket != null && heldObj != null)
                 {
@@ -203,7 +196,6 @@ public class PickUpSystem : MonoBehaviour
             }
             else if (hit.collider.CompareTag("TrashCan"))
             {
-                Debug.Log("Interacting with Trash Can...");
                 TrashCan trashCan = hit.collider.GetComponent<TrashCan>();
                 if (trashCan != null && heldObj != null)
                 {
@@ -230,17 +222,11 @@ public class PickUpSystem : MonoBehaviour
 
                     if (ticket != null)
                     {
-                        Debug.Log("Adding Ticket to Tray...");
                         trayManager.PositionDocket(heldObj);
                     }
                     else if (heldObj.CompareTag("Order"))
                     {
-                        Debug.Log("Adding Order to Tray...");
                         trayManager.AddOrderToTray(heldObj);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Held object is neither a Ticket nor an Order!");
                     }
                 }
             }
@@ -268,7 +254,6 @@ public class PickUpSystem : MonoBehaviour
             heldObj.transform.SetParent(trayHoldPos);
             heldObj.transform.localPosition = Vector3.zero;
             heldObj.transform.localRotation = Quaternion.Euler(-90, 0, 0);  // Custom rotation for tray
-            Debug.Log("Tray picked up with correct rotation and custom hold position.");
         }
         else
         {
@@ -276,7 +261,6 @@ public class PickUpSystem : MonoBehaviour
             heldObj.transform.SetParent(holdPos);
             heldObj.transform.localPosition = Vector3.zero;
             heldObj.transform.localRotation = Quaternion.identity;  // Default rotation
-            Debug.Log($"Picked up object: {heldObj.name}");
         }
     }
 
@@ -298,13 +282,8 @@ public class PickUpSystem : MonoBehaviour
                         {
                             counter.AddPlateToStack(heldObj); // Add plate to counter stack
                             heldObj = null; // Reset held object
-                            Debug.Log("Plate placed on counter.");
                             return;
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("Cannot place dirty plate on the counter!");
                     }
                 }
 
@@ -318,13 +297,8 @@ public class PickUpSystem : MonoBehaviour
                         {
                             counter.AddPlateToStack(heldObj); // Add plate to counter stack
                             heldObj = null; // Reset held object
-                            Debug.Log("Plate placed on counter.");
                             return;
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("Cannot place dirty plate on the counter!");
                     }
                 }
             }
@@ -336,7 +310,6 @@ public class PickUpSystem : MonoBehaviour
                 heldObjRb.velocity = Vector3.zero;
             }
             heldObj.transform.SetParent(null);
-            Debug.Log($"Dropped object: {heldObj.name}");
             heldObj = null;
         }
     }
@@ -511,17 +484,4 @@ public class PickUpSystem : MonoBehaviour
             hoverText.text = message;
         }
     }
-
-    /*void TryPickUpStack()
-    {
-        // Assuming you have a reference to your StackManager
-        GameObject container = stackManager.CreateStackContainer();
-        if (container != null)
-        {
-            // Use your existing pickup logic to pick up the container.
-            // For example:
-            PickUpObject(container);
-        }
-    }
-    */
 }

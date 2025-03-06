@@ -16433,8 +16433,8 @@ MonoBehaviour:
   - Turkey and Ham
   - Roast Beef
   dessertOptions:
-  - Trio of Ice Cream
-  - Jelly and Ice cream
+  - Ice Cream
+  - Jelly and Ice Cream
   - Chocolate Mousse
   allTickets: []
   ticketCount: 0

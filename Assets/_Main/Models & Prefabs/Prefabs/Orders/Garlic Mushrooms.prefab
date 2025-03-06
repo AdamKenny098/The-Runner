@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4337647426826029697}
   - component: {fileID: 2388491820631310825}
   - component: {fileID: 6512219066468977459}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Mushroom (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4841207445660708711}
   - component: {fileID: 3553899524158144964}
   - component: {fileID: 581905641324847211}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Garlic Mushrooms
   m_TagString: Order
   m_Icon: {fileID: 0}
@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 5756295421917669701}
   - component: {fileID: 6107251932131182903}
   - component: {fileID: 900888083251224100}
+  - component: {fileID: -8328085053478930413}
   m_Layer: 13
   m_Name: Garlic Mushrooms
   m_TagString: Order
@@ -295,6 +296,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &-8328085053478930413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193821269969237077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a134483d802cbc4ebccbae82b05eea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDeliveryTime: 30
 --- !u!1 &4486016086697464806
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +320,7 @@ GameObject:
   - component: {fileID: 334645455841023756}
   - component: {fileID: 6041389324182286187}
   - component: {fileID: 5372129006921203380}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Mushroom (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +403,7 @@ GameObject:
   - component: {fileID: 7863914712169906484}
   - component: {fileID: 6102299576355454572}
   - component: {fileID: 6743615429875223206}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Mushroom (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,7 +486,7 @@ GameObject:
   - component: {fileID: 5537767392062816669}
   - component: {fileID: 3042151780548637972}
   - component: {fileID: 3781529215853508210}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Mushroom (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +569,7 @@ GameObject:
   - component: {fileID: 4717724972197598098}
   - component: {fileID: 2891495717543153407}
   - component: {fileID: 976129126375224612}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Mushroom (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +652,7 @@ GameObject:
   - component: {fileID: 6277582212980483456}
   - component: {fileID: 3633589085643030568}
   - component: {fileID: 3556076992658060705}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Mushroom (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -721,7 +735,7 @@ GameObject:
   - component: {fileID: 8563679874357112403}
   - component: {fileID: 3970915022303211650}
   - component: {fileID: 4405108992954299275}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Mushroom (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -859,7 +873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4946822912142570138, guid: a6a05dfd6ea5bca4e92945a2926df319, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -883,9 +897,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garlic Mayo
       objectReference: {fileID: 0}
+    - target: {fileID: 311525631483475685, guid: bd0870088f5a3074792ff61a01d84753, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 491478257636371861, guid: bd0870088f5a3074792ff61a01d84753, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1259336036657023681, guid: bd0870088f5a3074792ff61a01d84753, type: 3}
       propertyPath: m_LocalScale.x
@@ -1019,7 +1037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1374351661074928323, guid: b9522b67716b9b64dbcc1fcf78c43928, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

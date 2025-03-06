@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -81,13 +81,13 @@ public class TicketMaker : MonoBehaviour
 
         ticketCount++;
         newTicket.ticketNumber = ticketCount;
-        newTicket.numberOfPeople = Random.Range(1, 6);
+        newTicket.numberOfPeople = Random.Range(1, 2);
         newTicket.isHavingStarters = Random.value < 0.5f;
         newTicket.isHavingDesserts = Random.value < 0.5f;
         newTicket.isEveryoneEating = Random.value < 0.8f;
         newTicket.timeToMake = Random.Range(30, 91);
 
-        // ?? Store the exact food items instead of just counting them
+        // 🆕 Store the exact food items instead of just counting them
         newTicket.orderedStarters = GetRandomItemsList(starterOptions, newTicket.isHavingStarters ? Random.Range(1, newTicket.numberOfPeople + 1) : 0, newTicket.isHavingStarters);
         newTicket.orderedEntrees = GetRandomItemsList(mainOptions, newTicket.numberOfPeople, true);
         newTicket.orderedDesserts = GetRandomItemsList(dessertOptions, newTicket.isHavingDesserts ? Random.Range(1, newTicket.numberOfPeople + 1) : 0, newTicket.isHavingDesserts);
@@ -98,7 +98,7 @@ public class TicketMaker : MonoBehaviour
                   $"Desserts: {newTicket.isHavingDesserts} ({newTicket.orderedDesserts.Count}), " +
                   $"Time: {newTicket.timeToMake} sec");
 
-        // Update the physical ticket�s TextMeshPro display
+        // Update the physical ticket’s TextMeshPro display
         TMP_Text ticketText = newTicket.GetComponentInChildren<TMP_Text>();
         if (ticketText != null)
         {

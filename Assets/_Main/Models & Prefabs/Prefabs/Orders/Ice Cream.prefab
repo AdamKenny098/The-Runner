@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2823044592939093538}
   - component: {fileID: 8099738366335921678}
   - component: {fileID: 1094229328734191071}
+  - component: {fileID: -1742229876122810852}
   m_Layer: 13
   m_Name: Ice Cream
   m_TagString: Order
@@ -105,6 +106,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.30841064, y: 0.12684393, z: 0.29512787}
   m_Center: {x: -0.010772705, y: -0.054184914, z: 0.006099701}
+--- !u!114 &-1742229876122810852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540393386545437549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a134483d802cbc4ebccbae82b05eea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDeliveryTime: 30
 --- !u!1 &6499508707959693229
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +131,7 @@ GameObject:
   - component: {fileID: 2610299779236005196}
   - component: {fileID: 9068323543671151797}
   - component: {fileID: 5994283278502917875}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Trio of Ice Cream
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7621754239691895921, guid: 144fcc654ba8229478b65a1b652c524f, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -344,7 +358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7895590265775739547, guid: b6405e8551b9bff4199f8886461e6860, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -426,7 +440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7621754239691895921, guid: 144fcc654ba8229478b65a1b652c524f, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -508,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7621754239691895921, guid: 144fcc654ba8229478b65a1b652c524f, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -534,7 +548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6909482522282851755, guid: 901670aaca2affb4b8ae127df1fad0c2, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8169704629703427169, guid: 901670aaca2affb4b8ae127df1fad0c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -600,7 +614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3393019293338142657, guid: 7312208b789d7074aafb13c3b81d7b96, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7145610265670188687, guid: 7312208b789d7074aafb13c3b81d7b96, type: 3}
       propertyPath: m_LocalPosition.x

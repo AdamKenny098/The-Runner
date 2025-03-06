@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2843793117881700360}
   - component: {fileID: 4918585469267452879}
   - component: {fileID: 3677938644546381196}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Jelly and Ice cream
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 17755495759575466}
   - component: {fileID: 871458211456022695}
   - component: {fileID: 3606616122800290691}
+  - component: {fileID: 8019775810554432770}
   m_Layer: 13
   m_Name: Jelly and Ice Cream
   m_TagString: Order
@@ -205,6 +206,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8019775810554432770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010969079403703414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a134483d802cbc4ebccbae82b05eea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDeliveryTime: 30
 --- !u!1001 &1220450414393892471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,7 +289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7621754239691895921, guid: 144fcc654ba8229478b65a1b652c524f, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -297,7 +311,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 521387191308904311, guid: 543069e9a61a14a458931973e94149ef, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1265550888786185909, guid: 543069e9a61a14a458931973e94149ef, type: 3}
       propertyPath: m_LocalScale.x
@@ -353,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1736246098765691847, guid: 543069e9a61a14a458931973e94149ef, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2952496336975587392, guid: 543069e9a61a14a458931973e94149ef, type: 3}
       propertyPath: m_Name
@@ -361,23 +375,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2952496336975587392, guid: 543069e9a61a14a458931973e94149ef, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3476928299373752614, guid: 543069e9a61a14a458931973e94149ef, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4799166273659415950, guid: 543069e9a61a14a458931973e94149ef, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6146090248661192861, guid: 543069e9a61a14a458931973e94149ef, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7521815156005066836, guid: 543069e9a61a14a458931973e94149ef, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -403,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6909482522282851755, guid: 901670aaca2affb4b8ae127df1fad0c2, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8169704629703427169, guid: 901670aaca2affb4b8ae127df1fad0c2, type: 3}
       propertyPath: m_LocalPosition.x
