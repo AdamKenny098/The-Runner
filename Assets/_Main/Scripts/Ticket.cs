@@ -15,6 +15,14 @@ public class Ticket : MonoBehaviour
     public List<string> orderedDesserts = new List<string>();  // Stores exact dessert names
 
     public List<Order> spawnedOrders = new List<Order>();  // Track spawned orders
+    public void AddOrder(Order order)
+    {
+        if (!spawnedOrders.Contains(order))
+        {
+            spawnedOrders.Add(order);
+            order.ticket = this; // Assign the ticket reference
+        }
+    }
 
     public void RemoveOrder(Order order)
     {

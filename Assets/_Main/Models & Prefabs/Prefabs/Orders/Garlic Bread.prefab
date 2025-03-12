@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 5165646814920081051}
   - component: {fileID: 7632144433029075504}
   - component: {fileID: 2847132962940575811}
+  - component: {fileID: 670141914890594372}
   m_Layer: 13
   m_Name: Garlic Bread
   m_TagString: Order
@@ -217,6 +218,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDeliveryTime: 30
+--- !u!114 &670141914890594372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3826669634416277214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b6f67f18e38534e8e3d34f0bc9b1d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPeople: 0
+  isHavingStarters: 0
+  isHavingDesserts: 0
+  isEveryoneEating: 0
+  orderNumber: 0
+  numberOfStarters: 0
+  numberOfEntrees: 0
+  numberOfDesserts: 0
+  timeToMake: 0
+  ticket: {fileID: 0}
 --- !u!1001 &3907865868942643623
 PrefabInstance:
   m_ObjectHideFlags: 0

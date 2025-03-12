@@ -29,6 +29,11 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreUI();
     }
 
+    public void Update()
+    {
+        UpdateScoreUI();
+    }
+
     /// <summary>
     /// Adds points to the player's score.
     /// </summary>
@@ -36,7 +41,7 @@ public class ScoreManager : MonoBehaviour
     {
         score += points;
         UpdateScoreUI();
-        Debug.Log($"🏆 Score Updated: {score}");
+        Debug.Log($"Score Updated: {score}");
     }
 
     /// <summary>
@@ -47,7 +52,7 @@ public class ScoreManager : MonoBehaviour
         score -= points;
         if (score < 0) score = 0; // Prevent negative scores
         UpdateScoreUI();
-        Debug.Log($"⚠️ Penalty Applied! Score: {score}");
+        Debug.Log($"Penalty Applied! Score: {score}");
     }
 
     /// <summary>

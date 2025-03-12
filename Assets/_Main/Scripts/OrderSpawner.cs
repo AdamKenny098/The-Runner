@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class OrderSpawner : MonoBehaviour
@@ -21,6 +22,8 @@ public class OrderSpawner : MonoBehaviour
     private int spawnedEntrees = 0;
     private int spawnedDesserts = 0;
     public int currentTicketIndex = 0;
+
+    private Dictionary<GameObject, Ticket> orderToTicketMap = new Dictionary<GameObject, Ticket>(); // Track meal-ticket pair
 
     private IEnumerator Start()
     {
@@ -118,17 +121,14 @@ public class OrderSpawner : MonoBehaviour
     void SpawnOrder()
     {
         Transform spawnPoint = GetNextEmptySpawnPoint();
-        if (spawnPoint == null)
-        {
-            return;
-        }
+        if (spawnPoint == null) return;
 
         GameObject orderPrefab = null;
-        string orderName = ""; // Store the required food name
+        string orderName = "";
 
         if (spawnedStarters < currentTicket.orderedStarters.Count)
         {
-            orderName = currentTicket.orderedStarters[spawnedStarters]; // Get exact order
+            orderName = currentTicket.orderedStarters[spawnedStarters];
             orderPrefab = FindPrefab(orderName, starterOrderPrefabs);
             spawnedStarters++;
         }
@@ -147,6 +147,7 @@ public class OrderSpawner : MonoBehaviour
 
         if (orderPrefab == null)
         {
+            Debug.LogError($"❌ No matching prefab found for {orderName}!");
             return;
         }
 
@@ -154,17 +155,16 @@ public class OrderSpawner : MonoBehaviour
         newOrder.transform.SetParent(spawnPoint, false);
         newOrder.transform.localPosition = Vector3.zero;
 
-        // Link the order to the ticket
-        Order order = newOrder.GetComponent<Order>();
-        if (order != null)
-        {
-            order.ticket = currentTicket;
-            currentTicket.spawnedOrders.Add(order);
-        }
+        // ✅ Store the order-ticket mapping
+        orderToTicketMap[newOrder] = currentTicket;
+        Debug.Log($"✅ Spawned {orderName} and assigned to Ticket #{currentTicket.ticketNumber}");
     }
 
-
-
+    // Function to retrieve ticket from a dropped meal
+    public Ticket GetTicketForOrder(GameObject orderObject)
+    {
+        return orderToTicketMap.ContainsKey(orderObject) ? orderToTicketMap[orderObject] : null;
+    }
     Transform GetNextEmptySpawnPoint()
     {
         foreach (Transform sp in spawnPoints)

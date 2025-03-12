@@ -63,72 +63,91 @@ public class OrderDropZone : MonoBehaviour
     {
         if (trayManager == null) return;
 
-        // Snap the tray into position
         SnapObjectToPosition(trayManager.transform, snapPos, Quaternion.Euler(-90, 0, 0));
 
-        int totalPoints = 0; // Track total points earned
-        int incorrectOrders = 0; // Track incorrect orders
+        int totalPoints = 0;
+        int incorrectOrders = 0;
 
         Debug.Log($"?? Processing tray drop for {trayManager.name}...");
 
-        // Loop through all children (orders) of the tray
-        foreach (Transform child in trayManager.transform)
+        OrderSpawner orderSpawner = FindObjectOfType<OrderSpawner>(); // Get reference to OrderSpawner
+
+        foreach (Transform child in trayManager.transform) // Iterate through direct children (plates, tray slots)
         {
-            if (!child.CompareTag("Order")) continue; // Skip non-order objects
-
-            // Try to retrieve the order's ticket
-            Ticket orderTicket = child.parent != null ? child.parent.GetComponent<Ticket>() : null;
-
-            if (orderTicket == null)
+            foreach (Transform grandchild in child) // Actual orders inside those slots
             {
-                Debug.LogWarning($"?? Order {child.name} has no associated ticket! Skipping.");
-                continue;
-            }
+                if (!grandchild.CompareTag("Order")) continue; // Skip non-order objects
 
-            int points = 0;
-            string orderName = child.name; // Assume order name matches meal type
+                // ? Retrieve the correct ticket from the OrderSpawner
+                Ticket orderTicket = orderSpawner?.GetTicketForOrder(grandchild.gameObject);
 
-            if (orderTicket.orderedStarters.Contains(orderName)) points = 10;
-            else if (orderTicket.orderedEntrees.Contains(orderName)) points = 20;
-            else if (orderTicket.orderedDesserts.Contains(orderName)) points = 15;
-            else
-            {
-                points = -10; // Incorrect order penalty
-                incorrectOrders++;
-                Debug.Log($"? Incorrect Order {orderName} detected! -10 points.");
-            }
+                if (orderTicket == null)
+                {
+                    Debug.LogWarning($"?? Order {grandchild.name} has no associated ticket! Skipping.");
+                    continue;
+                }
 
-            // Apply score
-            if (points > 0)
-            {
-                totalPoints += points;
-            }
-            else
-            {
-                totalPoints -= points; // Deduct negative score
-            }
+                int points = 0;
+                string orderName = grandchild.name;
 
-            // Check if the order is late
-            OrderTimer orderTimer = child.GetComponent<OrderTimer>();
-            if (orderTimer != null && orderTimer.IsLate())
-            {
-                totalPoints -= 5; // Late penalty
-                Debug.Log($"? Late Order {orderName}! -5 points.");
+                Debug.Log($"?? Checking order: {orderName} against ticket: {orderTicket.ticketNumber}");
+
+                // Remove "(Clone)" from the prefab name to match ticket names
+                string cleanOrderName = orderName.Replace("(Clone)", "").Trim();
+
+                if (orderTicket.orderedStarters.Contains(cleanOrderName)) points = 10;
+                else if (orderTicket.orderedEntrees.Contains(cleanOrderName)) points = 20;
+                else if (orderTicket.orderedDesserts.Contains(cleanOrderName)) points = 15;
+                else
+                {
+                    points = -10;
+                    incorrectOrders++;
+                    Debug.Log($"? Incorrect Order {cleanOrderName} detected! -10 points.");
+                }
+
+
+                if (points > 0)
+                {
+                    totalPoints += points;
+                }
+                else
+                {
+                    totalPoints -= Mathf.Abs(points);
+                }
+
+                // Check for late penalty
+                OrderTimer orderTimer = grandchild.GetComponent<OrderTimer>();
+                if (orderTimer != null && orderTimer.IsLate())
+                {
+                    totalPoints -= 5;
+                    Debug.Log($"? Late Order {orderName}! -5 points.");
+                }
             }
         }
 
-        // Update final score
+        // ? Debug: Check if ScoreManager is Active
+        if (ScoreManager.Instance == null)
+        {
+            Debug.LogError("? ScoreManager is NULL! Score cannot be updated.");
+            return;
+        }
+
+        // ? Update final score
         if (totalPoints > 0)
             ScoreManager.Instance.AddScore(totalPoints);
         else
             ScoreManager.Instance.DeductScore(-totalPoints);
 
-        Debug.Log($"?? Final tray score: {totalPoints} points. " +
-                  $" ? Incorrect: {incorrectOrders}");
+        Debug.Log($"?? Final tray score: {totalPoints} points. ? Correct: {trayManager.transform.childCount - incorrectOrders}, ? Incorrect: {incorrectOrders}");
 
-        // Destroy all orders on the tray after processing
+        Debug.Log($"?? Updated Score: {ScoreManager.Instance.GetScore()}");
+
         DestroyAllGrandchildren(trayManager.gameObject, destroyTime);
     }
+
+
+
+
 
 
     /// <summary>
@@ -147,15 +166,10 @@ public class OrderDropZone : MonoBehaviour
 
     public void DestroyAllGrandchildren(GameObject parentObject, float delay)
     {
-        Debug.Log($"Attempting to destroy all grandchildren of {parentObject.name}.");
-
         foreach (Transform child in parentObject.transform)
         {
-            Debug.Log($"Checking child: {child.name}");
-
             foreach (Transform grandchild in child)
             {
-                Debug.Log($"Scheduling destruction for grandchild: {grandchild.name} in {delay} seconds.");
                 StartCoroutine(DelayedDestroy(grandchild.gameObject, delay));
             }
         }
@@ -163,17 +177,11 @@ public class OrderDropZone : MonoBehaviour
 
     private IEnumerator DelayedDestroy(GameObject obj, float delay)
     {
-        Debug.Log($"Starting coroutine for {obj.name}, will destroy after {delay} seconds.");
         yield return new WaitForSeconds(delay);
 
         if (obj != null)
         {
-            Debug.Log($"Destroying {obj.name} after {delay} seconds.");
             Destroy(obj);
-        }
-        else
-        {
-            Debug.LogWarning($"{obj.name} is already destroyed before delay.");
         }
     }
 }
