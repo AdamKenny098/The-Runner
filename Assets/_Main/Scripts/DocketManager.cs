@@ -4,12 +4,14 @@ using System.Collections;
 public class DocketManager : MonoBehaviour
 {
     public Transform readingPosition; // The position in front of the player (child of the camera)
-    public float moveSpeed = 5f; // Speed at which the docket moves
+    public float docketMoveSpeed = 5f; // Speed at which the docket moves
 
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Transform originalParent;
     private bool isReading = false;
+
+    private Collider docketCollider;
 
     private void Start()
     {
@@ -31,12 +33,14 @@ public class DocketManager : MonoBehaviour
         }
     }
 
-    private void ReadDocket()
+    public void ReadDocket()
     {
         isReading = true;
         transform.SetParent(readingPosition); // ? Parent to camera so it moves with player
         StopAllCoroutines();
         StartCoroutine(MoveDocket(Vector3.zero, readingPosition.localRotation));
+        gameObject.layer = LayerMask.NameToLayer("Held Docket");
+
     }
 
     private void ResetDocket()
@@ -45,6 +49,7 @@ public class DocketManager : MonoBehaviour
         transform.SetParent(originalParent); // ? Restore original parent
         StopAllCoroutines();
         StartCoroutine(MoveDocket(originalPosition, originalRotation));
+        gameObject.layer = LayerMask.NameToLayer("CanPickUp");
     }
 
     private IEnumerator MoveDocket(Vector3 targetPosition, Quaternion targetRotation)
@@ -55,8 +60,8 @@ public class DocketManager : MonoBehaviour
 
         while (elapsedTime < 1f)
         {
-            transform.localPosition = Vector3.Lerp(startPos, targetPosition, elapsedTime * moveSpeed);
-            transform.localRotation = Quaternion.Lerp(startRot, targetRotation, elapsedTime * moveSpeed);
+            transform.localPosition = Vector3.Lerp(startPos, targetPosition, elapsedTime * docketMoveSpeed);
+            transform.localRotation = Quaternion.Lerp(startRot, targetRotation, elapsedTime * docketMoveSpeed);
             elapsedTime += Time.deltaTime;
             yield return null;
         }

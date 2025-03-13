@@ -105,6 +105,7 @@ public class PickUpSystem : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
         {
+            Debug.Log(hit.collider.name);
             // If the held object is a tray, handle tray interactions.
             if (hit.collider.CompareTag("TrayPosition"))
             {
@@ -234,11 +235,12 @@ public class PickUpSystem : MonoBehaviour
             else if (hit.collider.CompareTag("Docket"))
             {
                 DocketManager docketManager = hit.collider.GetComponent<DocketManager>();
-                if (docketManager != null)
+                if (docketManager != null) // ? Prevent multiple dockets at once
                 {
                     docketManager.ToggleDocketPosition();
                 }
             }
+
         }
     }
 
