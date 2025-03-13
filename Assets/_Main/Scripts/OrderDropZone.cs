@@ -134,9 +134,14 @@ public class OrderDropZone : MonoBehaviour
 
         // ? Update final score
         if (totalPoints > 0)
+        {
             ScoreManager.Instance.AddScore(totalPoints);
+        }
         else
+        {
             ScoreManager.Instance.DeductScore(-totalPoints);
+            StressManager.Instance.AddStress(10);
+        }
 
         Debug.Log($"?? Final tray score: {totalPoints} points. ? Correct: {trayManager.transform.childCount - incorrectOrders}, ? Incorrect: {incorrectOrders}");
 

@@ -25,6 +25,13 @@ public class OrderSpawner : MonoBehaviour
 
     private Dictionary<GameObject, Ticket> orderToTicketMap = new Dictionary<GameObject, Ticket>(); // Track meal-ticket pair
 
+    [Header("Audio")]
+    public AudioSource audioSource; // The audio source for playing sounds
+    public AudioClip orderReadySound; // The sound that plays when the first plate spawns
+
+    private bool hasPlayedSoundForTicket = false; // Prevents multiple plays per ticket
+
+
     private IEnumerator Start()
     {
 
@@ -60,10 +67,13 @@ public class OrderSpawner : MonoBehaviour
                 spawnedEntrees = 0;
                 spawnedDesserts = 0;
 
+                hasPlayedSoundForTicket = false; // ✅ Reset sound trigger for the new ticket
+
                 StartCoroutine(SpawnAllOrdersForCurrentTicket()); // Trigger full order spawning
             }
         }
     }
+
 
     IEnumerator SpawnOrders()
     {
@@ -110,12 +120,16 @@ public class OrderSpawner : MonoBehaviour
     IEnumerator SpawnAllOrdersForCurrentTicket()
     {
         yield return new WaitForSeconds(currentTicket.timeToMake);
+
+        hasPlayedSoundForTicket = false; // ✅ Reset sound trigger before spawning
+
         while (!AllOrdersSpawned())
         {
             SpawnOrder();
             yield return new WaitForSeconds(1);
         }
     }
+
 
 
     void SpawnOrder()
@@ -158,7 +172,15 @@ public class OrderSpawner : MonoBehaviour
         // ✅ Store the order-ticket mapping
         orderToTicketMap[newOrder] = currentTicket;
         Debug.Log($"✅ Spawned {orderName} and assigned to Ticket #{currentTicket.ticketNumber}");
+
+        // 🎵 ✅ Play sound only for the first order of each ticket
+        if (!hasPlayedSoundForTicket)
+        {
+            hasPlayedSoundForTicket = true; // Prevents multiple plays
+            PlayOrderReadySound();
+        }
     }
+
 
     // Function to retrieve ticket from a dropped meal
     public Ticket GetTicketForOrder(GameObject orderObject)
@@ -195,4 +217,20 @@ public class OrderSpawner : MonoBehaviour
         return null; // Return null if no matching prefab is found
     }
 
+    private void PlayOrderReadySound()
+    {
+        if (audioSource != null && orderReadySound != null)
+        {
+            audioSource.PlayOneShot(orderReadySound);
+            Debug.Log("🔔 Order ready! Sound played.");
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ AudioSource or orderReadySound is missing!");
+        }
+    }
+
+
 }
+
+
