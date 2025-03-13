@@ -230,6 +230,15 @@ public class PickUpSystem : MonoBehaviour
                     }
                 }
             }
+
+            else if (hit.collider.CompareTag("Docket"))
+            {
+                DocketManager docketManager = hit.collider.GetComponent<DocketManager>();
+                if (docketManager != null)
+                {
+                    docketManager.ToggleDocketPosition();
+                }
+            }
         }
     }
 

@@ -928,6 +928,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 645048750671348524, guid: bd0870088f5a3074792ff61a01d84753, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1259336036657023681, guid: bd0870088f5a3074792ff61a01d84753, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.20000002
@@ -984,7 +988,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 062141110a6c81944aa5e465b50d9fa0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1101742164539019794, guid: bd0870088f5a3074792ff61a01d84753, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

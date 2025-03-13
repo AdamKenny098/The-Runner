@@ -2001,7 +2001,8 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1266
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1101742164539019794, guid: bd0870088f5a3074792ff61a01d84753, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -49,5 +49,10 @@ public class OrderTaker : MonoBehaviour
                 orderTimer = 0f;
             }
         }
+
+        else
+        {
+
+        }
     }
 }
