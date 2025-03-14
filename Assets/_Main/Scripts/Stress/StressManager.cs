@@ -9,7 +9,7 @@ public class StressManager : MonoBehaviour
     [SerializeField] private float currentStress = 0f;
 
     [Header("Jumpscare Settings")]
-    [SerializeField] private GameObject jumpscareEffect;
+    StressJumpscare stressJumpscare;
 
     private void Awake()
     {
@@ -25,6 +25,30 @@ public class StressManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // Find the StressJumpscare script in the scene
+        stressJumpscare = FindObjectOfType<StressJumpscare>();
+
+        if (stressJumpscare == null)
+        {
+            Debug.LogError("StressJumpscare script not found! Ensure there is a GameObject in the scene with the StressJumpscare component.");
+        }
+    }
+
+    private void Update()
+    {
+        if(currentStress >= stressThreshold && !stressJumpscare.hasTriggered)
+        {
+            stressJumpscare.TriggerJumpscare();
+        }
+
+        else
+        {
+            return;
+        }
+    }
+
     /// <summary>
     /// Call this method to add stress from any source.
     /// </summary>
@@ -32,11 +56,6 @@ public class StressManager : MonoBehaviour
     {
         currentStress += amount;
         Debug.Log("Stress increased to: " + currentStress);
-
-        if (currentStress >= stressThreshold)
-        {
-            TriggerJumpscare();
-        }
     }
 
     /// <summary>
@@ -53,23 +72,5 @@ public class StressManager : MonoBehaviour
     public float GetStressThreshold()
     {
         return stressThreshold;
-    }
-
-    /// <summary>
-    /// Triggers the jumpscare effect (and game-over logic if needed).
-    /// </summary>
-    private void TriggerJumpscare()
-    {
-        Debug.Log("Stress threshold reached! Triggering jumpscare.");
-
-        if (jumpscareEffect != null)
-        {
-            jumpscareEffect.SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning("Jumpscare Effect is not assigned in StressManager!");
-        }
-        // Additional game-over logic can be added here.
     }
 }
