@@ -17,6 +17,8 @@ public class StressJumpscare : MonoBehaviour
 
     public bool hasTriggered = false; // Prevents multiple executions
 
+    public GameOverManager gameOverManager;
+
     void Start()
     {
         // Ensure the UI Image is disabled at the start
@@ -39,6 +41,7 @@ public class StressJumpscare : MonoBehaviour
         if (!hasTriggered) // Ensures it only executes once
         {
             hasTriggered = true;
+            gameOverManager.DisableArray();
             StartCoroutine(JumpscareSequence());
         }
     }
@@ -76,6 +79,7 @@ public class StressJumpscare : MonoBehaviour
                 jumpscareImage.color = new Color(0, 0, 0, alpha);
             }
             yield return null;
+
         }
 
 
@@ -84,6 +88,9 @@ public class StressJumpscare : MonoBehaviour
         {
             jumpscareImage.color = new Color(0, 0, 0, 1); // Ensures full black stays
         }
+        yield return new WaitForSeconds(4f);
+        gameOverManager.EnableGameOver();
+        this.gameObject.SetActive(false);
     }
 
 

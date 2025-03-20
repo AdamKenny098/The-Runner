@@ -259,7 +259,7 @@ public class PickUpSystem : MonoBehaviour
         }
 
         // Check if the object is a tray and apply custom hold position
-        if (heldObj.CompareTag("Tray"))
+        if (heldObj.CompareTag("Tray") || heldObj.CompareTag("OldPC"))
         {
             // Parent to tray hold position and apply correct rotation
             heldObj.transform.SetParent(trayHoldPos);

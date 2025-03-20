@@ -22,6 +22,8 @@ TagManager:
   - Tray
   - Docket
   - TrayPosition
+  - OldPC
+  - ClockOut
   layers:
   - Default
   - TransparentFX
