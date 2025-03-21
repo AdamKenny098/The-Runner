@@ -9,7 +9,7 @@ public class TrayManager : MonoBehaviour
     private int nextAvailableSlot = 0;  // Tracks the next available slot
     public Transform docketSlot;
 
-    private List<GameObject> placedOrders = new List<GameObject>(); // Track orders added to the tray
+    [SerializeField]private List<GameObject> placedOrders = new List<GameObject>(); // Track orders added to the tray
     private GameObject docketTicket = null;  // Store the current docket
 
     /// <summary>
@@ -19,26 +19,38 @@ public class TrayManager : MonoBehaviour
     {
         // Prevent adding duplicate orders
         if (placedOrders.Contains(orderItem))
+            return false;
+
+        // Find the first available slot manually
+        int slotIndex = GetNextAvailableSlot();
+        if (slotIndex == -1)
         {
+            Debug.Log("Tray Full");
             return false;
         }
 
-        if (nextAvailableSlot >= traySlots.Length)
-        {
-            return false;  // Tray is full
-        }
-
-        // Parent the order item to the next available slot
-        orderItem.transform.SetParent(traySlots[nextAvailableSlot], false);
-        orderItem.transform.localPosition = Vector3.zero;  // Align to slot position
-        orderItem.transform.localRotation = Quaternion.identity;  // Reset rotation if needed
+        // Parent the order item to the found slot
+        orderItem.transform.SetParent(traySlots[slotIndex], false);
+        orderItem.transform.localPosition = Vector3.zero;
+        orderItem.transform.localRotation = Quaternion.identity;
         orderItem.transform.localScale = Vector3.one;
 
-        placedOrders.Add(orderItem); // Track the added order
-        nextAvailableSlot++;  // Move to the next slot
-
-        return true;  // Item added successfully
+        placedOrders.Add(orderItem);
+        return true;
     }
+
+    private int GetNextAvailableSlot()
+    {
+        for (int i = 0; i < traySlots.Length; i++)
+        {
+            if (traySlots[i].childCount == 0)
+            {
+                return i;
+            }
+        }
+        return -1; // No free slots
+    }
+
 
     /// <summary>
     /// Positions the docket (ticket) on the tray.
@@ -86,10 +98,19 @@ public class TrayManager : MonoBehaviour
     /// <summary>
     /// Checks if the tray is full.
     /// </summary>
-    public bool IsTrayFull()
+    public bool HasActiveItems()
     {
-        return nextAvailableSlot >= traySlots.Length;
+        foreach (Transform child in transform)
+        {
+            foreach (Transform grandchild in child)
+            {
+                if (grandchild.gameObject.activeInHierarchy)
+                    return true;
+            }
+        }
+        return false;
     }
+
 
     public void PlaceTray(GameObject tray, Transform traySpot)
     {
@@ -111,6 +132,14 @@ public class TrayManager : MonoBehaviour
             {
                 rb.isKinematic = true;
             }
+        }
+    }
+
+    public void RemoveItem(GameObject item)
+    {
+        if (placedOrders.Contains(item))
+        {
+            placedOrders.Remove(item);
         }
     }
 }

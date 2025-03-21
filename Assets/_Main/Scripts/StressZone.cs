@@ -43,9 +43,13 @@ public class StressZone : MonoBehaviour
     private IEnumerator IncreaseStressOverTime()
     {
         isStressing = true;
+
         while (isStressing && objectsInZone.Count > maxItemsBeforeStress)
         {
             StressManager.Instance.AddStress(stressIncreaseRate);
+
+            GameStats.totalMessyTime += 1f; // Track total time the area was messy
+
             yield return new WaitForSeconds(1f);
         }
     }

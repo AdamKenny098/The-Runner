@@ -39,11 +39,16 @@ public class OrderDropZone : MonoBehaviour
         else
         {
             points = -10; // Deduct points if incorrect order
-            Debug.Log($"? Incorrect Order {orderName}! -10 points.");
+            Debug.Log($"? Incorrect Order {orderName}! -100 points.");
+            GameStats.mistakesMade++;
         }
 
         if (points > 0)
+        {
             ScoreManager.Instance.AddScore(points);
+            GameStats.ordersCompleted++;
+        }
+            
         else
             ScoreManager.Instance.DeductScore(-points);
 
@@ -52,8 +57,10 @@ public class OrderDropZone : MonoBehaviour
         if (orderTimer != null && orderTimer.IsLate())
         {
             ScoreManager.Instance.DeductScore(5);
-            Debug.Log($"? Late Order! -5 points.");
+            Debug.Log($"? Late Order! -50 points.");
+            GameStats.lateOrders++;
         }
+
     }
 
 
@@ -95,9 +102,9 @@ public class OrderDropZone : MonoBehaviour
                 // Remove "(Clone)" from the prefab name to match ticket names
                 string cleanOrderName = orderName.Replace("(Clone)", "").Trim();
 
-                if (orderTicket.orderedStarters.Contains(cleanOrderName)) points = 10;
-                else if (orderTicket.orderedEntrees.Contains(cleanOrderName)) points = 20;
-                else if (orderTicket.orderedDesserts.Contains(cleanOrderName)) points = 15;
+                if (orderTicket.orderedStarters.Contains(cleanOrderName)) points = 100;
+                else if (orderTicket.orderedEntrees.Contains(cleanOrderName)) points = 200;
+                else if (orderTicket.orderedDesserts.Contains(cleanOrderName)) points = 150;
                 else
                 {
                     points = -10;
@@ -182,11 +189,24 @@ public class OrderDropZone : MonoBehaviour
 
     private IEnumerator DelayedDestroy(GameObject obj, float delay)
     {
+        // Immediately stop interaction
+        Collider col = obj.GetComponent<Collider>();
+        if (col != null) col.enabled = false;
+
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+        if (rb != null) rb.isKinematic = true;
+
+        // Remove from tray tracking list BEFORE delay
+        TrayManager tray = FindObjectOfType<TrayManager>();
+        if (tray != null)
+            tray.RemoveItem(obj);
+
+        obj.SetActive(false); // Visually disables it instantly
+
         yield return new WaitForSeconds(delay);
 
-        if (obj != null)
-        {
-            Destroy(obj);
-        }
+        Destroy(obj); // Remove from scene
     }
+
+
 }

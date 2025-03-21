@@ -4839,7 +4839,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 412809525}
         m_TargetAssemblyTypeName: ClockOut, Assembly-CSharp
-        m_MethodName: YesClicked
+        m_MethodName: LoadLevelEvaluator
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4901,7 +4901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 1942019837}
   pickUpSystem: {fileID: 1240057159}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 571343465}
 --- !u!65 &412809526
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14364,6 +14364,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1240057167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170492216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b8cd7522a773c4087dd76c7b41cdc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRange: 5
+  triggerKey: 13
+  clockOut: {fileID: 412809525}
 --- !u!1 &1250663348
 GameObject:
   m_ObjectHideFlags: 0
@@ -20326,7 +20341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clock Out ?
+  m_text: Finish Shift
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -30604,6 +30619,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 638555809}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 16128688379294458, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1240057167}
     - targetCorrespondingSourceObject: {fileID: 16128688379294458, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1240057163}

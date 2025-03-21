@@ -3,39 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ClockOut : MonoBehaviour, IInteractable
+public class ClockOut : MonoBehaviour
 {
     [SerializeField] public GameObject loadingScreen;
     [SerializeField] public PickUpSystem pickUpSystem;
     [SerializeField] public GameManager gameManager;
 
-    public void Interact()
+    public void Start()
     {
-        if (pickUpSystem.heldObj.CompareTag("OldPC") && gameManager.money >= 300)
-        {
-            gameManager.money -= 300;
-            gameManager.hasBoughtComputer = true;
-        }
+        PickUpSystem pickUpSystem = FindObjectOfType<PickUpSystem>();
+    }
 
-        else
-        {
-            gameManager.hasBoughtComputer = false;
-        }
-
+    public void LoadLevelEvaluator()
+    {
         if (loadingScreen != null)
         {
             loadingScreen.SetActive(true); // Activate the loading screen (optional)
         }
-        SceneManager.LoadScene("Apartment"); // Replace with the actual name of your work level scene
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GameStats.CalculateCashPayout();
+        SceneManager.LoadScene("Game Over Good"); // Replace with the actual name of your work level scene
     }
 
-    public string GetDescription()
-    {
-        return "";
-    }
-
-    public bool RequiresUniquePanel()
-    {
-        return false;
-    }
 }
