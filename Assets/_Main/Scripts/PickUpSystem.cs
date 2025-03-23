@@ -1,4 +1,4 @@
-using TMPro;
+ using TMPro;
 using UnityEngine;
 
 public class PickUpSystem : MonoBehaviour
@@ -19,7 +19,7 @@ public class PickUpSystem : MonoBehaviour
     public TrayManager trayManager;
     void Update()
     {
-        HandleHoverUI();
+        //HandleHoverUI();
 
         // Check if the player is pressing the F key (for pickup or drop actions)
         if (Input.GetKeyDown(KeyCode.F))
@@ -325,7 +325,7 @@ public class PickUpSystem : MonoBehaviour
         }
     }
 
-    void HandleHoverUI()
+    /*void HandleHoverUI()
     {
         // Perform a raycast to detect objects
         RaycastHit hit;
@@ -484,6 +484,7 @@ public class PickUpSystem : MonoBehaviour
             UpdateHoverUI(false, false, false, ""); // Hide the UI if the raycast hits nothing
         }
     }
+    */
 
     void UpdateHoverUI(bool uiFActive, bool uiEActive, bool textActive, string message)
     {
