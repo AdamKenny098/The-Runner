@@ -85,6 +85,8 @@ public class PauseMenu : MonoBehaviour
             if (scene.name == sceneName && objectToDisable != null)
             {
                 objectToDisable.SetActive(false);
+                Cursor.lockState = CursorLockMode.None; // Lock the cursor to the centre of the screen
+                Cursor.visible = true; // Make the cursor invisible
                 return;
             }
 

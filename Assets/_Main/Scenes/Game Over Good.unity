@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 246100218}
   - component: {fileID: 246100217}
   m_Layer: 5
-  m_Name: 'Score:'
+  m_Name: 'Money Earned:'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score:'
+  m_text: 'Money Earned:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 1231094960}
   - component: {fileID: 1231094959}
   m_Layer: 5
-  m_Name: Score Value
+  m_Name: Money Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1256,6 +1256,7 @@ MonoBehaviour:
   mistakesText: {fileID: 307769551}
   cashEarnedText: {fileID: 1231094959}
   messyPenaltyText: {fileID: 75697566}
+  gameManager: {fileID: 0}
 --- !u!1 &1326890004
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,7 +2026,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1849282139}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1277691994}
+        m_TargetAssemblyTypeName: LevelEvaluator, Assembly-CSharp
+        m_MethodName: GoToApartment
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1849282139
 MonoBehaviour:
   m_ObjectHideFlags: 0

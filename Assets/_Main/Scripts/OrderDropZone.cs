@@ -33,9 +33,9 @@ public class OrderDropZone : MonoBehaviour
         int points = 0;
         string orderName = other.name; // Assuming object name matches the order type
 
-        if (orderTicket.orderedStarters.Contains(orderName)) points = 10;
-        else if (orderTicket.orderedEntrees.Contains(orderName)) points = 20;
-        else if (orderTicket.orderedDesserts.Contains(orderName)) points = 15;
+        if (orderTicket.orderedStarters.Contains(orderName)) points = 100;
+        else if (orderTicket.orderedEntrees.Contains(orderName)) points = 200;
+        else if (orderTicket.orderedDesserts.Contains(orderName)) points = 150;
         else
         {
             points = -10; // Deduct points if incorrect order
@@ -116,10 +116,12 @@ public class OrderDropZone : MonoBehaviour
                 if (points > 0)
                 {
                     totalPoints += points;
+                    GameStats.ordersCompleted++;
                 }
                 else
                 {
                     totalPoints -= Mathf.Abs(points);
+                    GameStats.mistakesMade++;
                 }
 
                 // Check for late penalty
@@ -127,6 +129,7 @@ public class OrderDropZone : MonoBehaviour
                 if (orderTimer != null && orderTimer.IsLate())
                 {
                     totalPoints -= 5;
+                    GameStats.lateOrders++;
                     Debug.Log($"? Late Order {orderName}! -5 points.");
                 }
             }

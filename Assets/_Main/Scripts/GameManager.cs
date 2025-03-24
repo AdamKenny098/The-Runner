@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public int money;
+    public float money;
     public int daysPlayed;
     public int daysFailed;
     public int totalAttempts;
