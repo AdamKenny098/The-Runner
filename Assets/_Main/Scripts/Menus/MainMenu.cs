@@ -12,14 +12,23 @@ public class MainMenu : MonoBehaviour
     public GameObject LoadingScreen;
     public Image LoadingBarFill;
 
+    public GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
     public void NewGame()
     {
+        gameManager.StartNewGame();
         LoadScene();
     }
 
     public void ContinueGame()
     {
-
+        SaveSystem.LoadGame();
+        LoadScene();
     }
 
     public void LoadGame()

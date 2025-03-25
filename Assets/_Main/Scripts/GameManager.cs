@@ -42,4 +42,16 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void StartNewGame()
+    {
+        money = 0;
+        daysPlayed = 0;
+        daysFailed = 0;
+        totalAttempts = 0;
+        highScore = 0;
+        hasBoughtComputer = false;
+        hasRepairedTVStand = false;
+        hasRepairedKitchen = false;
+    }
 }
