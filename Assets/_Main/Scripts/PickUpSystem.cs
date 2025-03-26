@@ -66,6 +66,17 @@ public class PickUpSystem : MonoBehaviour
                     PickUpObject(target);
                 }
         }
+
+        else if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
+        {
+            StackManager stackManager = hit.collider.GetComponent<StackManager>();
+            if (stackManager != null && stackManager.stackedPlates.Count > 0)
+            {
+                GameObject newStack = stackManager.CreateStackContainer();
+                PickUpObject(newStack);
+                return;
+            }
+        }
     }
 
     void TryDropObject()
