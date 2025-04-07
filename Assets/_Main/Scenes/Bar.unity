@@ -3252,7 +3252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1434424412078773848, guid: 44793efd1d3e09342b8a54b761f0f605, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1434424412078773848, guid: 44793efd1d3e09342b8a54b761f0f605, type: 3}
       propertyPath: m_TagString
@@ -10297,7 +10297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1434424412078773848, guid: 44793efd1d3e09342b8a54b761f0f605, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1434424412078773848, guid: 44793efd1d3e09342b8a54b761f0f605, type: 3}
       propertyPath: m_TagString
@@ -17582,7 +17582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1434424412078773848, guid: 44793efd1d3e09342b8a54b761f0f605, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1434424412078773848, guid: 44793efd1d3e09342b8a54b761f0f605, type: 3}
       propertyPath: m_TagString
@@ -33448,16 +33448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stackPrefab: {fileID: 1434424412078773848, guid: 44793efd1d3e09342b8a54b761f0f605, type: 3}
-  stackSlots:
-  - plateType: Bowl
-    spawnPoint: {fileID: 408828926}
-    currentStack: {fileID: 0}
-  - plateType: Entree
-    spawnPoint: {fileID: 1845371461}
-    currentStack: {fileID: 0}
-  - plateType: Starter
-    spawnPoint: {fileID: 1903514634}
-    currentStack: {fileID: 0}
+  stackSlots: []
 --- !u!33 &8892816714003254079
 MeshFilter:
   m_ObjectHideFlags: 10
