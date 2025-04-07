@@ -9,11 +9,9 @@ public class CounterStackManager : MonoBehaviour
     // For a simple approach, we'll use an index to assign positions sequentially.
     private int nextStackIndex = 0;
 
-    private void OnTriggerEnter(Collider other)
+    public void AcceptStack(GameObject other)
     {
         // Check if the object entering the collider is a stack container.
-        // You can use a tag, or check for a specific component on the container.
-        // In this example, we'll assume you've tagged the container as "PlateStackContainer".
         if (other.CompareTag("Stack"))
         {
             // If there are still available positions...
@@ -43,3 +41,4 @@ public class CounterStackManager : MonoBehaviour
     // Optional: If you ever need to remove a container (or free a position),
     // you can implement a method that decreases nextStackIndex or marks a specific slot as free.
 }
+

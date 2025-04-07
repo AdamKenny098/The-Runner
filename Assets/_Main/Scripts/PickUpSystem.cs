@@ -8,12 +8,7 @@ public class PickUpSystem : MonoBehaviour
     public Transform trayHoldPos;   // Custom hold position for the tray
     public float pickUpRange = 5f;
     public GameObject heldObj; // Made public so other scripts can access it
-    private Rigidbody heldObjRb;
-
-    public GameObject hoverUI;
-    public GameObject hoverUIE;
-    public GameObject hoverUIF; // Reference to the HoverUI GameObject
-    public TMP_Text hoverText; // Reference to the TextMeshPro text component
+    private Rigidbody heldObjRb; // Rigidbody of the held object
     public LayerMask canPickUpLayer; // Layer for objects that can be picked up
 
     public TrayManager trayManager;
@@ -34,7 +29,7 @@ public class PickUpSystem : MonoBehaviour
             HandleInteractions(); // Handles interactions with held objects
         }
 
-        // Automatically clear heldObj if it’s no longer parented to the hold position.
+        // Automatically clear heldObj if itï¿½s no longer parented to the hold position.
         if (heldObj != null && (heldObj.transform.parent != holdPos && heldObj.transform.parent != trayHoldPos))
         {
             heldObj = null;
@@ -67,6 +62,7 @@ public class PickUpSystem : MonoBehaviour
                 }
         }
 
+        //Handle the updated logic for picking up stacks
         else if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
         {
             StackManager stackManager = hit.collider.GetComponent<StackManager>();
@@ -252,6 +248,19 @@ public class PickUpSystem : MonoBehaviour
                 }
             }
 
+            else if(hit.collider.CompareTag("PlateWashUp"))
+            {
+                CounterStackManager counterStackManager = hit.collider.GetComponent<CounterStackManager>();
+                if (counterStackManager != null && heldObj != null)
+                {
+                    if(heldObj.CompareTag("Stack"))
+                    {
+                        counterStackManager.AcceptStack(heldObj);
+                        heldObj = null; // Reset held object after placing it in the stack
+                    }
+                }
+            }
+
         }
     }
 
@@ -333,178 +342,6 @@ public class PickUpSystem : MonoBehaviour
             }
             heldObj.transform.SetParent(null);
             heldObj = null;
-        }
-    }
-
-    /*void HandleHoverUI()
-    {
-        // Perform a raycast to detect objects
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange, LayerMask.GetMask("CanPickUp", "Default")))
-        {
-            GameObject hitObject = hit.collider.gameObject;
-            UpdateHoverUI(false, false, false, "");
-
-            if (hitObject.layer == LayerMask.NameToLayer("CanPickUp") && heldObj == null)
-            {
-                // Check the object's specific layer for context-specific hover text
-                if (hit.collider.CompareTag("Plate") && heldObj == null)
-                {
-                    UpdateHoverUI(true, false, true, "Pick Up Plate ?");
-                }
-                else if (hit.collider.CompareTag("Glass") && heldObj == null)
-                {
-                    UpdateHoverUI(true, false, true, "Pick Up Glass ?");
-                }
-                else if (hit.collider.CompareTag("Order") && heldObj == null)
-                {
-                    UpdateHoverUI(true, false, true, "Pick Up Order ?");
-                }
-                else
-                {
-                    UpdateHoverUI(true, false, true, "Pick Up ?");
-                }
-            }
-            // Handle hover UI for Trash Cans
-            else if (hitObject.CompareTag("TrashCan") && heldObj != null)
-            {
-                TrashCan trashCan = hitObject.GetComponent<TrashCan>();
-                if (trashCan != null)
-                {
-                    if (heldObj.CompareTag(trashCan.acceptedTag))
-                    {
-                        UpdateHoverUI(false, true, true, "Dispose Of Object ?");
-                    }
-                    else
-                    {
-                        UpdateHoverUI(false, false, true, "Incorrect Trash Can");
-                    }
-                }
-            }
-            // Handle hover UI for food bin
-            else if (hitObject.CompareTag("FoodBin") && heldObj != null)
-            {
-                Plate plate = heldObj.GetComponent<Plate>();
-                if (plate != null && plate.IsDirty())
-                {
-                    UpdateHoverUI(false, true, true, "Scrape Plate?");
-                }
-                else
-                {
-                    UpdateHoverUI(false, false, false, "");
-                }
-            }
-            // Handle hover UI for liquid bucket
-            else if (hitObject.CompareTag("LiquidBucket") && heldObj != null)
-            {
-                Glass glass = heldObj.GetComponent<Glass>();
-                if (glass != null && glass.IsDirty())
-                {
-                    UpdateHoverUI(false, true, true, "Empty Glass");
-                }
-                else
-                {
-                    UpdateHoverUI(false, false, false, "");
-                }
-            }
-            // Handle hover UI for Order Counter
-            else if (hitObject.CompareTag("OrderDropZone") && heldObj != null)
-            {
-                Order order = heldObj.GetComponent<Order>();
-                TrayManager trayManager = heldObj.GetComponent<TrayManager>();
-                if (order != null)
-                {
-                    UpdateHoverUI(false, true, true, "Place Order?");
-                }
-                else if(trayManager != null)
-                {
-                    UpdateHoverUI(false, true, true, "Place Tray?");
-                }
-
-                else
-                {
-                    UpdateHoverUI(false, false, false, "");
-                }
-            }
-            // Handle hover UI for Glass Tray
-            else if (hitObject.CompareTag("GlassStorage"))
-            {
-                GlassStorageManager glassStorage = hitObject.GetComponent<GlassStorageManager>();
-
-                // If the player's hand is empty and the storage is full
-                if (heldObj == null && glassStorage.isFull)
-                {
-                    UpdateHoverUI(false, true, true, "Empty Glasses?");
-                }
-                // If the player is holding a glass and the storage is not full
-                else if (heldObj != null)
-                {
-                    Glass glass = heldObj.GetComponent<Glass>();
-
-                    if (glass != null && glassStorage.nextGlassIndex < glassStorage.glassSlots.Length)
-                    {
-                        UpdateHoverUI(false, true, true, "Place Glass?");
-                    }
-                    // If storage is full and the player is holding a glass
-                    else if (glass != null && glassStorage.nextGlassIndex == glassStorage.glassSlots.Length)
-                    {
-                        UpdateHoverUI(false, true, true, "Storage Full, Empty it First");
-                    }
-                }
-            }
-
-            else if (hitObject.CompareTag("TrayPosition"))
-            {
-                // Ensure heldObj is not null before accessing its components
-                TrayManager trayManager = null;
-                if (heldObj != null)
-                {
-                    trayManager = heldObj.GetComponent<TrayManager>();
-                }
-                
-
-                // If the player's hand is empty and the TrayPosition has a tray
-                if (heldObj == null && hit.transform.childCount > 0)
-                {
-                    UpdateHoverUI(true, false, true, "Pick Up Tray?");
-                }
-                // If the player is holding a tray and TrayPosition is empty
-                else if (heldObj != null)
-                {
-                    if (trayManager != null && hit.transform.childCount == 0)
-                    {
-                        UpdateHoverUI(false, true, true, "Place Tray?");
-                    }
-                    // If TrayPosition is full and player is holding a tray
-                    else if (trayManager != null && hit.transform.childCount > 0)
-                    {
-                        UpdateHoverUI(false, true, true, "There's Already A Tray!");
-                    }
-                }
-            }
-
-
-            else
-            {
-                // Hide the Hover UI if no interactable object is detected
-                UpdateHoverUI(false, false, false, "");
-            }
-        }
-        else
-        {
-            UpdateHoverUI(false, false, false, ""); // Hide the UI if the raycast hits nothing
-        }
-    }
-    */
-
-    void UpdateHoverUI(bool uiFActive, bool uiEActive, bool textActive, string message)
-    {
-        hoverUIF.SetActive(uiFActive);
-        hoverUIE.SetActive(uiEActive);
-        hoverText.gameObject.SetActive(textActive);
-        if (textActive)
-        {
-            hoverText.text = message;
         }
     }
 }
