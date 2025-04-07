@@ -24,6 +24,7 @@ TagManager:
   - TrayPosition
   - OldPC
   - ClockOut
+  - PlateWashUp
   layers:
   - Default
   - TransparentFX
