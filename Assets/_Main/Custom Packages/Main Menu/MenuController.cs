@@ -3,61 +3,171 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 using TMPro;
-using System.IO;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    [Header("Volume Setting")]
-    [SerializeField] private TMP_Text volumeTextValue = null;
-    [SerializeField] private Slider volumeSlider = null;
-    [SerializeField] private float defaultVolume = 1.0f;
+    [Header("Audio Sliders")]
+    public Slider masterVolumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider sfxVolumeSlider;
+    public TMP_Text volumeTextValue;
+    public TMP_Text musicVolumeTextValue;
+    public TMP_Text SFXVolumeTextValue;
 
-    [SerializeField] private GameObject confirmationPrompt = null;
 
-    [Header("Levels to Load")]
+    [Header("Display Settings")]
+    public Toggle vsyncToggle;
+    public Slider fpsSlider;
+    public TMP_Text fpsValueText;
+    public Toggle fullscreenToggle;
+    public TMP_Dropdown resolutionDropdown;
+    public TMP_Dropdown qualityDropdown;
+
+    [Header("Scene Loading")]
     public string newGameLevel;
-    private string levelToLoad;
-    [SerializeField] private GameObject noSaveGameDialog = null;
+    public GameObject noSaveGameDialog;
+    public GameObject confirmationPrompt;
+    public Image loadingBarFill;
+    public GameObject loadingScreen;
 
-    [SerializeField] public AudioMixer audioMixer;
-
-    [SerializeField] public TMP_Dropdown resolutionDropdown;
-    [SerializeField] Resolution[] resolutions;
-
-    [Header("Data Persistance")]
-    public GameManager gameManager;
-
-    
-    public Image LoadingBarFill;
-    public GameObject LoadingScreen;
+    private Resolution[] resolutions;
+    private GameManager gameManager;
 
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-    
-        int currentResolutionIndex = 0;
-        for(int i = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
-
-            if(resolutions[i].width == Screen.currentResolution.width &&
-               resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-            }
-        }
-
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+        LoadSettingsToUI();
     }
 
+    private void LoadSettingsToUI()
+    {
+        SettingsData s = SettingsManager.Instance.settings;
+
+        // AUDIO
+        masterVolumeSlider.value = s.masterVolume;
+        musicVolumeSlider.value = s.musicVolume;
+        sfxVolumeSlider.value = s.sfxVolume;
+        volumeTextValue.text = s.masterVolume.ToString("0.0");
+
+        // GRAPHICS
+        vsyncToggle.isOn = s.vsyncEnabled;
+        fpsSlider.value = s.targetFPS;
+        fpsValueText.text = $"FPS: {s.targetFPS}";
+        fpsSlider.interactable = !s.vsyncEnabled;
+
+        fullscreenToggle.isOn = SettingsManager.Instance.settings.fullscreen;
+
+
+        FillResolutionDropdown(s.resolutionIndex);
+        qualityDropdown.value = s.qualityLevel;
+        qualityDropdown.RefreshShownValue();
+
+        
+        OnVSyncToggle(); // <- this will handle slider interactable logic
+    }
+
+    public void FillResolutionDropdown(int savedIndex)
+{
+    resolutions = Screen.resolutions;
+    resolutionDropdown.ClearOptions();
+
+    List<string> options = new List<string>();
+    List<string> seen = new List<string>();
+    int validIndex = 0;
+
+    for (int i = 0; i < resolutions.Length; i++)
+    {
+        Resolution res = resolutions[i];
+        string label = $"{res.width} x {res.height}";
+
+        // Failsafe: skip if already added
+        if (seen.Contains(label))
+            continue;
+
+        seen.Add(label);
+        options.Add(label);
+
+        if (i == savedIndex)
+            validIndex = options.Count - 1; // real index in the filtered list
+    }
+
+    resolutionDropdown.AddOptions(options);
+    resolutionDropdown.value = Mathf.Clamp(validIndex, 0, options.Count - 1);
+    resolutionDropdown.RefreshShownValue();
+}
+
+
+    public void ApplyAllSettings()
+    {
+        var s = SettingsManager.Instance.settings;
+
+        // AUDIO
+        s.masterVolume = masterVolumeSlider.value;
+        s.musicVolume = musicVolumeSlider.value;
+        s.sfxVolume = sfxVolumeSlider.value;
+
+        // GRAPHICS
+        s.vsyncEnabled = vsyncToggle.isOn;
+        s.targetFPS = (int)fpsSlider.value;
+        s.fullscreen = fullscreenToggle.isOn;
+        s.resolutionIndex = resolutionDropdown.value;
+        s.qualityLevel = qualityDropdown.value;
+
+        // APPLY + SAVE
+        SettingsManager.Instance.ApplySettings();
+        SettingsManager.Instance.SaveSettings();
+
+        StartCoroutine(ShowConfirmation());
+    }
+
+    public void ResetToDefaultSettings()
+    {
+        SettingsManager.Instance.settings = new SettingsData();
+        SettingsManager.Instance.ApplySettings();
+        SettingsManager.Instance.SaveSettings();
+
+        LoadSettingsToUI();
+        StartCoroutine(ShowConfirmation());
+    }
+
+    // UI Hooks for Real-Time Feedback (optional)
+    public void OnFPSChanged()
+    {
+        int fps = (int)fpsSlider.value;
+        fpsValueText.text = $"FPS: {fps}";
+
+        // Only apply if VSync is off
+        if (!vsyncToggle.isOn)
+        {
+            Application.targetFrameRate = fps;
+            SettingsManager.Instance.settings.targetFPS = fps;
+        }
+    }
+
+
+
+    public void OnMasterVolumeChanged(float value)
+    {
+        volumeTextValue.text = value.ToString("0.0");
+        SettingsManager.Instance.SetMasterVolume(value);
+    }
+
+    public void OnMusicVolumeChanged(float value)
+    {
+        musicVolumeTextValue.text = value.ToString("0.0");
+        SettingsManager.Instance.SetMusicVolume(value);
+    }
+
+    public void OnSFXVolumeChanged(float value)
+    {
+        SFXVolumeTextValue.text = value.ToString("0.0");
+        SettingsManager.Instance.SetSFXVolume(value);
+    }
+
+
+    // Game Management
     public void NewGame()
     {
         gameManager.StartNewGame();
@@ -70,75 +180,23 @@ public class MenuController : MonoBehaviour
         LoadScene();
     }
 
+    public void LoadGameDialogYes()
+    {
+        string savePath = Application.persistentDataPath + "/savefile.json";
+        if (System.IO.File.Exists(savePath))
+            ContinueGame();
+        else
+            noSaveGameDialog.SetActive(true);
+    }
+
     public void NewGameDialogYes()
     {
         SceneManager.LoadScene(newGameLevel);
     }
 
-    public void LoadGameDialogYes()
-    {
-        string savePath = Application.persistentDataPath + "/savefile.json";
-        if (File.Exists(savePath))
-        {
-            ContinueGame();
-        }
-        else
-        {
-            noSaveGameDialog.SetActive(true);
-        }
-    }
-
-    public void ExitButton()
+    public void ExitGame()
     {
         Application.Quit();
-    }
-
-    public void SetVolume(float volume)
-    {
-        AudioListener.volume = volume;
-        volumeTextValue.text = volume.ToString("0.0");
-    }
-
-    public void VolumeApply()
-    {
-        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
-        StartCoroutine(ConfirmationBox());
-    }
-
-    public void ResetButton(string MenuType)
-    {
-        if(MenuType == "Audio")
-        {
-            AudioListener.volume = defaultVolume;
-            volumeSlider.value = defaultVolume;
-            volumeTextValue.text = defaultVolume.ToString("0.0");
-            VolumeApply();
-        }
-    }
-
-    public IEnumerator ConfirmationBox()
-    {
-        confirmationPrompt.SetActive(true);
-        yield return new WaitForSeconds(2);
-        confirmationPrompt.SetActive(false);
-    }
-
-    
-
-    public void SetResolution (int resolutionIndex)
-    {
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-    }
-
-    public void SetQuality (int qualityIndex)
-    {
-        QualitySettings.SetQualityLevel(qualityIndex);
-    }
-
-    public void SetFullscreen (bool isFullscreen)
-    {
-        Screen.fullScreen = isFullscreen;
     }
 
     private void LoadScene()
@@ -146,15 +204,59 @@ public class MenuController : MonoBehaviour
         StartCoroutine(LoadSceneAsync());
     }
 
-    IEnumerator LoadSceneAsync()
+    private IEnumerator LoadSceneAsync()
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(newGameLevel);
-        LoadingScreen.SetActive(true);
+        loadingScreen.SetActive(true);
+
         while (!operation.isDone)
         {
-            float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
-            LoadingBarFill.fillAmount = progressValue;
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            loadingBarFill.fillAmount = progress;
             yield return null;
         }
     }
+
+    private IEnumerator ShowConfirmation()
+    {
+        confirmationPrompt.SetActive(true);
+        yield return new WaitForSeconds(2);
+        confirmationPrompt.SetActive(false);
+    }
+
+    public void OnVSyncToggle()
+    {
+        bool vsyncOn = vsyncToggle.isOn;
+
+        QualitySettings.vSyncCount = vsyncOn ? 1 : 0;
+        fpsSlider.interactable = !vsyncOn;
+
+        if (vsyncOn)
+        {
+            Application.targetFrameRate = -1;
+            fpsSlider.value = SettingsManager.Instance.settings.targetFPS; // Reset to saved value or default
+            fpsValueText.text = $"FPS: {fpsSlider.value}";
+        }
+        else
+        {
+            Application.targetFrameRate = (int)fpsSlider.value;
+            fpsValueText.text = $"FPS: {(int)fpsSlider.value}";
+        }
+    }
+
+    public void OnFullscreenToggle(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+        SettingsManager.Instance.settings.fullscreen = isFullscreen;
+    }
+
+    public void OnResolutionDropdownChanged(int index)
+    {
+        Resolution res = resolutions[index];
+        Screen.SetResolution(res.width, res.height, Screen.fullScreen);
+
+        SettingsManager.Instance.settings.resolutionIndex = index;
+    }
+
+
 }
