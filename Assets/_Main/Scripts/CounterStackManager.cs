@@ -18,27 +18,32 @@ public class CounterStackManager : MonoBehaviour
     }
 
     public void AcceptStack(GameObject other)
-{
-    if (other.CompareTag("Stack"))
     {
-        for (int i = 0; i < stackSlots.Length; i++)
+        if (other.CompareTag("Stack"))
         {
-            if (stackSlots[i].stackObject == null)
+            for (int i = 0; i < stackSlots.Length; i++)
             {
-                Transform targetPoint = stackSlots[i].position;
-                other.transform.position = targetPoint.position;
-                other.transform.rotation = Quaternion.identity;
-                other.transform.localScale = Vector3.one;
-                other.transform.SetParent(targetPoint);
+                if (stackSlots[i].stackObject == null)
+                {
+                    Transform targetPoint = stackSlots[i].position;
+                    other.transform.position = targetPoint.position;
+                    other.transform.rotation = Quaternion.identity;
+                    other.transform.localScale = Vector3.one;
+                    other.transform.SetParent(targetPoint);
 
-                stackSlots[i].stackObject = other;
-                return;
+                    stackSlots[i].stackObject = other;
+
+                    // ✅ Move the tutorial trigger INSIDE the loop, before return
+                    DeliverStackTutorial();
+
+                    return;
+                }
             }
-        }
 
-        Debug.Log("No available stack positions on the counter.");
+            Debug.Log("No available stack positions on the counter.");
+        }
     }
-}
+
 
     public void WashDish()
 {
@@ -77,8 +82,6 @@ public class CounterStackManager : MonoBehaviour
             }
         }
     }
-
-    Debug.Log("❌ No plates left to wash.");
 }
 
 
@@ -93,6 +96,16 @@ public class CounterStackManager : MonoBehaviour
         }
     }
 
+
+    private void DeliverStackTutorial()
+    {
+            TutorialManager.Instance.TriggerTutorial(
+                "deliveredPlateStack",
+                "Delivering Plates",
+                "Cleaned plates go here to be washed automatically. Good job!",
+                null
+            );
+    }
 
     // Optional: If you ever need to remove a container (or free a position),
     // you can implement a method that decreases nextStackIndex or marks a specific slot as free.

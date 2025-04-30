@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1094229328734191071}
   - component: {fileID: -1742229876122810852}
   - component: {fileID: -3529532030400763440}
+  - component: {fileID: -5877912929857302558}
   m_Layer: 13
   m_Name: Ice Cream
   m_TagString: Order
@@ -119,6 +120,24 @@ MonoBehaviour:
   numberOfDesserts: 0
   timeToMake: 0
   ticket: {fileID: 0}
+--- !u!114 &-5877912929857302558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540393386545437549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf088508c8a7354cbdff4eac531f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialID: orderUp
+  title: Order Up
+  content: Great Job! Now place the completed order onto the tray on the left. Don't
+    forget to attach the ticket!
+  image: {fileID: 0}
+  onlyTriggerOnce: 1
 --- !u!1 &6499508707959693229
 GameObject:
   m_ObjectHideFlags: 0

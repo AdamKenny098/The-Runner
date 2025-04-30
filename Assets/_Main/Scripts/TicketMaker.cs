@@ -92,12 +92,6 @@ public class TicketMaker : MonoBehaviour
         newTicket.orderedEntrees = GetRandomItemsList(mainOptions, newTicket.numberOfPeople, true);
         newTicket.orderedDesserts = GetRandomItemsList(dessertOptions, newTicket.isHavingDesserts ? Random.Range(1, newTicket.numberOfPeople + 1) : 0, newTicket.isHavingDesserts);
 
-        Debug.Log($"Created Ticket #{newTicket.ticketNumber}: {newTicket.numberOfPeople} people, " +
-                  $"Starters: {newTicket.isHavingStarters} ({newTicket.orderedStarters.Count}), " +
-                  $"Entrees: {newTicket.orderedEntrees.Count}, " +
-                  $"Desserts: {newTicket.isHavingDesserts} ({newTicket.orderedDesserts.Count}), " +
-                  $"Time: {newTicket.timeToMake} sec");
-
         // Update the physical ticket’s TextMeshPro display
         TMP_Text ticketText = newTicket.GetComponentInChildren<TMP_Text>();
         if (ticketText != null)

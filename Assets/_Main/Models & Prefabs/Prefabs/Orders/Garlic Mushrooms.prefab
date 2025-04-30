@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 900888083251224100}
   - component: {fileID: -8328085053478930413}
   - component: {fileID: 2746133980394631653}
+  - component: {fileID: 2779484615698545559}
   m_Layer: 13
   m_Name: Garlic Mushrooms
   m_TagString: Order
@@ -332,6 +333,24 @@ MonoBehaviour:
   numberOfDesserts: 0
   timeToMake: 0
   ticket: {fileID: 0}
+--- !u!114 &2779484615698545559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193821269969237077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf088508c8a7354cbdff4eac531f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialID: orderUp
+  title: Order Up
+  content: Great Job! Now place the completed order onto the tray on the left. Don't
+    forget to attach the ticket!
+  image: {fileID: 0}
+  onlyTriggerOnce: 1
 --- !u!1 &4486016086697464806
 GameObject:
   m_ObjectHideFlags: 0

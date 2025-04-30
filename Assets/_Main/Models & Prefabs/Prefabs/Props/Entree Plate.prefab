@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7428042686656802707}
   - component: {fileID: 6675739263569165159}
   - component: {fileID: -7613994902163631116}
+  - component: {fileID: 4851560606729349560}
   m_Layer: 13
   m_Name: Entree Plate
   m_TagString: Plate
@@ -148,3 +149,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plateType: Entree
+--- !u!114 &4851560606729349560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4278800481104863018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf088508c8a7354cbdff4eac531f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialID: cleanPlate
+  title: Cleaning Plates
+  content: Press [F] while looking at a plate to pick it up. Look at the food bin
+    and press [E] to scrape it clean. Then once clean, stack it on the other counter.
+  image: {fileID: 0}
+  onlyTriggerOnce: 1

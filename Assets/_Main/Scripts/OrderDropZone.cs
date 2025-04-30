@@ -47,6 +47,8 @@ public class OrderDropZone : MonoBehaviour
         {
             ScoreManager.Instance.AddScore(points);
             GameStats.ordersCompleted++;
+
+                
         }
             
         else
@@ -117,6 +119,8 @@ public class OrderDropZone : MonoBehaviour
                 {
                     totalPoints += points;
                     GameStats.ordersCompleted++;
+
+                    FirstOrderTutorial();
                 }
                 else
                 {
@@ -211,5 +215,13 @@ public class OrderDropZone : MonoBehaviour
         Destroy(obj); // Remove from scene
     }
 
-
+    public void FirstOrderTutorial()
+    {
+        TutorialManager.Instance.TriggerTutorial(
+                    "firstOrder",
+                    "First Delivery!",
+                    "Nice job! You've delivered your first order. Keep it up!",
+                    null
+                );
+    }
 }

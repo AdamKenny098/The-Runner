@@ -2772,6 +2772,7 @@ GameObject:
   - component: {fileID: 6461208264400581823}
   - component: {fileID: -5096639127121519930}
   - component: {fileID: -5689866484321806708}
+  - component: {fileID: 7581582042528415050}
   m_Layer: 13
   m_Name: Chocolate Mousse
   m_TagString: Order
@@ -2878,6 +2879,24 @@ MonoBehaviour:
   numberOfDesserts: 0
   timeToMake: 0
   ticket: {fileID: 0}
+--- !u!114 &7581582042528415050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6324892648917744888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf088508c8a7354cbdff4eac531f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialID: orderUp
+  title: Order Up
+  content: Great Job! Now place the completed order onto the tray on the left. Don't
+    forget to attach the ticket!
+  image: {fileID: 0}
+  onlyTriggerOnce: 1
 --- !u!1001 &336765229812316585
 PrefabInstance:
   m_ObjectHideFlags: 0

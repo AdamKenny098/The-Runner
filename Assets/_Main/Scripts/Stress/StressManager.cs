@@ -68,8 +68,6 @@ public class StressManager : MonoBehaviour
     {
         currentStress += amount;
         currentStress = Mathf.Clamp(currentStress, 0, stressThreshold); // Prevent over-increase
-
-        Debug.Log("Stress increased to: " + currentStress);
     }
 
     /// <summary>
@@ -99,7 +97,7 @@ public class StressManager : MonoBehaviour
             // Convert 0-100 stress ? 25-125 alpha
             float alphaValue = Mathf.Lerp(minAlpha, maxAlpha, currentStress / stressThreshold);
 
-            // Convert 0-255 alpha to Unity’s 0-1 range
+            // Convert 0-255 alpha to Unityï¿½s 0-1 range
             alphaValue /= 255f;
 
             // Update overlay alpha

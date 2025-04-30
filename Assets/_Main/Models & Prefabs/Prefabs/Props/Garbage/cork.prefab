@@ -89,6 +89,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ffce2f6f3bc70cf439ff0999e80cc784, type: 3}
       insertIndex: -1
       addedObject: {fileID: -2206808846174419789}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ffce2f6f3bc70cf439ff0999e80cc784, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3349334627768705780}
   m_SourcePrefab: {fileID: 100100000, guid: ffce2f6f3bc70cf439ff0999e80cc784, type: 3}
 --- !u!1 &2581735500407438922 stripped
 GameObject:
@@ -164,3 +167,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.2569878, y: 2.2569883, z: 2.0000005}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3349334627768705780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581735500407438922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf088508c8a7354cbdff4eac531f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialID: firstWasteSorted
+  title: Waste Management
+  content: The various garbage that gets brought in here can be dumped into the black
+    trash cans behind you
+  image: {fileID: 0}
+  onlyTriggerOnce: 1

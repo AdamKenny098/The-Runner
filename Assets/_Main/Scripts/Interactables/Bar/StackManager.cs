@@ -47,6 +47,10 @@ public class StackManager : MonoBehaviour
         plate.transform.rotation = Quaternion.identity;
 
         stackedPlates.Add(plate);
+
+        TriggerTutorial();
+
+
     }
 
     public void RemoveStack()
@@ -123,4 +127,16 @@ public class StackManager : MonoBehaviour
         return newStack;
     }
 
+
+    private void TriggerTutorial()
+    {
+        
+            TutorialManager.Instance.TriggerTutorial(
+                "stackPlates",
+                "Stacking Plates",
+                "You can stack plates here to save space!",
+                null
+            );
+        
+    }
 }

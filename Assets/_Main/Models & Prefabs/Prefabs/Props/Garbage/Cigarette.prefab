@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9151754047116109061}
   - component: {fileID: 4892496227752282985}
   - component: {fileID: -2307592327152489743}
+  - component: {fileID: 1100272716261011830}
   m_Layer: 13
   m_Name: Cigarette
   m_TagString: Waste
@@ -135,3 +136,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1100272716261011830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2588413836654571912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf088508c8a7354cbdff4eac531f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialID: firstWasteSorted
+  title: Waste Management
+  content: The various garbage that gets brought in here can be dumped into the black
+    trash cans behind you
+  image: {fileID: 0}
+  onlyTriggerOnce: 1

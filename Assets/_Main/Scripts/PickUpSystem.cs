@@ -34,6 +34,21 @@ public class PickUpSystem : MonoBehaviour
         {
             heldObj = null;
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("🔴 R key pressed — forcing First Serve tutorial");
+
+            if (TutorialManager.Instance != null)
+            {
+                TutorialManager.Instance.TriggerTutorial(
+                    "firstServe",
+                    "First Delivery!",
+                    "Nice job! You've delivered your first order. Keep it up!",
+                    null
+                );
+            }
+        }
     }
 
     void TryPickUp()
@@ -215,10 +230,31 @@ public class PickUpSystem : MonoBehaviour
                 OrderDropZone orderDropZone = hit.collider.GetComponent<OrderDropZone>();
                 if (orderDropZone != null && heldObj != null)
                 {
-                    // For non-tray orders, you might handle drop differently.
-                    orderDropZone.HandleOrderDrop(heldObj.GetComponent<Collider>());
+                    // FIRST: Check if it's deliverable
+                    if (heldObj.CompareTag("Order")) // Or whatever your deliverable tag is
+                    {
+                        // 🧠 Trigger the tutorial BEFORE delivery happens
+                        if (TutorialManager.Instance != null)
+                        {
+                            TutorialManager.Instance.TriggerTutorial(
+                                "firstOrder",
+                                "First Delivery!",
+                                "Nice job! You've delivered your first order. Keep it up and watch those timers!",
+                                null
+                            );
+                        }
+
+                        // THEN process the order normally
+                        orderDropZone.HandleOrderDrop(heldObj.GetComponent<Collider>());
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Trying to deliver an invalid object: " + heldObj.name);
+                    }
                 }
             }
+
+
 
             else if (hit.collider.CompareTag("Tray"))
             {
@@ -275,25 +311,30 @@ public class PickUpSystem : MonoBehaviour
         if (heldObjRb != null)
         {
             heldObjRb.isKinematic = true;
-            heldObjRb.velocity = Vector3.zero; // Reset any movement
+            heldObjRb.velocity = Vector3.zero;
         }
 
-        // Check if the object is a tray and apply custom hold position
         if (heldObj.CompareTag("Tray") || heldObj.CompareTag("OldPC"))
         {
-            // Parent to tray hold position and apply correct rotation
             heldObj.transform.SetParent(trayHoldPos);
             heldObj.transform.localPosition = Vector3.zero;
-            heldObj.transform.localRotation = Quaternion.Euler(-90, 0, 0);  // Custom rotation for tray
+            heldObj.transform.localRotation = Quaternion.Euler(-90, 0, 0);
         }
         else
         {
-            // Parent other objects to the default hold position
             heldObj.transform.SetParent(holdPos);
             heldObj.transform.localPosition = Vector3.zero;
-            heldObj.transform.localRotation = Quaternion.identity;  // Default rotation
+            heldObj.transform.localRotation = Quaternion.identity;
+        }
+
+        // 🔥 Tutorial detection
+        TutorialInteractionTrigger tutorial = pickUpObj.GetComponent<TutorialInteractionTrigger>();
+        if (tutorial != null)
+        {
+            tutorial.Trigger();
         }
     }
+
 
     public void DropObject()
     {

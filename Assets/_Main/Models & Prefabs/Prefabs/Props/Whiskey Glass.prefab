@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3150582576526325097}
   - component: {fileID: 4215987269857916522}
   - component: {fileID: -7953996047436891878}
+  - component: {fileID: -7254848721698641903}
   m_Layer: 13
   m_Name: Whiskey Glass
   m_TagString: Glass
@@ -147,3 +148,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f23f8fd4ee7f0cb4d80dd4c7526f12c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7254848721698641903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462676467826169709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf088508c8a7354cbdff4eac531f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialID: glassWashed
+  title: Washing Glasses
+  content: Glasses can be emptied into the liquid bucket and placed into the purple
+    tray in the next room
+  image: {fileID: 0}
+  onlyTriggerOnce: 1

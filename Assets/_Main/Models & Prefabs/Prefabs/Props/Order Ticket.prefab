@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 4332527708208322326}
   - component: {fileID: 864678020664741628}
   - component: {fileID: 6463695948068715615}
+  - component: {fileID: -2294177272490843431}
   m_Layer: 13
   m_Name: Order Ticket
   m_TagString: Docket
@@ -304,7 +305,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   readingPosition: {fileID: 0}
-  moveSpeed: 5
+  docketMoveSpeed: 5
+--- !u!114 &-2294177272490843431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935311387343314594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf088508c8a7354cbdff4eac531f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialID: docket
+  title: Your First Order
+  content: Collect the required items listed on these tickets and place them on the
+    tray. Don't worry about any extra items, they're for the next one.
+  image: {fileID: 0}
+  onlyTriggerOnce: 1
 --- !u!1 &7173781647718854541
 GameObject:
   m_ObjectHideFlags: 0

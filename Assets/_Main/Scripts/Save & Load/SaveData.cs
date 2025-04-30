@@ -10,4 +10,7 @@ public class SaveData
     public bool hasBoughtComputer;
     public bool hasRepairedTVStand;
     public bool hasRepairedKitchen;
+
+    public TutorialFlags tutorialFlags = new TutorialFlags();
+
 }
