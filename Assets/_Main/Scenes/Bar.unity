@@ -31978,6 +31978,7 @@ GameObject:
   - component: {fileID: 1628531701}
   - component: {fileID: 1628531704}
   - component: {fileID: 1628531705}
+  - component: {fileID: 1628531706}
   m_Layer: 0
   m_Name: Bar Manager
   m_TagString: Untagged
@@ -32003,6 +32004,7 @@ MonoBehaviour:
   exitPrompt: {fileID: 1044949700}
   exitCountdownText: {fileID: 2113914248}
   sessionTimer: 0
+  clockOut: {fileID: 0}
 --- !u!4 &1628531696
 Transform:
   m_ObjectHideFlags: 0
@@ -32193,6 +32195,21 @@ MonoBehaviour:
   uiPanel: {fileID: 2085162856}
   actionRowPrefab: {fileID: 8564707857882352299, guid: 406607e9d62b70e4db8eea05712b8ca4, type: 3}
   rowContainer: {fileID: 2085162857}
+--- !u!114 &1628531706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628531694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c6b0089bfe8054faa731077d74d167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 0}
+  pickUpSystem: {fileID: 1240057159}
+  gameManager: {fileID: 1925268105}
 --- !u!1001 &1630442227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36457,6 +36474,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0065109017, y: 0.010000001, z: 0.18314743}
   m_Center: {x: -0.0017445434, y: 0.0000000037252903, z: 0.04434121}
+--- !u!114 &1925268105 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1949960870834844567, guid: 052af404c341548429119de5043a8d40, type: 3}
+  m_PrefabInstance: {fileID: 2044599981}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ff90725ee22f4409706d2b6e4a0c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1948315899
 GameObject:
   m_ObjectHideFlags: 0
