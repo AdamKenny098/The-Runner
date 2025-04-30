@@ -25,11 +25,15 @@ public class CombinedTimerManager : MonoBehaviour
     // When true, the session timer is paused during the exit countdown
     private bool isPaused = false;
 
+    public ClockOut clockOut;
+
     void Start()
     {
         // Ensure the exit prompt is hidden when the game starts
         if (exitPrompt != null)
             exitPrompt.SetActive(false);
+        
+        clockOut = FindObjectOfType<ClockOut>();
     }
 
     void Update()
@@ -44,8 +48,9 @@ public class CombinedTimerManager : MonoBehaviour
             if (sessionTimer >= exitPromptDelay)
             {
                 // Pause the session timer and start the exit countdown
-                isPaused = true;
-                StartCoroutine(ExitCountdownCoroutine());
+                // isPaused = true;
+                // StartCoroutine(ExitCountdownCoroutine());
+                clockOut.LoadLevelEvaluator();
             }
         }
     }
