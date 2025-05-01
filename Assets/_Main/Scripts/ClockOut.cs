@@ -21,6 +21,26 @@ public class ClockOut : MonoBehaviour
             loadingScreen.SetActive(true); // Activate the loading screen (optional)
         }
 
+        if(gameManager.hasBoughtComputer == false)
+        {
+            if (pickUpSystem.heldObj == null) return;
+            if (!pickUpSystem.heldObj.CompareTag("OldPC")) return;
+            if (gameManager.money >= gameManager.PcCost)
+            {
+                gameManager.money -= gameManager.PcCost;
+                gameManager.hasBoughtComputer = true;
+
+                SaveSystem.SaveGame();
+
+                Debug.Log("✅ PC purchased and unlocked in apartment!");
+            }
+            else
+            {
+                Debug.Log("❌ Not enough money to buy the PC.");
+            }
+        }
+        
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         GameStats.CalculateCashPayout();

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public float money;
+
+    public int PcCost = 300;
     public int daysPlayed;
     public int daysFailed;
     public int totalAttempts;
@@ -15,8 +17,6 @@ public class GameManager : MonoBehaviour
     public bool hasBoughtComputer;
     public bool hasRepairedTVStand;
     public bool hasRepairedKitchen;
-
-    // Start is called before the first frame update
 
     private void Awake()
     {
