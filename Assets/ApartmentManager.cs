@@ -37,6 +37,17 @@ public class ApartmentManager : MonoBehaviour
             fixedTVStand.SetActive(false);
         }
 
+        if(GameManager.Instance.hasRepairedKitchen)
+        {
+            brokenKitchen.SetActive(false);
+            fixedKitchen.SetActive(true);
+        }
+        else
+        {
+            brokenKitchen.SetActive(true);
+            fixedKitchen.SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
