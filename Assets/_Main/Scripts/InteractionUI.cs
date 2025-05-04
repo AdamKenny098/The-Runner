@@ -252,6 +252,15 @@ public class InteractionUI_Layout : MonoBehaviour
                 }
                 break;
 
+            //Apartment Scene
+            case "FrontDoor":
+                if (layer == LayerMask.NameToLayer("Default") && heldObj == null)
+                {
+                    actions.Add(("E", "Leave for Work"));
+                }
+                break;
+            
+
             default:
                 HideUI();
                 return;

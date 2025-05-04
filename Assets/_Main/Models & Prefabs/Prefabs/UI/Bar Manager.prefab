@@ -1,0 +1,252 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5157380125973053134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3588380479657389827}
+  - component: {fileID: 1342964915212814829}
+  - component: {fileID: 5756870787635456306}
+  - component: {fileID: 7036504923490623434}
+  - component: {fileID: 245093224727518106}
+  - component: {fileID: 1166702512376689731}
+  - component: {fileID: 6801401841254850413}
+  - component: {fileID: 7325027884610645078}
+  - component: {fileID: 7916645665647389736}
+  - component: {fileID: 3540907680959193192}
+  - component: {fileID: 8881366449409965526}
+  m_Layer: 0
+  m_Name: Bar Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3588380479657389827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 942.6768, y: 584.04016, z: -3.4205723}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1342964915212814829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e38087199aff4f4fa583a79745396c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitPromptDelay: 300
+  exitPromptDuration: 30
+  sessionTimerText: {fileID: 0}
+  exitPrompt: {fileID: 0}
+  exitCountdownText: {fileID: 0}
+  sessionTimer: 0
+  clockOut: {fileID: 0}
+--- !u!114 &5756870787635456306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25acf3cf1c32c0045aa5d22a093ca01a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ticketPrefab: {fileID: 4332527708208322326, guid: b97f6142f5a9c4743906dbfb54c2d232, type: 3}
+  ticketSpawnPoint: {fileID: 0}
+  docketPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  orderTaker: {fileID: 7036504923490623434}
+  starterOptions:
+  - Garlic Mushrooms
+  - Soup
+  - Garlic Bread
+  mainOptions:
+  - Bangers and Mash
+  - Turkey and Ham
+  - Roast Beef
+  dessertOptions:
+  - Ice Cream
+  - Jelly and Ice Cream
+  - Chocolate Mousse
+  allTickets: []
+  ticketCount: 0
+  currentDocketIndex: 0
+--- !u!114 &7036504923490623434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea5870e320cb0347af89c467c099771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTakeOrder: 1
+  orderLeastWait: 5
+  orderMostWait: 15
+  timeBetweenOrders: 0
+  outcome: 0
+  orderCreator: {fileID: 5756870787635456306}
+--- !u!114 &245093224727518106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8957c01c80a5f54899ecbec398e1e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnInterval: 10
+  stopSpawning: 0
+  starterOrderPrefabs:
+  - {fileID: 3826669634416277214, guid: 198695a92afd33044a81d70f0074f84a, type: 3}
+  - {fileID: 2193821269969237077, guid: 25e2baf0df6525741b2366b516757b19, type: 3}
+  - {fileID: 4938310173398624733, guid: 62494535693cf384c9ad3e7b9a9969e8, type: 3}
+  entreeOrderPrefabs:
+  - {fileID: 437457753476090761, guid: 8d878a47b870f3e4aac49f33c8653faf, type: 3}
+  - {fileID: 7985491076483417121, guid: e0680ff4628f5924a99f900408d32ed2, type: 3}
+  - {fileID: 5035125289544136743, guid: a3527a9ce53ae2a4d822cae20cb61f89, type: 3}
+  dessertOrderPrefabs:
+  - {fileID: 6324892648917744888, guid: acac3319f494077459c747608b62f25c, type: 3}
+  - {fileID: 2540393386545437549, guid: a48965807ccd16848a8377872c96896a, type: 3}
+  - {fileID: 5010969079403703414, guid: acf0782727e62b746bec3bc4991ba9d6, type: 3}
+  ticketMaker: {fileID: 5756870787635456306}
+  currentTicket: {fileID: 0}
+  currentTicketIndex: 0
+  audioSource: {fileID: 0}
+  orderReadySound: {fileID: 8300000, guid: 77aaf95641e5d2c4cbe37b59babf574f, type: 3}
+--- !u!114 &1166702512376689731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110ab72762cced7438da983d060f8d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+--- !u!114 &6801401841254850413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0926ab16cf6e57b468bc11feb5ae56c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stressThreshold: 100
+  currentStress: 0
+  stressAudioSource: {fileID: 0}
+  stressSound: {fileID: 8300000, guid: d64f1751acc06414e903e4dfcb2d905c, type: 3}
+  stressOverlay: {fileID: 0}
+  stressJumpscare: {fileID: 0}
+--- !u!114 &7325027884610645078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18475e31eca220946badfaca0f2dc1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stressSlider: {fileID: 0}
+--- !u!114 &7916645665647389736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e10f1c98ceea9844b922e8603d05f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toBeDisabled:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  Jumpscare: {fileID: 0}
+  loadingScreen: {fileID: 0}
+--- !u!114 &3540907680959193192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45cd15b9096739e48ad0353a6d8e78ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
+  interactionRange: 5
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  pickUpSystem: {fileID: 0}
+  uiPanel: {fileID: 0}
+  actionRowPrefab: {fileID: 8564707857882352299, guid: 406607e9d62b70e4db8eea05712b8ca4, type: 3}
+  rowContainer: {fileID: 0}
+--- !u!114 &8881366449409965526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157380125973053134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c6b0089bfe8054faa731077d74d167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 0}
+  pickUpSystem: {fileID: 0}
+  gameManager: {fileID: 0}

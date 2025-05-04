@@ -1,74 +1,63 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class FrontDoorHandle : MonoBehaviour, IInteractable
+public class FrontDoorHandle : MonoBehaviour
 {
     [SerializeField] private string description = "Leave for work?";
 
-    // Loading screen (optional)
+    [Header("UI")]
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject HUD;
 
-    public void Interact()
-    {
-        Debug.Log("Interacting with the front door handle!");
+    [Header("Yes/No Panel")]
+    [SerializeField] private GameObject interactionPanel;
+    [SerializeField] private TMPro.TMP_Text descriptionText;
+    [SerializeField] private GameObject yesButton;
+    [SerializeField] private GameObject noButton;
+    [SerializeField] private GameObject closeButton;
 
-        // Show the interaction panel with unique buttons
-        Interactor interactor = FindObjectOfType<Interactor>();
-        if (interactor != null)
+    public void ShowPrompt()
+    {
+        // Lock player/camera if needed
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (interactionPanel != null)
         {
-            Debug.Log("Interactor found. Displaying unique interaction panel...");
-            interactor.ShowUniqueInteractionPanel(description);
+            interactionPanel.SetActive(true);
+            descriptionText.text = description;
+
+            yesButton.SetActive(true);
+            noButton.SetActive(true);
+            closeButton.SetActive(false);
+
+            Debug.Log("Front door prompt shown.");
         }
         else
         {
-            Debug.LogWarning("Interactor not found! Cannot display interaction panel.");
+            Debug.LogWarning("Interaction panel not assigned.");
         }
     }
 
-    public string GetDescription()
-    {
-        Debug.Log($"GetDescription called. Returning: {description}");
-        return description; // Description shown when hovering over the door handle
-    }
-
-    // Called when the "Yes" button is clicked
     public void YesClicked()
     {
-        Debug.Log("Yes button clicked! Leaving for work...");
+        Debug.Log("Yes clicked: transitioning to work scene.");
+
         if (loadingScreen != null)
         {
-            Debug.Log("Activating loading screen...");
-            HUD.SetActive(false);
-            loadingScreen.SetActive(true); // Activate the loading screen (optional)
-        }
-        else
-        {
-            Debug.LogWarning("Loading screen is not assigned!");
+            HUD?.SetActive(false);
+            loadingScreen.SetActive(true);
         }
 
-        Debug.Log("Changing scene to 'Bar'.");
-        SceneManager.LoadScene("Bar"); // Replace with the actual name of your work level scene
+        SceneManager.LoadScene("Bar"); // Replace with correct scene name
     }
 
-    // Called when the "No" button is clicked
     public void NoClicked()
     {
-        Debug.Log("No button clicked! Staying home...");
-        Interactor interactor = FindObjectOfType<Interactor>();
-        if (interactor != null)
-        {
-            Debug.Log("Closing interaction panel...");
-            interactor.CloseInteractionPanel(); // Close the interaction panel
-        }
-        else
-        {
-            Debug.LogWarning("Interactor not found! Cannot close interaction panel.");
-        }
-    }
+        Debug.Log("No clicked: closing panel.");
+        interactionPanel?.SetActive(false);
 
-    public bool RequiresUniquePanel()
-    {
-        return true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

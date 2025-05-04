@@ -25,6 +25,7 @@ TagManager:
   - OldPC
   - ClockOut
   - PlateWashUp
+  - FrontDoor
   layers:
   - Default
   - TransparentFX
