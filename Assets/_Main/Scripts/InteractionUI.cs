@@ -99,7 +99,7 @@ public class InteractionUI_Layout : MonoBehaviour
             break;
 
             case "Stack":
-            if (layer == LayerMask.NameToLayer("CanPickUp") && heldObj == null)
+            if (layer == LayerMask.NameToLayer("Default") && heldObj == null)
             {
                 actions.Add(("F", "Pick Up"));
             }
@@ -113,6 +113,13 @@ public class InteractionUI_Layout : MonoBehaviour
             else 
             {
             
+            }
+            break;
+
+            case "OldPC":
+            if (layer == LayerMask.NameToLayer("CanPickUp") && heldObj == null)
+            {
+                actions.Add(("F", "Pick Up"));
             }
             break;
 
