@@ -14,9 +14,14 @@ public class ApartmentManager : MonoBehaviour
     [SerializeField] private GameObject loadingScreen;
     public GameManager gameManager;
 
+    public GameObject welcomePanel;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         gameManager = GameObject.FindObjectOfType<GameManager>();
         if (gameManager == null)
         {
@@ -104,6 +109,14 @@ public class ApartmentManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void CloseWelcomePanel()
+    {
+        welcomePanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 }
