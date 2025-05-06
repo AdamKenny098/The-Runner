@@ -14,6 +14,12 @@ public class PcScreen : MonoBehaviour
     public GameObject pcScreenCanvas;
     public GameObject pcCamera;
 
+    public Transform playerTransform;
+    public Transform playerCapsuleTransform;
+    public Transform playerCameraTransform;
+    public Transform playerFollowTransform;
+    public CharacterController characterController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +75,18 @@ public class PcScreen : MonoBehaviour
         Debug.Log("Pc off");
         pcScreenCanvas.SetActive(false);
         pcCamera.SetActive(false);
+
+        characterController.enabled = false;
+
+        playerTransform.transform.position = new Vector3(-26.779f,24.2f,35.215f);
+        playerCapsuleTransform.localPosition = Vector3.zero;
+        playerCameraTransform.localPosition = new Vector3(0f,1.1f,0f);
+        playerFollowTransform.localPosition = new Vector3(0f,1.1f,0f);
+
+        characterController.enabled = true;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 }
