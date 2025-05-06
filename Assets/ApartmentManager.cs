@@ -16,6 +16,11 @@ public class ApartmentManager : MonoBehaviour
 
     public GameObject welcomePanel;
 
+    public Camera playerCamera;
+    public GameObject pcCamera;
+
+    public GameObject pcCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +67,17 @@ public class ApartmentManager : MonoBehaviour
     void Update()
     {
         CheckTagInteractions();
+        if(welcomePanel.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        if(pcCamera.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     private void CheckTagInteractions()
@@ -88,9 +104,12 @@ public class ApartmentManager : MonoBehaviour
                         }
                         break;
 
-                    case "Computer":
+                    case "OldPC":
                         // Example: Turn on computer
-                        
+                        Debug.Log("Turning on the PC");
+                        pcCamera.SetActive(true);
+                        pcCanvas.SetActive(true);
+
                         break;
 
                     case "TVStand":

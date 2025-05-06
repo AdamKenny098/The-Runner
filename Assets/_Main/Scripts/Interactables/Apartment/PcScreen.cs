@@ -11,6 +11,9 @@ public class PcScreen : MonoBehaviour
     public GameObject filesScreen;
     public GameObject newsScreen;
 
+    public GameObject pcScreenCanvas;
+    public GameObject pcCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +62,13 @@ public class PcScreen : MonoBehaviour
     public void NewsScreen()
     {
         UpdatePCScreen(false, false, false, false, false, true);
+    }
+
+    public void PCOff()
+    {
+        Debug.Log("Pc off");
+        pcScreenCanvas.SetActive(false);
+        pcCamera.SetActive(false);
     }
 
 }
