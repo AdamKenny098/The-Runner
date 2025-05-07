@@ -10,30 +10,44 @@ public class PurchaseItemUI : MonoBehaviour
     public TMP_Text buttonText;
 
     public GameManager gameManager; // Reference to your GameManager script
-    public string itemKey; // Unique key for the item being purchased (e.g., "UnlockSpawner")
+    public string itemKey;          // Unique key for the item (e.g., "FixKitchen")
+    public int itemPrice = 100;     // Cost of this item
 
     private void Start()
     {
         purchaseButton.onClick.AddListener(PurchaseItem);
+        priceText.text = "$" + itemPrice.ToString();
     }
 
     void PurchaseItem()
     {
-        // Example: set a boolean in your GameManager
-        switch (itemKey)
+        if (gameManager.money >= itemPrice)
         {
-            case "FixKitchen":
-                gameManager.hasRepairedKitchen = true;
-                break;
+            // Deduct money
+            gameManager.money -= itemPrice;
 
-            case "FixTVStand":
-            gameManager.hasRepairedTVStand = true;
-            break;
-            // Add more cases for different items if needed
+            // Apply item effect
+            switch (itemKey)
+            {
+                case "FixKitchen":
+                    gameManager.hasRepairedKitchen = true;
+                    break;
+
+                case "FixTVStand":
+                    gameManager.hasRepairedTVStand = true;
+                    break;
+
+                // Add more cases as needed
+            }
+
+            // Update UI to show sold out
+            purchaseButton.interactable = false;
+            buttonText.text = "SOLD OUT";
         }
-
-        // Disable button and update UI to show "Sold Out"
-        purchaseButton.interactable = false;
-        buttonText.text = "SOLD OUT";
+        else
+        {
+            Debug.Log("Not enough money to purchase: " + itemKey);
+            // Optionally display a UI message or play a warning sound
+        }
     }
 }
