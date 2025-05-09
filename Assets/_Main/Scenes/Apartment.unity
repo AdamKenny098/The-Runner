@@ -7027,6 +7027,7 @@ MonoBehaviour:
   buttonText: {fileID: 964621752}
   gameManager: {fileID: 233965281}
   itemKey: FixKitchen
+  itemPrice: 1995
 --- !u!114 &1077369427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11407,13 +11408,42 @@ PrefabInstance:
     - {fileID: 65702495048144492, guid: 75882b0bc9994fd4aaecbab907e6b47f, type: 3}
     - {fileID: -8700617353114198275, guid: 75882b0bc9994fd4aaecbab907e6b47f, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -8391222552659086748, guid: 75882b0bc9994fd4aaecbab907e6b47f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1593243364}
   m_SourcePrefab: {fileID: 100100000, guid: 75882b0bc9994fd4aaecbab907e6b47f, type: 3}
 --- !u!4 &1593243362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 75882b0bc9994fd4aaecbab907e6b47f, type: 3}
   m_PrefabInstance: {fileID: 1593243361}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1593243363 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 75882b0bc9994fd4aaecbab907e6b47f, type: 3}
+  m_PrefabInstance: {fileID: 1593243361}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1593243364
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593243363}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8852359, y: 2.2398067, z: 1.9999996}
+  m_Center: {x: 0.0010347067, y: -0.11990258, z: 4.2598303e-16}
 --- !u!1 &1611015536
 GameObject:
   m_ObjectHideFlags: 0
@@ -18951,7 +18981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4034272784724616570, guid: 9721d95442674a742bfb7c1eaf91034e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4148871814962345218, guid: 9721d95442674a742bfb7c1eaf91034e, type: 3}
       propertyPath: m_text
@@ -18979,7 +19009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4415692957007476211, guid: 9721d95442674a742bfb7c1eaf91034e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4415692957007476211, guid: 9721d95442674a742bfb7c1eaf91034e, type: 3}
       propertyPath: m_TagString
@@ -19268,6 +19298,7 @@ MonoBehaviour:
   buttonText: {fileID: 8387210414650986970}
   gameManager: {fileID: 233965281}
   itemKey: FixTVStand
+  itemPrice: 250
 --- !u!1 &8399603407123559152
 GameObject:
   m_ObjectHideFlags: 0

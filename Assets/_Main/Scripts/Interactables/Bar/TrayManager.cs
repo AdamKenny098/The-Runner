@@ -16,7 +16,9 @@ public class TrayManager : MonoBehaviour
     /// Adds an order to the tray in the next available slot.
     /// </summary>
     public bool AddOrderToTray(GameObject orderItem)
-    {
+    {   
+        
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.traySound);
         // Prevent adding duplicate orders
         if (placedOrders.Contains(orderItem))
             return false;
@@ -120,6 +122,7 @@ public class TrayManager : MonoBehaviour
         }
         else
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.traySound);
             // Set tray position to match the held object position
             tray.transform.position = traySpot.position;
             tray.transform.rotation = traySpot.rotation;

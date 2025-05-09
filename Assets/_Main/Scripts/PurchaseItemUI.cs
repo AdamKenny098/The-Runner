@@ -43,6 +43,8 @@ public class PurchaseItemUI : MonoBehaviour
             // Update UI to show sold out
             purchaseButton.interactable = false;
             buttonText.text = "SOLD OUT";
+
+            AudioManager.Instance.PlaySuccess();
         }
         else
         {

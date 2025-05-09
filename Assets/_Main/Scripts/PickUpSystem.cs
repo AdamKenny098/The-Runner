@@ -34,21 +34,6 @@ public class PickUpSystem : MonoBehaviour
         {
             heldObj = null;
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Debug.Log("🔴 R key pressed — forcing First Serve tutorial");
-
-            if (TutorialManager.Instance != null)
-            {
-                TutorialManager.Instance.TriggerTutorial(
-                    "firstServe",
-                    "First Delivery!",
-                    "Nice job! You've delivered your first order. Keep it up!",
-                    null
-                );
-            }
-        }
     }
 
     void TryPickUp()
@@ -180,6 +165,8 @@ public class PickUpSystem : MonoBehaviour
                     }
                     else if (heldObj != null && heldObj.CompareTag("Glass") && !storageManager.isFull)
                     {
+                        
+                        AudioManager.Instance.PlaySFX(AudioManager.Instance.smallSplashSound);
                         storageManager.StoreGlass(heldObj);
                         heldObj = null;
                     }
@@ -201,7 +188,9 @@ public class PickUpSystem : MonoBehaviour
                     Plate plate = heldObj.GetComponent<Plate>();
                     if (plate != null)
                     {
+                        AudioManager.Instance.PlaySFX(AudioManager.Instance.scrapingSound);
                         foodBin.StartScraping(plate);
+                        
                     }
                 }
             }
@@ -213,6 +202,7 @@ public class PickUpSystem : MonoBehaviour
                     Glass glass = heldObj.GetComponent<Glass>();
                     if (glass != null)
                     {
+                        AudioManager.Instance.PlaySFX(AudioManager.Instance.largeSplashSound);
                         liquidBucket.StartCleaning(glass);
                     }
                 }
@@ -222,6 +212,7 @@ public class PickUpSystem : MonoBehaviour
                 TrashCan trashCan = hit.collider.GetComponent<TrashCan>();
                 if (trashCan != null && heldObj != null)
                 {
+                    AudioManager.Instance.PlaySFX(AudioManager.Instance.garbageSound);
                     trashCan.StartDisposal(heldObj, this);
                 }
             }
@@ -280,6 +271,7 @@ public class PickUpSystem : MonoBehaviour
                 DocketManager docketManager = hit.collider.GetComponent<DocketManager>();
                 if (docketManager != null) // ? Prevent multiple dockets at once
                 {
+                    AudioManager.Instance.PlaySFX(AudioManager.Instance.docketSound);
                     docketManager.ToggleDocketPosition();
                 }
             }
@@ -307,6 +299,7 @@ public class PickUpSystem : MonoBehaviour
     {
         heldObj = pickUpObj;
         Rigidbody heldObjRb = heldObj.GetComponent<Rigidbody>();
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.pickUpSound);
 
         if (heldObjRb != null)
         {

@@ -27,6 +27,7 @@ public class StackManager : MonoBehaviour
         {
             pickUpSystem.heldObj = null; // Detach from player
         }
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.stackingSound);
 
         StackPlate(other.gameObject);
     }

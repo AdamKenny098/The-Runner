@@ -117,6 +117,7 @@ public class OrderDropZone : MonoBehaviour
 
                 if (points > 0)
                 {
+                    AudioManager.Instance.PlaySFX(AudioManager.Instance.successSound);
                     totalPoints += points;
                     GameStats.ordersCompleted++;
 

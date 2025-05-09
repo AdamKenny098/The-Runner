@@ -25,6 +25,7 @@ public class CounterStackManager : MonoBehaviour
             {
                 if (stackSlots[i].stackObject == null)
                 {
+                    AudioManager.Instance.PlaySFX(AudioManager.Instance.stackingSound);
                     Transform targetPoint = stackSlots[i].position;
                     other.transform.position = targetPoint.position;
                     other.transform.rotation = Quaternion.identity;
