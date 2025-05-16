@@ -136,7 +136,7 @@ public class StackManager : MonoBehaviour
                 "stackPlates",
                 "Stacking Plates",
                 "You can stack plates here to save space!",
-                null
+                TutorialManager.Instance.stackedPlateSprite
             );
         
     }

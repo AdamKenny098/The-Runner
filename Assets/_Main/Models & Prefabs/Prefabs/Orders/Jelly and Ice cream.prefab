@@ -236,7 +236,7 @@ MonoBehaviour:
   title: Order Up
   content: Great Job! Now place the completed order onto the tray on the left. Don't
     forget to attach the ticket!
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 58780b7f5e80a4840a1f540dd47bb1c3, type: 3}
   onlyTriggerOnce: 1
 --- !u!1001 &1220450414393892471
 PrefabInstance:

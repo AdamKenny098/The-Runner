@@ -5,6 +5,15 @@ public class TutorialManager : MonoBehaviour
     public GameObject tutorialPopupPrefab;
     public Transform popupParent;
 
+    public Sprite glassWashedSprite;
+    public Sprite docketSprite;
+    public Sprite bringAnOrderSprite;
+    public Sprite firstWasteSprite;
+    public Sprite orderUpSprite;
+    public Sprite firstOrderSprite;
+    public Sprite stackedPlateSprite;
+    public Sprite deliverPlateStackSprite;
+
     public static TutorialManager Instance;
 
     private void Awake()

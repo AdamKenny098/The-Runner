@@ -259,6 +259,15 @@ public class InteractionUI_Layout : MonoBehaviour
                 }
                 break;
 
+            case "PlateWashUp":
+            if (heldObj != null && heldObj.CompareTag("Stack"))
+            {
+                actions.Add(("E", "Deliver Plates"));
+                actions.Add(("F", "Drop"));
+            }
+            break;
+
+
             //Apartment Scene
             case "FrontDoor":
                 if (layer == LayerMask.NameToLayer("Default") && heldObj == null)

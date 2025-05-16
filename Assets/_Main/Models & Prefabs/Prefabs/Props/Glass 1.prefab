@@ -164,5 +164,5 @@ MonoBehaviour:
   title: Washing Glasses
   content: Glasses can be emptied into the liquid bucket and placed into the purple
     tray in the next room
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: e350c701aa219fc47b8e1057940b7fd3, type: 3}
   onlyTriggerOnce: 1

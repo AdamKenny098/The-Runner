@@ -1777,6 +1777,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3749141027453419893, guid: 052af404c341548429119de5043a8d40, type: 3}
+      propertyPath: HUDCanvas
+      value: 
+      objectReference: {fileID: 431862818}
     - target: {fileID: 4081553562146680270, guid: 052af404c341548429119de5043a8d40, type: 3}
       propertyPath: m_LocalPosition.x
       value: 942.6768

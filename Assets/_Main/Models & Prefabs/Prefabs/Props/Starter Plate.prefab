@@ -165,5 +165,5 @@ MonoBehaviour:
   title: Cleaning Plates
   content: Press [F] while looking at a plate to pick it up. Look at the food bin
     and press [E] to scrape it clean. Then once clean, stack it on the other counter.
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: e350c701aa219fc47b8e1057940b7fd3, type: 3}
   onlyTriggerOnce: 1

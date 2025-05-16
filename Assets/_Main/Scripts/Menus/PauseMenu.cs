@@ -15,6 +15,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject settingsMenuUI;
     public GameObject player;
     public GameObject objectToDisable;
+
+    public GameObject HUDCanvas;
+    public GameObject UICanvas;
     public string[] targetScenes; // Add scene names in Inspector
 
     private bool isPaused = false;
@@ -33,7 +36,9 @@ public class PauseMenu : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        
+        settingsMenuUI = PersistentCanvas.Instance.settingsMenuUI;
         objectToDisable = GameObject.Find("PauseMenuUICanvas");
         string currentScene = SceneManager.GetActiveScene().name;
 
@@ -66,6 +71,9 @@ public class PauseMenu : MonoBehaviour
                 PauseGame();
             }
         }
+
+        UICanvas = GameObject.Find("UI Canvas");
+        HUDCanvas = transform.GetChild(0).gameObject;
     }
 
     void OnEnable()
@@ -126,6 +134,7 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
     }
 
     public void PauseGame()
@@ -139,11 +148,22 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        
     }
 
     public void Settings()
     {
         settingsMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
+        PersistentCanvas.Instance.settingsMenuUI.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
+        HUDCanvas.SetActive(false);
+    }
+
+    public void CloseSettings()
+    {
+        settingsMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(true);
+        HUDCanvas.SetActive(true);
     }
 
     public void MainMenu()

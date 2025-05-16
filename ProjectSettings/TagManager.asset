@@ -26,6 +26,7 @@ TagManager:
   - ClockOut
   - PlateWashUp
   - FrontDoor
+  - settingsMenuUI
   layers:
   - Default
   - TransparentFX
