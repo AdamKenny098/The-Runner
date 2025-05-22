@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LiquidBucket : MonoBehaviour
 {
-    public float cleaningTime = 3f; // Time it takes to clean the glass
+    public float cleaningTime = 0.15f; // Time it takes to clean the glass
     public UnityEngine.UI.Slider progressBar; // Reference to the progress bar
     private bool isCleaning = false;
 

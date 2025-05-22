@@ -322,7 +322,7 @@ MonoBehaviour:
   title: Your First Order
   content: Collect the required items listed on these tickets and place them on the
     tray. Don't worry about any extra items, they're for the next one.
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 41ff5e57d8c471242928960609b00233, type: 3}
   onlyTriggerOnce: 1
 --- !u!1 &7173781647718854541
 GameObject:

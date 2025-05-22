@@ -183,5 +183,5 @@ MonoBehaviour:
   title: Waste Management
   content: The various garbage that gets brought in here can be dumped into the black
     trash cans behind you
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 74044a0a6bb1ba1459233c64318b4b0b, type: 3}
   onlyTriggerOnce: 1

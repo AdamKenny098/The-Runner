@@ -223,11 +223,24 @@ public class OrderSpawner : MonoBehaviour
         {
             audioSource.PlayOneShot(orderReadySound);
             Debug.Log("🔔 Order ready! Sound played.");
+            TriggerTutorial(); // Trigger tutorial after sound
         }
         else
         {
             Debug.LogWarning("⚠️ AudioSource or orderReadySound is missing!");
         }
+    }
+
+    private void TriggerTutorial()
+    {
+        
+            TutorialManager.Instance.TriggerTutorial(
+                "orderReady",
+                "A Food Order is Ready!",
+                "A food order is ready! Hurry to the kitchen and don't let it go cold!",
+                TutorialManager.Instance.deliverPlateStackSprite
+            );
+        
     }
 
 

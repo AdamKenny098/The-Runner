@@ -14,7 +14,10 @@ public class TutorialFlags
 
     public bool stackedPlate = false;
 
+    public bool stackPickedUp = false;
+
     public bool deliveredPlateStack = false;
+    public bool orderReady = false;
 
     // Add more as needed
 }

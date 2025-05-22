@@ -171,5 +171,6 @@ public class PauseMenu : MonoBehaviour
         SaveSystem.SaveGame();
         Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu");
+        pauseMenuUI.SetActive(false);
     }
 }

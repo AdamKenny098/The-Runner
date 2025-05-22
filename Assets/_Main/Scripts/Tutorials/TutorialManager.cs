@@ -55,6 +55,8 @@ public class TutorialManager : MonoBehaviour
             "firstOrder" => flags.firstOrder,
             "stackPlates" => flags.stackedPlate,
             "deliveredPlateStack" => flags.deliveredPlateStack,
+            "stackPickedUp" => flags.stackPickedUp,
+            "orderReady" => flags.orderReady,
             _ => false
         };
     }
@@ -82,7 +84,7 @@ public class TutorialManager : MonoBehaviour
                 if (flags.docket) return;
                 flags.docket = true;
                 break;
-            
+
             case "bringingAnOrder":
                 if (flags.bringingAnOrder) return;
                 flags.bringingAnOrder = true;
@@ -104,14 +106,14 @@ public class TutorialManager : MonoBehaviour
                 break;
 
             case "firstOrder":
-                if (flags.firstOrder) 
+                if (flags.firstOrder)
                 {
                     Debug.Log("[TutorialManager] Tutorial 'firstServe' already shown, skipping...");
                     return;
                 }
                 flags.firstOrder = true;
                 break;
-            
+
             case "stackPlates":
                 if (flags.stackedPlate) return;
                 flags.stackedPlate = true;
@@ -120,6 +122,16 @@ public class TutorialManager : MonoBehaviour
             case "deliveredPlateStack":
                 if (flags.deliveredPlateStack) return;
                 flags.deliveredPlateStack = true;
+                break;
+
+            case "stackPickedUp":
+                if (flags.stackPickedUp) return;
+                flags.stackPickedUp = true;
+                break;
+                
+            case "orderReady":
+                if (flags.orderReady) return;
+                flags.orderReady = true;
                 break;
         }
 

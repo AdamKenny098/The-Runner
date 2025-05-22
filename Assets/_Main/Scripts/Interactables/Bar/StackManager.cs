@@ -65,34 +65,38 @@ public class StackManager : MonoBehaviour
 
     public GameObject CreateStackContainer()
     {
-        // Create a new container GameObject
         GameObject container = new GameObject("PlateStackContainer");
         container.tag = "Stack";
-        container.layer = LayerMask.NameToLayer("CanPickUp"); // So it's pickable
+        container.layer = LayerMask.NameToLayer("CanPickUp");
 
         container.transform.position = stackPoint.position;
 
-        // Optionally add a Rigidbody & Collider to make it interactable
         Rigidbody rb = container.AddComponent<Rigidbody>();
         rb.isKinematic = true;
 
         BoxCollider col = container.AddComponent<BoxCollider>();
         col.isTrigger = true;
-        col.size = new Vector3(1f, 0.05731403f, 1f); // Adjust to fit your plate stack
+        col.size = new Vector3(1f, 0.05731403f, 1f);
 
-        // Move plates into the new container
         foreach (GameObject plate in stackedPlates)
         {
             plate.transform.SetParent(container.transform);
-
-            // Disable individual colliders to avoid physics issues
             Collider plateCol = plate.GetComponent<Collider>();
             if (plateCol != null) plateCol.enabled = false;
         }
 
-        stackedPlates.Clear(); // Reset the original stack
+        // 🔥 Add the tutorial trigger component
+        var tutorialTrigger = container.AddComponent<TutorialInteractionTrigger>();
+        tutorialTrigger.tutorialID = "stackPickedUp";
+        tutorialTrigger.title = "Carrying Stacks";
+        tutorialTrigger.content = "Deliver the stacks of plates to the kitchen for washing!";
+        tutorialTrigger.image = TutorialManager.Instance.deliverPlateStackSprite; // Set this sprite in manager or skip
+
+        stackedPlates.Clear();
+
         return container;
     }
+
 
 
     /// <summary>
