@@ -35,6 +35,22 @@ public class MenuController : MonoBehaviour
     private Resolution[] resolutions;
     private GameManager gameManager;
 
+
+    public static MenuController Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Prevent duplicate singletons
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject); // Optional: keep across scenes if needed
+    }
+
+
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
