@@ -8067,7 +8067,7 @@ MonoBehaviour:
   orderUpSprite: {fileID: 0}
   firstOrderSprite: {fileID: 0}
   stackedPlateSprite: {fileID: 21300000, guid: a717506ebc73acb4ca82dc71e2dfb785, type: 3}
-  deliverPlateStackSprite: {fileID: 21300000, guid: 41ff5e57d8c471242928960609b00233, type: 3}
+  deliverPlateStackSprite: {fileID: 21300000, guid: d66bcba6d02a79a459af8ac2ced4bf8a, type: 3}
 --- !u!4 &426364075
 Transform:
   m_ObjectHideFlags: 0

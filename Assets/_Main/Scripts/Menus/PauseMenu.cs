@@ -36,8 +36,8 @@ public class PauseMenu : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start()
-    {   
-        
+    {
+
         settingsMenuUI = PersistentCanvas.Instance.settingsMenuUI;
         objectToDisable = GameObject.Find("PauseMenuUICanvas");
         string currentScene = SceneManager.GetActiveScene().name;
@@ -59,7 +59,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
             {
@@ -101,12 +101,12 @@ public class PauseMenu : MonoBehaviour
             else
             {
                 objectToDisable.SetActive(true);
-                if(pauseMenuUI != null)
+                if (pauseMenuUI != null)
                 {
                     pauseMenuUI.SetActive(false);
                 }
 
-                else 
+                else
                 {
                     return;
                 }
@@ -134,7 +134,7 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
     }
 
     public void PauseGame()
@@ -148,14 +148,24 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        
+
     }
 
     public void Settings()
     {
+        PersistentCanvas.Instance.settingsMenuUI.transform.GetChild(0).GetChild(4).gameObject.SetActive(true);
         settingsMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         PersistentCanvas.Instance.settingsMenuUI.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
+        HUDCanvas.SetActive(false);
+    }
+
+    public void MainMenuSettings()
+    {
+        PersistentCanvas.Instance.settingsMenuUI.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
+        settingsMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
+        PersistentCanvas.Instance.settingsMenuUI.transform.GetChild(0).GetChild(4).gameObject.SetActive(false);
         HUDCanvas.SetActive(false);
     }
 
@@ -170,7 +180,28 @@ public class PauseMenu : MonoBehaviour
     {
         SaveSystem.SaveGame();
         Time.timeScale = 1f;
+
+        // Register scene-loaded callback
+        SceneManager.sceneLoaded += OnMainMenuLoaded;
+
         SceneManager.LoadScene("Main Menu");
         pauseMenuUI.SetActive(false);
     }
+    
+    private void OnMainMenuLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Main Menu")
+        {
+            GameObject menu = GameObject.Find("MainMenuCanvas");
+            if (menu != null)
+            {
+                menu.transform.GetChild(1).gameObject.SetActive(true);
+                Debug.Log("✅ GameObject activated in Main Menu.");
+            }
+
+            // Unsubscribe so it doesn't run every time
+            SceneManager.sceneLoaded -= OnMainMenuLoaded;
+        }
+    }
+
 }
