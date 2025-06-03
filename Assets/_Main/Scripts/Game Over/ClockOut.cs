@@ -16,10 +16,10 @@ public class ClockOut : MonoBehaviour
 
     public void LoadLevelEvaluator()
     {
-        if (loadingScreen != null)
-        {
-            loadingScreen.SetActive(true); // Activate the loading screen (optional)
-        }
+        // if (loadingScreen != null)
+        // {
+        //     loadingScreen.SetActive(true); // Activate the loading screen (optional)
+        // }
 
         if(gameManager.hasBoughtComputer == false)
         {

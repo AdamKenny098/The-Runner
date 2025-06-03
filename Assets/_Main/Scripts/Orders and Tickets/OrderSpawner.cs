@@ -233,12 +233,12 @@ public class OrderSpawner : MonoBehaviour
 
     private void TriggerTutorial()
     {
-        
-            TutorialManager.Instance.TriggerTutorial(
-                "orderReady",
-                "A Food Order is Ready!",
-                "A food order is ready! Hurry to the kitchen and don't let it go cold!",
-                TutorialManager.Instance.deliverPlateStackSprite
+
+        TutorialManager.Instance.TriggerTutorial(
+            "orderReady",
+            "A Food Order is Ready!",
+            "A food order is ready! Hurry to the kitchen and don't let it go cold!",
+            TutorialManager.Instance.firstBellRangSprite
             );
         
     }

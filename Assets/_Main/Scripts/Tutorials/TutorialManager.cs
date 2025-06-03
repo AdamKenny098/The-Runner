@@ -13,6 +13,7 @@ public class TutorialManager : MonoBehaviour
     public Sprite firstOrderSprite;
     public Sprite stackedPlateSprite;
     public Sprite deliverPlateStackSprite;
+    public Sprite firstBellRangSprite;
 
     public static TutorialManager Instance;
 
@@ -25,6 +26,29 @@ public class TutorialManager : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    public void Start()
+    {
+        if (GameManager.Instance.isFirstTimePlaying)
+        {
+            var flags = SaveSystem.CurrentSave.tutorialFlags;
+
+            flags.cleanedPlate = false;
+            flags.runnerRoom = false;
+            flags.glassWashed = false;
+            flags.docket = false;
+            flags.bringingAnOrder = false;
+            flags.firstWasteSorted = false;
+            flags.orderUp = false;
+            flags.firstOrder = false;
+            flags.stackedPlate = false;
+            flags.deliveredPlateStack = false;
+            flags.stackPickedUp = false;
+            flags.orderReady = false;
+
+            GameManager.Instance.isFirstTimePlaying = false;
+        }
     }
 
     public bool HasTriggered(string id)

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CombinedTimerManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class CombinedTimerManager : MonoBehaviour
     public TextMeshProUGUI exitCountdownText;
 
     // Internal timer for the session
-    [SerializeField]private float sessionTimer = 0f;
+    [SerializeField] private float sessionTimer = 0f;
 
     // When true, the session timer is paused during the exit countdown
     private bool isPaused = false;
@@ -32,7 +33,7 @@ public class CombinedTimerManager : MonoBehaviour
         // Ensure the exit prompt is hidden when the game starts
         if (exitPrompt != null)
             exitPrompt.SetActive(false);
-        
+
         clockOut = FindObjectOfType<ClockOut>();
     }
 
@@ -50,7 +51,7 @@ public class CombinedTimerManager : MonoBehaviour
                 // Pause the session timer and start the exit countdown
                 // isPaused = true;
                 // StartCoroutine(ExitCountdownCoroutine());
-                clockOut.LoadLevelEvaluator();
+                SwapToScene("Game Over Good");
             }
         }
     }
@@ -93,5 +94,10 @@ public class CombinedTimerManager : MonoBehaviour
 
         // Resume the session timer
         isPaused = false;
+    }
+
+    public void SwapToScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

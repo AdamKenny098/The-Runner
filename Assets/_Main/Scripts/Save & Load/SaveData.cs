@@ -11,6 +11,8 @@ public class SaveData
     public bool hasRepairedTVStand;
     public bool hasRepairedKitchen;
 
+    public bool isFirstTimePlaying;
+
     public TutorialFlags tutorialFlags = new TutorialFlags();
 
 }

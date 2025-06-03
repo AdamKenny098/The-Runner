@@ -55,12 +55,14 @@ public static class SaveSystem
 
             Debug.Log("✅ Game Loaded");
         }
-        else if (!File.Exists(savePath))
+        else
         {
             CurrentSave = new SaveData(); // Prevent nulls if no save file exists
             Debug.Log("⚠️ No save found. Created default save.");
+            SaveGame(); // 🆕 Save the new file immediately
         }
     }
+
 
     public static void DeleteSave()
     {

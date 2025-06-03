@@ -152,4 +152,14 @@ public class TicketMaker : MonoBehaviour
         return text;
     }
 
+    
+    public void CheckAndReenableOrders()  
+    {
+        if (!AreAllSlotsFilled() && orderTaker != null)
+        {
+            orderTaker.canTakeOrder = true;
+            Debug.Log("Slots are available. Can take more orders.");
+        }
+    }
+
 }

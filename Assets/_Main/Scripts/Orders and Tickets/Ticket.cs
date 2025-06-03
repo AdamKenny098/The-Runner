@@ -44,4 +44,14 @@ public class Ticket : MonoBehaviour
         Debug.Log($"✅ Ticket #{ticketNumber} is now COMPLETE!");
         Destroy(gameObject);  // Remove the ticket itself
     }
+
+    void OnDestroy()
+    {
+        TicketMaker ticketMaker = FindObjectOfType<TicketMaker>();
+        if (ticketMaker != null)
+        {
+            ticketMaker.CheckAndReenableOrders();
+        }
+    }
+
 }

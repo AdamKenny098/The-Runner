@@ -35,4 +35,11 @@ public class TutorialTrigger : MonoBehaviour
         if (destroyAfterTrigger)
             Destroy(this);
     }
+
+    public static void ResetSessionTriggers()
+    {
+        sessionTriggered.Clear();
+        Debug.Log("Tutorial session triggers reset.");
+    }
+
 }

@@ -82,7 +82,17 @@ public class InteractionUI_Layout : MonoBehaviour
             {
                 actions.Add(("F", "Pick Up"));
             }
+            else if (heldObj != null)
+            {
+                TrayManager tray = hit.collider.GetComponent<TrayManager>();
+                if (tray != null && heldObj.CompareTag("Order"))
+                {
+                    actions.Add(("E", "Place Order on Tray"));
+                    actions.Add(("F", "Drop"));
+                }
+            }
             break;
+
 
             case "Waste":
             if (layer == LayerMask.NameToLayer("CanPickUp") && heldObj == null)
@@ -129,7 +139,17 @@ public class InteractionUI_Layout : MonoBehaviour
                 actions.Add(("E", "Read"));
                 actions.Add(("F", "Pick Up"));
             }
+            else if (heldObj != null)
+            {
+                TrayManager tray = hit.collider.GetComponent<TrayManager>();
+                if (tray != null && heldObj.CompareTag("Docket"))
+                {
+                    actions.Add(("E", "Place Docket on Tray"));
+                    actions.Add(("F", "Drop"));
+                }
+            }
             break;
+
 
             case "FoodBin":
                 if (tag == "FoodBin" && layer == LayerMask.NameToLayer("Default"))
