@@ -287,6 +287,21 @@ public class InteractionUI_Layout : MonoBehaviour
             }
             break;
 
+            case "Locker":
+                LockerPuzzle lockerPuzzle = hit.collider.GetComponent<LockerPuzzle>();
+                if (lockerPuzzle != null)
+                {
+                    if (!lockerPuzzle.isUnlocked)
+                    {
+                        actions.Add(("E", "Unlock Locker"));
+                    }
+                    else
+                    {
+                        return; // If the locker is already unlocked, do not show any actions
+                    }
+                }
+                break;
+
 
             //Apartment Scene
             case "FrontDoor":

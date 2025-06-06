@@ -27,6 +27,7 @@ TagManager:
   - PlateWashUp
   - FrontDoor
   - settingsMenuUI
+  - Locker
   layers:
   - Default
   - TransparentFX

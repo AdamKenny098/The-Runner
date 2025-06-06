@@ -22,7 +22,6 @@ public class TrashCan : MonoBehaviour
             if (obj.CompareTag("Plate"))
             {
                 platesDisposed++;
-                Debug.Log($"Plate disposed of. Total plates disposed: {platesDisposed}");
             }
 
             // Check if the object's tag matches the acceptedTag for the trash can
@@ -32,7 +31,7 @@ public class TrashCan : MonoBehaviour
             }
             else
             {
-                Debug.Log("Incorrect trash can for this object!");
+                return;
             }
         }
     }
@@ -42,7 +41,6 @@ public class TrashCan : MonoBehaviour
     {
         isDisposing = true;
 
-        Debug.Log("Disposing of object...");
 
         float elapsed = 0f;
         if (progressBar != null)
@@ -70,7 +68,6 @@ public class TrashCan : MonoBehaviour
         Destroy(obj);
         pickUpSystem.DropObject();
 
-        Debug.Log("Object disposed of!");
         isDisposing = false;
     }
 }

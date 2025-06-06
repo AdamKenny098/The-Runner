@@ -1,4 +1,4 @@
- using TMPro;
+using TMPro;
 using UnityEngine;
 
 public class PickUpSystem : MonoBehaviour
@@ -165,7 +165,7 @@ public class PickUpSystem : MonoBehaviour
                     }
                     else if (heldObj != null && heldObj.CompareTag("Glass") && !storageManager.isFull)
                     {
-                        
+
                         AudioManager.Instance.PlaySFX(AudioManager.Instance.smallSplashSound);
                         storageManager.StoreGlass(heldObj);
                         heldObj = null;
@@ -190,7 +190,7 @@ public class PickUpSystem : MonoBehaviour
                     {
                         AudioManager.Instance.PlaySFX(AudioManager.Instance.scrapingSound);
                         foodBin.StartScraping(plate);
-                        
+
                     }
                 }
             }
@@ -276,16 +276,26 @@ public class PickUpSystem : MonoBehaviour
                 }
             }
 
-            else if(hit.collider.CompareTag("PlateWashUp"))
+            else if (hit.collider.CompareTag("PlateWashUp"))
             {
                 CounterStackManager counterStackManager = hit.collider.GetComponent<CounterStackManager>();
                 if (counterStackManager != null && heldObj != null)
                 {
-                    if(heldObj.CompareTag("Stack"))
+                    if (heldObj.CompareTag("Stack"))
                     {
                         counterStackManager.AcceptStack(heldObj);
                         heldObj = null; // Reset held object after placing it in the stack
                     }
+                }
+            }
+
+            else if (hit.collider.CompareTag("Locker"))
+            {
+                Debug.Log("Interacting with Locker...");
+                LockerPuzzle locker = hit.collider.GetComponent<LockerPuzzle>();
+                if (locker != null)
+                {
+                    locker.ActivatePuzzle();
                 }
             }
 
