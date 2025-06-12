@@ -24,6 +24,7 @@ public class GameOverManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         Cursor.lockState = CursorLockMode.None; // Unlock cursor for UI interaction
         Cursor.visible = true; // Make the cursor visible
+        Time.timeScale = 0f;
 
     }
 

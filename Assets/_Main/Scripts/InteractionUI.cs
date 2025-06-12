@@ -13,6 +13,7 @@ public class InteractionUI_Layout : MonoBehaviour
     [Header("UI")]
     public GameObject uiPanel;
     public GameObject actionRowPrefab;
+    public GameObject docketPosition; // The position in front of the player (child of the camera)
     public Transform rowContainer; // The parent object with Vertical Layout Group
 
     private List<GameObject> currentRows = new List<GameObject>();
@@ -20,6 +21,7 @@ public class InteractionUI_Layout : MonoBehaviour
     public void Start()
     {
         pickUpSystem = FindAnyObjectByType<PickUpSystem>();
+        docketPosition = GameObject.Find("Docket Position");
     }
 
     private void Update()
@@ -120,11 +122,17 @@ public class InteractionUI_Layout : MonoBehaviour
             {
                 actions.Add(("F", "Pick Up"));
             }
-            else 
+            else if (layer == LayerMask.NameToLayer("CanPickUp") && heldObj != null && heldObj.CompareTag("Order"))
             {
-            
+                actions.Add(("E", "Place Order on Tray"));
+                actions.Add(("F", "Drop"));
+            }
+            else if (layer == LayerMask.NameToLayer("CanPickUp") && heldObj != null)
+            {
+                actions.Add(("F", "Drop"));
             }
             break;
+
 
             case "OldPC":
             if (layer == LayerMask.NameToLayer("CanPickUp") && heldObj == null)
@@ -139,13 +147,23 @@ public class InteractionUI_Layout : MonoBehaviour
                 actions.Add(("E", "Read"));
                 actions.Add(("F", "Pick Up"));
             }
-            else if (heldObj != null)
-            {
-                TrayManager tray = hit.collider.GetComponent<TrayManager>();
-                if (tray != null && heldObj.CompareTag("Docket"))
+
+                // NEW: Return Docket option
+                if (docketPosition.transform.childCount > 0 && heldObj == null)
                 {
-                    actions.Add(("E", "Place Docket on Tray"));
-                    actions.Add(("F", "Drop"));
+                    actions.Add(("E", "Return Docket"));
+                }
+                else if (heldObj != null)
+                {
+                    TrayManager tray = hit.collider.GetComponent<TrayManager>();
+                    if (tray != null && heldObj.CompareTag("Docket"))
+                    {
+                        actions.Add(("E", "Place Docket on Tray"));
+                        actions.Add(("F", "Drop"));
+                    }
+                if (docketPosition.transform.childCount > 0)
+                {
+                    actions.Add(("E", "Return Docket (Unavailable whilst holding an object)"));
                 }
             }
             break;

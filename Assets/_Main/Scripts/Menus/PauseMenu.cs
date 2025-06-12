@@ -59,6 +59,8 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -125,17 +127,24 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        if (settingsMenuUI != null && settingsMenuUI.activeSelf)
+        {
+            Debug.Log("⚠ Cannot resume: settings menu is open.");
+            return;
+        }
+
         if (player != null)
         {
             player.SetActive(true);
         }
+
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
+
 
     public void PauseGame()
     {

@@ -340,52 +340,63 @@ public class PickUpSystem : MonoBehaviour
 
 
     public void DropObject()
+{
+    if (heldObj != null)
     {
-        if (heldObj != null)
+        // Optional: Raycast to check if we're in front of a counter or zone (retains your previous logic)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange))
+            // Check for clean plate on counter
+            if (hit.collider.CompareTag("Counter") && heldObj.CompareTag("Plate"))
             {
-                // Check for counter interaction
-                if (hit.collider.CompareTag("Counter") && heldObj.CompareTag("Plate"))
+                Plate plate = heldObj.GetComponent<Plate>();
+                if (plate != null && !plate.IsDirty())
                 {
-                    Plate plate = heldObj.GetComponent<Plate>();
-                    if (plate != null && !plate.IsDirty())
+                    PlateCounter counter = hit.collider.GetComponent<PlateCounter>();
+                    if (counter != null)
                     {
-                        PlateCounter counter = hit.collider.GetComponent<PlateCounter>();
-                        if (counter != null)
-                        {
-                            counter.AddPlateToStack(heldObj); // Add plate to counter stack
-                            heldObj = null; // Reset held object
-                            return;
-                        }
-                    }
-                }
-
-                if (hit.collider.CompareTag("OrderDropZone") && heldObj.CompareTag("Order"))
-                {
-                    Order order = heldObj.GetComponent<Order>();
-                    if (order != null)
-                    {
-                        PlateCounter counter = hit.collider.GetComponent<PlateCounter>();
-                        if (counter != null)
-                        {
-                            counter.AddPlateToStack(heldObj); // Add plate to counter stack
-                            heldObj = null; // Reset held object
-                            return;
-                        }
+                        counter.AddPlateToStack(heldObj);
+                        heldObj = null;
+                        return;
                     }
                 }
             }
 
-            // If no valid target is found, drop the object normally
-            if (heldObjRb != null)
+            // Check for order delivery
+            if (hit.collider.CompareTag("OrderDropZone") && heldObj.CompareTag("Order"))
             {
-                heldObjRb.isKinematic = false;
-                heldObjRb.velocity = Vector3.zero;
+                Order order = heldObj.GetComponent<Order>();
+                if (order != null)
+                {
+                    PlateCounter counter = hit.collider.GetComponent<PlateCounter>();
+                    if (counter != null)
+                    {
+                        counter.AddPlateToStack(heldObj);
+                        heldObj = null;
+                        return;
+                    }
+                }
             }
-            heldObj.transform.SetParent(null);
-            heldObj = null;
         }
+
+        // ✅ SAFETY RESET
+        heldObj.transform.SetParent(null);
+        heldObj.transform.position = transform.position + transform.forward * 1.5f;
+        heldObj.transform.rotation = Quaternion.identity;
+
+        if (heldObjRb != null)
+        {
+            heldObjRb.isKinematic = false;
+            heldObjRb.velocity = Vector3.zero;
+        }
+        else
+        {
+            Debug.LogWarning("DropObject: heldObjRb was null! Rigidbody not reset.");
+        }
+
+        heldObj = null;
     }
+}
+
 }

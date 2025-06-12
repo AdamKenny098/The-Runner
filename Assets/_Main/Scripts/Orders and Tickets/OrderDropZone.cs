@@ -221,7 +221,7 @@ public class OrderDropZone : MonoBehaviour
         TutorialManager.Instance.TriggerTutorial(
                     "firstOrder",
                     "First Delivery!",
-                    "Nice job! You've delivered your first order. Keep it up!",
+                    "Nice job! You've delivered your first order. Keep it up! Don't forget to take the tray with you each time!",
                     null
                 );
     }
