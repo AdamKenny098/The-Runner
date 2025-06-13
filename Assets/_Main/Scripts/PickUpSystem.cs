@@ -298,6 +298,16 @@ public class PickUpSystem : MonoBehaviour
                     locker.ActivatePuzzle();
                 }
             }
+            
+            else if (hit.collider.CompareTag("Journal"))
+            {
+                UnlockMenuInteraction unlocker = hit.collider.GetComponent<UnlockMenuInteraction>();
+                if (unlocker != null)
+                {
+                    unlocker.Interact();
+                }
+            }
+
 
         }
     }

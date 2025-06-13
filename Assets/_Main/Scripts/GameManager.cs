@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool hasBoughtComputer;
     public bool hasRepairedTVStand;
     public bool hasRepairedKitchen;
+    public bool hasUnlockedMenu;
 
     private void Awake()
     {

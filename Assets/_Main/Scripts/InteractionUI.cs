@@ -320,6 +320,14 @@ public class InteractionUI_Layout : MonoBehaviour
                 }
                 break;
 
+                case "Journal":  // Tag this object as "Unlocker"
+                if (heldObj == null)
+                {
+                    actions.Add(("E", "Pick Up Journal"));
+                }
+                break;
+
+
 
             //Apartment Scene
             case "FrontDoor":

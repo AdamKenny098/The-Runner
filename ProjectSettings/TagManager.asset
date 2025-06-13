@@ -28,6 +28,7 @@ TagManager:
   - FrontDoor
   - settingsMenuUI
   - Locker
+  - Journal
   layers:
   - Default
   - TransparentFX
