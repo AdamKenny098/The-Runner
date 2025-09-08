@@ -19,6 +19,8 @@ public class TutorialPopupUI : MonoBehaviour
     }
 
 
+    // === CHEATSHEET: Set Tutorial Popup | Category: UI ===
+    // NOTE: Updates popup text + image, unlocks cursor, and pauses the game
     public void SetTutorial(string title, string content, Sprite image = null)
     {
         titleText.text = title;
@@ -34,19 +36,23 @@ public class TutorialPopupUI : MonoBehaviour
             tutorialImage.gameObject.SetActive(false);
         }
 
-        // 🔓 Show cursor + pause game
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 0;
     }
+    // === END ===
 
+
+    // === CHEATSHEET: Close Tutorial Popup | Category: UI ===
+    // NOTE: Hides popup, locks cursor again, and unpauses the game
     private void ClosePopup()
     {
         gameObject.SetActive(false);
 
-        // 🔐 Hide cursor + unpause
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1;
     }
+    // === END ===
+
 }

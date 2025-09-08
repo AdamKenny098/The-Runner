@@ -19,7 +19,8 @@ public class ProgressBarController : MonoBehaviour
         }
     }
 
-    // Public method to start the progress bar for a given duration
+    // === CHEATSHEET: Start Progress | Category: UI ===
+    // NOTE: Starts a progress bar that fills over a set duration
     public void StartProgress(float duration)
     {
         if (!isFilling)
@@ -27,8 +28,11 @@ public class ProgressBarController : MonoBehaviour
             StartCoroutine(FillProgressBar(duration));
         }
     }
+    // === END ===
 
-    // Coroutine to fill the progress bar over time
+
+    // === CHEATSHEET: Fill Progress Bar | Category: UI ===
+    // NOTE: Coroutine that fills a UI slider over time and hides it after completion
     private IEnumerator FillProgressBar(float duration)
     {
         isFilling = true;
@@ -48,6 +52,8 @@ public class ProgressBarController : MonoBehaviour
         progressBar.gameObject.SetActive(false);
         isFilling = false;
     }
+    // === END ===
+
 
     // Public method to check if the progress bar is currently active
     public bool IsFilling()

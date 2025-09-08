@@ -4,9 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 public class PauseMenu : MonoBehaviour
 {
-
     public static PauseMenu Instance;
     public GameObject pauseMenuUI;
     public Button resumeButton;
@@ -14,17 +14,17 @@ public class PauseMenu : MonoBehaviour
     public Button menuButton;
     public GameObject settingsMenuUI;
     public GameObject player;
-    public GameObject objectToDisable;
+    public bool isPaused = false;
 
-    public GameObject HUDCanvas;
-    public GameObject UICanvas;
-    public string[] targetScenes; // Add scene names in Inspector
+    public List<MonoBehaviour> scriptsToDisable = new List<MonoBehaviour>();
 
-    private bool isPaused = false;
+    public GameObject pauseMenuUICanvas;
+    public GameObject settingsMenuTabs;
 
+    // Sets up the singleton and makes the pause menu persistent.
     private void Awake()
     {
-        if (Instance == null)
+        if (!Instance)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // Persistent across scenes
@@ -34,178 +34,160 @@ public class PauseMenu : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    // Start is called before the first frame update
+
+    // Initializes object references and sets the initial pause state based on the scene.
     void Start()
     {
 
-        settingsMenuUI = PersistentCanvas.Instance.settingsMenuUI;
-        objectToDisable = GameObject.Find("PauseMenuUICanvas");
         string currentScene = SceneManager.GetActiveScene().name;
 
-        if (currentScene == "Main Menu" || currentScene == "y")
+        if (currentScene == "Inside" || currentScene == "Outside")
         {
-            if (objectToDisable != null)
-                objectToDisable.SetActive(false);
+            player = GameObject.FindWithTag("Player");
         }
-
-        else
-        {
-            objectToDisable.SetActive(true);
-        }
-
-        player = GameObject.FindWithTag("Player");
     }
 
-    // Update is called once per frame
+    // Checks for pause/resume input and updates references.
     void Update()
     {
-        
-
+        if (isPaused) return;
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene == "Main Menu" || currentScene == "GameOver")
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
+            if (Time.timeScale == 0f)
             {
                 Resume();
             }
-
             else
             {
                 PauseGame();
             }
         }
-
-        UICanvas = GameObject.Find("UI Canvas");
-        HUDCanvas = transform.GetChild(0).gameObject;
     }
 
+    // Registers scene loaded callback.
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    // Unregisters scene loaded callback.
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    // Handles logic when a new scene is loaded.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        foreach (string sceneName in targetScenes)
+        scriptsToDisable.Clear(); // Clear previous scripts to disable
+
+        if (scene.name == "Outside" || scene.name == "Inside")
         {
-            if (scene.name == sceneName && objectToDisable != null)
+            player = GameObject.FindWithTag("Player");
+            if (player)
             {
-                objectToDisable.SetActive(false);
-                Cursor.lockState = CursorLockMode.None; // Lock the cursor to the centre of the screen
-                Cursor.visible = true; // Make the cursor invisible
-                return;
+                RunnerFirstPersonController rfpc = player.GetComponent<RunnerFirstPersonController>();
+
+
+                scriptsToDisable.Add(rfpc);
             }
 
-            else
-            {
-                objectToDisable.SetActive(true);
-                if (pauseMenuUI != null)
-                {
-                    pauseMenuUI.SetActive(false);
-                }
-
-                else
-                {
-                    return;
-                }
-                Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the centre of the screen
-                Cursor.visible = false; // Make the cursor invisible
-            }
+            settingsMenuTabs = pauseMenuUICanvas.transform.GetChild(4).gameObject;
         }
 
-        // Optionally re-enable it in other scenes
-        if (objectToDisable != null)
+        if (scene.name == "Main Menu" || scene.name == "GameOver")
         {
-            objectToDisable.SetActive(true);
+            scriptsToDisable.Clear(); // Clear scripts to disable in main menu or game over
         }
     }
 
-
+    // Resumes the game from pause.
     public void Resume()
     {
-        if (settingsMenuUI != null && settingsMenuUI.activeSelf)
+        if (isPaused) return;
+        if (settingsMenuUI && settingsMenuUI.activeSelf)
         {
-            Debug.Log("⚠ Cannot resume: settings menu is open.");
             return;
         }
 
-        if (player != null)
+        foreach (MonoBehaviour script in scriptsToDisable)
         {
-            player.SetActive(true);
+            script.enabled = true; // Disable scripts to pause their functionality
         }
 
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
         isPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        HUDManager.Instance.ClosePauseMenu();
+
     }
 
-
+    // Pauses the game.
     public void PauseGame()
     {
-        if (player != null)
+        if (isPaused) return;
+        foreach (MonoBehaviour script in scriptsToDisable)
         {
-            player.SetActive(false);
+            script.enabled = false; // Disable scripts to pause their functionality
         }
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+
         isPaused = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
+        HUDManager.Instance.OpenPauseMenu();
     }
 
-    public void Settings()
-    {
-        PersistentCanvas.Instance.settingsMenuUI.transform.GetChild(0).GetChild(4).gameObject.SetActive(true);
-        settingsMenuUI.SetActive(true);
-        pauseMenuUI.SetActive(false);
-        PersistentCanvas.Instance.settingsMenuUI.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
-        HUDCanvas.SetActive(false);
-    }
-
-    public void MainMenuSettings()
-    {
-        PersistentCanvas.Instance.settingsMenuUI.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
-        settingsMenuUI.SetActive(true);
-        pauseMenuUI.SetActive(false);
-        PersistentCanvas.Instance.settingsMenuUI.transform.GetChild(0).GetChild(4).gameObject.SetActive(false);
-        HUDCanvas.SetActive(false);
-    }
-
+    // Closes the settings menu and returns to pause menu.
     public void CloseSettings()
     {
-        settingsMenuUI.SetActive(false);
-        pauseMenuUI.SetActive(true);
-        HUDCanvas.SetActive(true);
+        HUDManager.Instance.CloseSettingsToPause();
     }
 
+    public void OnBackPressed()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (currentScene == "Main Menu")
+        {
+            GameObject menu = GameObject.Find("Main Menu Container");
+            GameObject settings = GameObject.Find("PauseMenuUICanvas");
+            menu.transform.GetChild(0).gameObject.SetActive(true);
+            settings.transform.GetChild(0).gameObject.SetActive(false);
+            settings.transform.GetChild(2).gameObject.SetActive(false);
+            settings.transform.GetChild(3).gameObject.SetActive(false);
+            settings.transform.GetChild(4).gameObject.SetActive(false);
+
+
+        }
+        else if (currentScene == "Inside" || currentScene == "Outside")
+        {
+            HUDManager.Instance.CloseSettingsToPause();
+            GameObject settings = GameObject.Find("PauseMenuUICanvas");
+            settings.transform.GetChild(3).gameObject.SetActive(false);
+            settings.transform.GetChild(4).gameObject.SetActive(false);
+        }
+    }
+
+    // Saves game and returns to the main menu.
     public void MainMenu()
     {
-        SaveSystem.SaveGame();
+        GameManager.Instance.SaveGame();
         Time.timeScale = 1f;
 
-        // Register scene-loaded callback
-        SceneManager.sceneLoaded += OnMainMenuLoaded;
-
-        SceneManager.LoadScene("Main Menu");
-        pauseMenuUI.SetActive(false);
+        HUDManager.Instance.HideAllOverlays();
+        LoadingManager.Instance.LoadScene("Main Menu");
     }
-    
+
+    // Handles logic after loading the main menu scene.
     private void OnMainMenuLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Main Menu")
         {
             GameObject menu = GameObject.Find("MainMenuCanvas");
-            if (menu != null)
+            if (menu)
             {
                 menu.transform.GetChild(1).gameObject.SetActive(true);
-                Debug.Log("✅ GameObject activated in Main Menu.");
             }
 
             // Unsubscribe so it doesn't run every time
@@ -213,4 +195,12 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void SetIsPaused(bool paused)
+    {
+        isPaused = paused;
+        if (paused && Time.timeScale == 0f)
+        {
+            HUDManager.Instance.ClosePauseMenu();
+        }
+    }
 }

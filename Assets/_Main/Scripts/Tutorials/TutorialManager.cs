@@ -17,6 +17,8 @@ public class TutorialManager : MonoBehaviour
 
     public static TutorialManager Instance;
 
+    // === CHEATSHEET: Singleton Pattern | Category: Patterns ===
+    // NOTE: Ensures only one instance of TutorialManager exists
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,7 +29,11 @@ public class TutorialManager : MonoBehaviour
 
         Instance = this;
     }
+    // === END ===
 
+
+    // === CHEATSHEET: Reset Tutorial Flags | Category: Tutorials ===
+    // NOTE: On first playthrough, reset all tutorial flags in SaveSystem
     public void Start()
     {
         if (GameManager.Instance.isFirstTimePlaying)
@@ -50,7 +56,11 @@ public class TutorialManager : MonoBehaviour
             GameManager.Instance.isFirstTimePlaying = false;
         }
     }
+    // === END ===
 
+
+    // === CHEATSHEET: Has Triggered | Category: Tutorials ===
+    // NOTE: Returns true if a tutorial has already been shown (based on SaveSystem flags)
     public bool HasTriggered(string id)
     {
         if (SaveSystem.CurrentSave == null)
@@ -84,6 +94,8 @@ public class TutorialManager : MonoBehaviour
             _ => false
         };
     }
+    // === END ===
+
 
 
     public void TriggerTutorial(string id, string title, string content, Sprite image = null)
@@ -160,7 +172,7 @@ public class TutorialManager : MonoBehaviour
         }
 
 
-        SaveSystem.SaveGame();
+        GameManager.Instance.SaveGame();
 
         GameObject popup = Instantiate(tutorialPopupPrefab, popupParent);
         popup.GetComponent<TutorialPopupUI>().SetTutorial(title, content, image);
@@ -168,3 +180,27 @@ public class TutorialManager : MonoBehaviour
 
 
 }
+
+// === CHEATSHEET: Trigger Tutorial Popup | Category: Tutorials ===
+// NOTE: Saves progress and spawns a tutorial popup UI
+// public void TriggerTutorial(string id, string title, string content, Sprite image = null)
+// {
+//     Debug.Log($"[TutorialManager] TriggerTutorial called for ID: {id}");
+//     var flags = SaveSystem.CurrentSave.tutorialFlags;
+
+//     // Example of setting flag (repeat this per case as needed)
+//     switch (id)
+//     {
+//         case "cleanPlate":
+//             if (flags.cleanedPlate) return;
+//             flags.cleanedPlate = true;
+//             break;
+//         // ...other cases
+//     }
+
+//     GameManager.Instance.SaveGame();
+
+//     GameObject popup = Instantiate(tutorialPopupPrefab, popupParent);
+//     popup.GetComponent<TutorialPopupUI>().SetTutorial(title, content, image);
+// }
+// === END ===

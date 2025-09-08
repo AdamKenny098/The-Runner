@@ -10,6 +10,8 @@ public class TutorialInteractionTrigger : MonoBehaviour
 
     private bool triggeredThisSession = false;
 
+    // === CHEATSHEET: Trigger Tutorial Once | Category: Tutorials ===
+    // NOTE: Ensures a tutorial only triggers once per session and respects save flags
     public void Trigger()
     {
         if (onlyTriggerOnce && triggeredThisSession) return;
@@ -20,4 +22,6 @@ public class TutorialInteractionTrigger : MonoBehaviour
 
         TutorialManager.Instance.TriggerTutorial(tutorialID, title, content, image);
     }
+    // === END ===
+
 }

@@ -36,10 +36,25 @@ public class TutorialTrigger : MonoBehaviour
             Destroy(this);
     }
 
+    // === CHEATSHEET: Reset Session Flags | Category: Tutorials ===
+    // NOTE: Clears session-triggered tutorials (useful on new game)
     public static void ResetSessionTriggers()
     {
         sessionTriggered.Clear();
         Debug.Log("Tutorial session triggers reset.");
     }
+    // === END ===
+
 
 }
+
+
+// === CHEATSHEET: OnTriggerEnter Player | Category: Triggers ===
+// NOTE: Detects when player enters a trigger
+// private void OnTriggerEnter(Collider other)
+// {
+//     if (!other.CompareTag("Player")) return;
+
+//     // Insert custom logic here
+// }
+// === END ===

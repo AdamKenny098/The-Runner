@@ -39,30 +39,33 @@ public class CombinedTimerManager : MonoBehaviour
 
     void Update()
     {
-        // Only increment session timer if not paused
+        // === CHEATSHEET: Increment Timer | Category: Timers ===
+        // NOTE: Adds Time.deltaTime each frame and checks against a duration
         if (!isPaused)
         {
             sessionTimer += Time.deltaTime;
             UpdateSessionTimerUI();
 
-            // Check if the session timer has reached the 20-minute mark
             if (sessionTimer >= exitPromptDelay)
             {
-                // Pause the session timer and start the exit countdown
-                // isPaused = true;
-                // StartCoroutine(ExitCountdownCoroutine());
+                // Example: Trigger end-game or countdown
                 SwapToScene("Game Over Good");
             }
         }
+        // === END ===
+
     }
 
-    // Updates the session timer UI to show minutes and seconds
+    // === CHEATSHEET: Update Session Timer UI | Category: Timers ===
+    // NOTE: Converts seconds into MM:SS format and updates a TMP text field
     void UpdateSessionTimerUI()
     {
         int minutes = Mathf.FloorToInt(sessionTimer / 60f);
         int seconds = Mathf.FloorToInt(sessionTimer % 60f);
         sessionTimerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
     }
+    // === END ===
+
 
     // Coroutine that handles the exit prompt display and countdown
     IEnumerator ExitCountdownCoroutine()
@@ -96,8 +99,12 @@ public class CombinedTimerManager : MonoBehaviour
         isPaused = false;
     }
 
+    // === CHEATSHEET: Swap To Scene | Category: Scene Management ===
+    // NOTE: Loads a new scene by name
     public void SwapToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
+    // === END ===
+
 }

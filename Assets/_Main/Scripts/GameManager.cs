@@ -1,23 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [Header("Progress")]
     public float money;
-
-    public int PcCost = 300;
     public int daysPlayed;
     public int daysFailed;
     public int totalAttempts;
     public int highScore;
 
-    public bool isFirstTimePlaying = true;
+    [Header("Upgrades")]
     public bool hasBoughtComputer;
     public bool hasRepairedTVStand;
     public bool hasRepairedKitchen;
+
+    [Header("Other Flags")]
+    public int PcCost = 300;
+    public bool isFirstTimePlaying = true;
     public bool hasUnlockedMenu;
 
     private void Awake()
@@ -25,8 +27,8 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Optional, persist across scenes
-            InitializeGame(); // 🆕 Load or create save at startup
+            DontDestroyOnLoad(gameObject);
+            InitializeGame(); // load or create save at startup
         }
         else
         {
@@ -34,60 +36,91 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        // Optional: You can move initialization here if preferred
-    }
-
-    void Update()
-    {
-        // Add game logic if needed
-    }
-
-    // 🆕 Initializes the game and loads the save system
+    // === Initialization ===
     private void InitializeGame()
     {
         Debug.Log("Initializing Game and Save System...");
-        SaveSystem.LoadGame(); // Will create and save new file if missing
-        ApplyLoadedData(); // 🆕 Apply loaded data to GameManager
+        var data = SaveSystem.LoadGame();
+        ApplySaveData(data);
     }
 
-    // 🆕 Applies data from the loaded save to GameManager fields
-    private void ApplyLoadedData()
+    // === Build SaveData from current state ===
+    public SaveData ToSaveData()
     {
-        if (SaveSystem.CurrentSave != null)
+        SaveData data = SaveSystem.CurrentSave ?? SaveData.GetDefaults();
+
+        // Core
+        data.money = money;
+        data.daysPlayed = daysPlayed;
+        data.daysFailed = daysFailed;
+        data.totalAttempts = totalAttempts;
+        data.highScore = highScore;
+
+        // Upgrades
+        data.hasBoughtComputer = hasBoughtComputer;
+        data.hasRepairedTVStand = hasRepairedTVStand;
+        data.hasRepairedKitchen = hasRepairedKitchen;
+
+        // Flags
+        data.isFirstTimePlaying = isFirstTimePlaying;
+
+        // Scene + Player position
+        data.currentScene = SceneManager.GetActiveScene().name;
+        var player = GameObject.FindWithTag("Player");
+        if (player != null)
         {
-            money = SaveSystem.CurrentSave.money;
-            daysPlayed = SaveSystem.CurrentSave.daysPlayed;
-            daysFailed = SaveSystem.CurrentSave.daysFailed;
-            totalAttempts = SaveSystem.CurrentSave.totalAttempts;
-            highScore = SaveSystem.CurrentSave.highScore;
-            hasBoughtComputer = SaveSystem.CurrentSave.hasBoughtComputer;
-            hasRepairedTVStand = SaveSystem.CurrentSave.hasRepairedTVStand;
-            hasRepairedKitchen = SaveSystem.CurrentSave.hasRepairedKitchen;
-            isFirstTimePlaying = SaveSystem.CurrentSave.isFirstTimePlaying;
+            Vector3 pos = player.transform.position;
+            data.playerPosition[0] = pos.x;
+            data.playerPosition[1] = pos.y;
+            data.playerPosition[2] = pos.z;
         }
+
+        return data;
+    }
+
+    // === Apply SaveData to restore state ===
+    public void ApplySaveData(SaveData data)
+    {
+        if (data == null) return;
+
+        money = data.money;
+        daysPlayed = data.daysPlayed;
+        daysFailed = data.daysFailed;
+        totalAttempts = data.totalAttempts;
+        highScore = data.highScore;
+
+        hasBoughtComputer = data.hasBoughtComputer;
+        hasRepairedTVStand = data.hasRepairedTVStand;
+        hasRepairedKitchen = data.hasRepairedKitchen;
+
+        isFirstTimePlaying = data.isFirstTimePlaying;
+    }
+
+    // === Public API ===
+    public void SaveGame()
+    {
+        SaveSystem.SaveGame(ToSaveData());
+    }
+
+    public void LoadGame()
+    {
+        var data = SaveSystem.LoadGame();
+        ApplySaveData(data);
     }
 
     public void StartNewGame()
     {
         Debug.Log("Starting New Game...");
-        // Reset all fields
-        money = 0;
-        daysPlayed = 0;
-        daysFailed = 0;
-        totalAttempts = 0;
-        highScore = 0;
-        hasBoughtComputer = false;
-        hasRepairedTVStand = false;
-        hasRepairedKitchen = false;
-        isFirstTimePlaying = true;
 
-        // 🆕 Reset the save data as well
-        SaveSystem.DeleteSave(); // Deletes old save
-        SaveSystem.LoadGame();   // Creates new save and saves to disk
-        SaveSystem.SaveGame();   // Save it immediately
+        // Wipe save + start fresh
+        SaveSystem.DeleteSave();
+        var freshData = SaveData.GetDefaults();
+        ApplySaveData(freshData);
+        SaveSystem.SaveGame(freshData);
+        SceneManager.LoadScene("Apartment");
 
-        TutorialTrigger.ResetSessionTriggers(); // 🆕 Clears in-memory triggers for new session
+        // Clear transient tutorial triggers
+        TutorialTrigger.ResetSessionTriggers();
+
     }
 }

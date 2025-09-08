@@ -41,14 +41,6 @@ public class Book : MonoBehaviour
         UpdateUIPageContent();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            FlipRight();
-        }
-    }
-
     public void FlipRight()
     {
         Debug.Log("📖 Book.FlipRight() called");

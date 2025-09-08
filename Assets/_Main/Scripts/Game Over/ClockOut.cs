@@ -30,7 +30,7 @@ public class ClockOut : MonoBehaviour
                 gameManager.money -= gameManager.PcCost;
                 gameManager.hasBoughtComputer = true;
 
-                SaveSystem.SaveGame();
+                GameManager.Instance.SaveGame();
 
                 Debug.Log("✅ PC purchased and unlocked in apartment!");
             }

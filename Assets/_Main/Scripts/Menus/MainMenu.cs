@@ -17,6 +17,8 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
     }
 
     public void NewGame()

@@ -5,12 +5,16 @@ using StarterAssets;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Cinemachine;
 
+
+// === CHEATSHEET: Interactables ===
+// NOTE: GameObject needs a script with this interface and a collider to detect ray tracing for interactibility
 interface IInteractable
 {
     void Interact();
     string GetDescription();
     bool RequiresUniquePanel();
 }
+// === END ===
 
 public class Interactor : MonoBehaviour
 {
@@ -25,7 +29,7 @@ public class Interactor : MonoBehaviour
     public GameObject yesButton; // Reference to the Yes button
     public GameObject noButton; // Reference to the No button
 
-    public CinemachineBrain cinemachineBrain;
+    public CinemachineBrain cinemachineBrain; //Reference to Cinemachine Brain
 
     void Start()
     {

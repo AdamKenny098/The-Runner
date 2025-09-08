@@ -18,6 +18,8 @@ public class PlayerCamera : MonoBehaviour
         Cursor.visible = false;
     }
 
+    // === CHEATSHEET: Camera ===
+    // NOTE: Handles looking around via mouse in first person
     private void Update()
     {
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
@@ -30,6 +32,7 @@ public class PlayerCamera : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0,yRotation,0);
+        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
+    // === END ===
 }
