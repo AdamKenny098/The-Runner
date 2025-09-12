@@ -231,7 +231,6 @@ public class HUDManager : MonoBehaviour
 
     public void ShowSettingsPanel()
     {
-        Debug.Log("ShowSettingsPanel called, settingsPanel = " + settingsPanel);
         HideAllOverlays();
         if (settingsPanel) settingsPanel.SetActive(true);
         if (mainPanel) mainPanel.SetActive(false);

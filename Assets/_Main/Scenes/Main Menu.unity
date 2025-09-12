@@ -650,6 +650,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3288861010012025087, guid: 052af404c341548429119de5043a8d40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1071593584}
+    - target: {fileID: 3288861010012025087, guid: 052af404c341548429119de5043a8d40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288861010012025087, guid: 052af404c341548429119de5043a8d40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HUDManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4081553562146680270, guid: 052af404c341548429119de5043a8d40, type: 3}
       propertyPath: m_LocalPosition.x
       value: 942.6768
@@ -878,6 +890,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8387218872041336624, guid: 052af404c341548429119de5043a8d40, type: 3}
   m_PrefabInstance: {fileID: 510451712}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1071593584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7759988413603897669, guid: 052af404c341548429119de5043a8d40, type: 3}
+  m_PrefabInstance: {fileID: 510451712}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ae7d09289802b459c370eaf01aee19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1358887278
 GameObject:
   m_ObjectHideFlags: 0
