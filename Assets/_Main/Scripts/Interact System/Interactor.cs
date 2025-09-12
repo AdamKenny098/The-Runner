@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
-using StarterAssets;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Cinemachine;
 

@@ -29108,6 +29108,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 16128688379294456, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 16128688379294456, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 16128688379294463, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.375
+      objectReference: {fileID: 0}
     - target: {fileID: 341444811492380401, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -29132,6 +29144,10 @@ PrefabInstance:
       propertyPath: clockOut
       value: 
       objectReference: {fileID: 412809525}
+    - target: {fileID: 5643497867892259635, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.375
+      objectReference: {fileID: 0}
     - target: {fileID: 6497763319286838152, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
       propertyPath: m_Name
       value: The Runner
@@ -31354,7 +31370,7 @@ LightingSettings:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   serializedVersion: 6
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1
@@ -33553,7 +33569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMenuUI: {fileID: 5024424747177542051}
-  playerHUD: {fileID: 7226065823931701930}
+  playerHUD: {fileID: 0}
 --- !u!1 &1949591886
 GameObject:
   m_ObjectHideFlags: 0
@@ -46171,11 +46187,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &673636596122272567 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5014519348977354874, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
-  m_PrefabInstance: {fileID: 1526753509}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &677395468068262148
 GameObject:
   m_ObjectHideFlags: 0
@@ -52090,7 +52101,7 @@ MonoBehaviour:
   playerCam: {fileID: 189047026743799935}
   puzzleCam: {fileID: 1565007701}
   playerControllerRoot: {fileID: 1307539240754311744}
-  HUD: {fileID: 7226065823931701930}
+  HUD: {fileID: 0}
   isUnlocked: 0
 --- !u!33 &6141148185293069656
 MeshFilter:
@@ -52559,11 +52570,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &7226065823931701930 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2920090373751968231, guid: f884a022fb138cc4a9841af71fb7cf3d, type: 3}
-  m_PrefabInstance: {fileID: 1526753509}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7242944476230507211
 GameObject:
   m_ObjectHideFlags: 0
@@ -54067,7 +54073,7 @@ PrefabInstance:
     - target: {fileID: 7916645665647389736, guid: 2202e93deedae10419854ae88fde5c12, type: 3}
       propertyPath: toBeDisabled.Array.data[0]
       value: 
-      objectReference: {fileID: 673636596122272567}
+      objectReference: {fileID: 0}
     - target: {fileID: 7916645665647389736, guid: 2202e93deedae10419854ae88fde5c12, type: 3}
       propertyPath: toBeDisabled.Array.data[1]
       value: 

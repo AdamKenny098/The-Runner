@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System.IO;
-using StarterAssets;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -130,10 +129,10 @@ public class SettingsManager : MonoBehaviour
     public void SetMouseSensitivity(float value)
     {
         settings.mouseSensitivity = Mathf.Clamp(value, 0.1f, 10f); // <-- write to settings!
-        var cam = FindObjectOfType<FirstPersonController>(true);
+        var cam = FindObjectOfType<RunnerFirstPersonController>(true);
         if (cam)
         {
-            cam.CameraSensitivity = settings.mouseSensitivity;
+            cam.lookSensitivity = settings.mouseSensitivity;
         }
 
     }

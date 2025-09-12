@@ -96,14 +96,16 @@ public class HUDManager : MonoBehaviour
             playerMenuOverlay = hudRootObject.transform.GetChild(9).gameObject;
         }
 
-        else if (scene.name == "MainMenu")
+        else if (scene.name == "Main Menu")
         {
             // Assign references dynamically
+            GameObject gameManager = GameObject.Find("GameManager");
             GameObject mainPanelParent = GameObject.Find("MainMenuCanvas");
             mainPanel = mainPanelParent.transform.GetChild(0).gameObject;
+            settingsPanel = gameManager.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
 
-            GameObject confirmationPrompt = mainPanelParent.transform.GetChild(1).gameObject.transform.GetChild(5).gameObject;
-            GameObject noSaveGameDialog = mainPanelParent.transform.GetChild(1).gameObject.transform.GetChild(4).gameObject;
+            //GameObject confirmationPrompt = mainPanelParent.transform.GetChild(1).gameObject.transform.GetChild(5).gameObject;
+            //GameObject noSaveGameDialog = mainPanelParent.transform.GetChild(1).gameObject.transform.GetChild(4).gameObject;
         }
     }
 
@@ -229,8 +231,10 @@ public class HUDManager : MonoBehaviour
 
     public void ShowSettingsPanel()
     {
+        Debug.Log("ShowSettingsPanel called, settingsPanel = " + settingsPanel);
         HideAllOverlays();
         if (settingsPanel) settingsPanel.SetActive(true);
+        if (mainPanel) mainPanel.SetActive(false);
     }
 
     public void ShowLoadingScreen(float progress = 0f)
