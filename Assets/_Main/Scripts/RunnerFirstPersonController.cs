@@ -99,11 +99,11 @@ public class RunnerFirstPersonController : MonoBehaviour
         if (IsGrounded)
         {
             if (_velocity.y < 0f) _velocity.y = groundedGravity;
-            if (_wantsJump)
-            {
-                _wantsJump = false;
-                _velocity.y = Mathf.Sqrt(-2f * gravity * Mathf.Max(0.01f, jumpHeight));
-            }
+            // if (_wantsJump)
+            // {
+            //     _wantsJump = false;
+            //     _velocity.y = Mathf.Sqrt(-2f * gravity * Mathf.Max(0.01f, jumpHeight));
+            // }
         }
         else
         {
